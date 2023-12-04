@@ -8,7 +8,6 @@ public class EosPitchYaw : MonoBehaviour
     private float _rotationSpeed;
     public Transform pivot;
 
-    // Start is called before the first frame update
     void Start()
     {
     }
@@ -18,10 +17,9 @@ public class EosPitchYaw : MonoBehaviour
         throw new NotImplementedException();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (Input.GetMouseButton(0)) // 滑鼠左鍵
+        if (Input.GetMouseButton(0))
         {
             float mouseX = Input.GetAxis("Mouse X") * _rotationSpeed;
             float mouseY = -Input.GetAxis("Mouse Y") * _rotationSpeed;

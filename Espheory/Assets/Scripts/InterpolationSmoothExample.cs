@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Math
+namespace Eos.Scripts
 {
     public class InterpolationSmoothExample : MonoBehaviour
     {

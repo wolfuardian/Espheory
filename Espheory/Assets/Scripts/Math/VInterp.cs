@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Math
+namespace Eos.Scripts.Math
 {
     public static class VInterp
     {
