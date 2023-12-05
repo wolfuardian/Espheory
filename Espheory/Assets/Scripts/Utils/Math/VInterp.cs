@@ -1,15 +1,15 @@
 using UnityEngine;
 
-namespace Eos.Scripts.Math
+namespace Eos.Scripts.Utils.Math
 {
-    public static class FInterp
+    public static class VInterp
     {
-        public static float Linear(float start, float end, float t)
+        public static Vector3 Linear(Vector3 start, Vector3 end, float t)
         {
             return start + (end - start) * t;
         }
 
-        public static float EaseInOutQuad(float start, float end, float t)
+        public static Vector3 EaseInOutQuad(Vector3 start, Vector3 end, float t)
         {
             t = Mathf.Clamp01(t);
             return start + (end - start) * (t < 0.5f ? 2 * t * t : -1 + (4 - 2 * t) * t);

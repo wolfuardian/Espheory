@@ -1,7 +1,7 @@
-using Eos.Scripts.Math;
+using Eos.Scripts.Utils.Math;
 using UnityEngine;
 
-namespace Eos.Scripts
+namespace Eos.Scripts.Runtime
 {
     public class InterpolationExample : MonoBehaviour
     {
