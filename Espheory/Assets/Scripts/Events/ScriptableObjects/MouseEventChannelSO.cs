@@ -21,6 +21,9 @@ namespace Eos.Events.ScriptableObjects
         public UnityAction<Vector2> OnMousePositionEventRaised;
         public UnityAction<Vector2> OnMouseMoveDeltaEventRaised;
         public UnityAction<float> OnMouseScrollDeltaEventRaised;
+        public UnityAction<Vector2> OnLMBDragEventRaised;
+        public UnityAction<Vector2> OnMMBDragEventRaised;
+        public UnityAction<Vector2> OnRMBDragEventRaised;
 
         public void RaiseLMBPressEvent() => OnLMBPressEventRaised?.Invoke();
         public void RaiseLMBReleaseEvent() => OnLMBReleaseEventRaised?.Invoke();
@@ -37,5 +40,8 @@ namespace Eos.Events.ScriptableObjects
         public void RaiseMousePositionEvent(Vector2 value) => OnMousePositionEventRaised?.Invoke(value);
         public void RaiseMouseMoveDeltaEvent(Vector2 value) => OnMouseMoveDeltaEventRaised?.Invoke(value);
         public void RaiseMouseScrollDeltaEvent(float value) => OnMouseScrollDeltaEventRaised?.Invoke(value);
+        public void RaiseLMBDragEvent(Vector2 value) => OnLMBDragEventRaised?.Invoke(value);
+        public void RaiseMMBDragEvent(Vector2 value) => OnMMBDragEventRaised?.Invoke(value);
+        public void RaiseRMBDragEvent(Vector2 value) => OnRMBDragEventRaised?.Invoke(value);
     }
 }

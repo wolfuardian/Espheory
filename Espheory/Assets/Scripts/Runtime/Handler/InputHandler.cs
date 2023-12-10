@@ -10,116 +10,137 @@ namespace Eos.Runtime.Handler
         [Header("Broadcasting on")] [SerializeField]
         private MouseEventChannelSO onMouseEventChannel;
 
-        [Header("Debug")] [SerializeField] private int leftMouseButtonHoldFrames;
-        [SerializeField] private int middleMouseButtonHoldFrames;
-        [SerializeField] private int rightMouseButtonHoldFrames;
-
         public Vector3 mousePosition => Input.mousePosition;
         public Vector2 mouseMoveDelta => new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         public Vector2 mouseScrollDelta => Input.mouseScrollDelta;
-        public bool IsUpdateHandlerIsNull() => UpdateHandler.instance == null;
-        public bool IsLeftMouseButtonHold() => Input.GetMouseButton(0);
-        public bool IsLeftMouseButtonPress() => Input.GetMouseButtonDown(0);
-        public bool IsLeftMouseButtonRelease() => Input.GetMouseButtonUp(0);
-        public bool IsRightMouseButtonHold() => Input.GetMouseButton(1);
-        public bool IsRightMouseButtonPress() => Input.GetMouseButtonDown(1);
-        public bool IsRightMouseButtonRelease() => Input.GetMouseButtonUp(1);
-        public bool IsMiddleMouseButtonHold() => Input.GetMouseButton(2);
-        public bool IsMiddleMouseButtonPress() => Input.GetMouseButtonDown(2);
-        public bool IsMiddleMouseButtonRelease() => Input.GetMouseButtonUp(2);
-        public bool IsMouseMoving() => mouseMoveDelta != Vector2.zero;
-        public bool IsMouseScrolling() => mouseScrollDelta.y != 0;
-        public bool IsShiftKeyPressed() => Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+        public bool isUpdateHandlerIsNull => UpdateHandler.instance == null;
+        public bool isLeftMouseButtonHold => Input.GetMouseButton(0);
+        public bool isLeftMouseButtonPress => Input.GetMouseButtonDown(0);
+        public bool isLeftMouseButtonRelease => Input.GetMouseButtonUp(0);
+        public bool isRightMouseButtonHold => Input.GetMouseButton(1);
+        public bool isRightMouseButtonPress => Input.GetMouseButtonDown(1);
+        public bool isRightMouseButtonRelease => Input.GetMouseButtonUp(1);
+        public bool isMiddleMouseButtonHold => Input.GetMouseButton(2);
+        public bool isMiddleMouseButtonPress => Input.GetMouseButtonDown(2);
+        public bool isMiddleMouseButtonRelease => Input.GetMouseButtonUp(2);
+        public bool isMouseMoving => mouseMoveDelta != Vector2.zero;
+        public bool isMouseScrolling => mouseScrollDelta.y != 0;
+        public bool isLeftMouseButtonDragging => isLeftMouseButtonHold && isMouseMoving;
+        public bool isRightMouseButtonDragging => isRightMouseButtonHold && isMouseMoving;
+        public bool isMiddleMouseButtonDragging => isMiddleMouseButtonHold && isMouseMoving;
+        public Vector2 leftMouseButtonDragOffset => (Vector2)mousePosition - _leftMouseButtonDragOrigin;
+        public Vector2 rightMouseButtonDragOffset => (Vector2)mousePosition - _rightMouseButtonDragOrigin;
+        public Vector2 middleMouseButtonDragOffset => (Vector2)mousePosition - _middleMouseButtonDragOrigin;
+        public bool isShiftKeyPressed => Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+
+        private int _leftMouseButtonHoldFrames;
+        private int _middleMouseButtonHoldFrames;
+        private int _rightMouseButtonHoldFrames;
+        private Vector2 _leftMouseButtonDragOrigin;
+        private Vector2 _middleMouseButtonDragOrigin;
+        private Vector2 _rightMouseButtonDragOrigin;
 
         private void Start()
         {
-            if (IsUpdateHandlerIsNull()) return;
+            if (isUpdateHandlerIsNull) return;
             UpdateHandler.instance.Register(this);
         }
 
         private void OnDestroy()
         {
-            if (IsUpdateHandlerIsNull()) return;
+            if (isUpdateHandlerIsNull) return;
             UpdateHandler.instance.Unregister(this);
         }
 
         public void Tick()
         {
-            if (IsLeftMouseButtonPress()) OnLeftMouseButtonPressed();
+            if (isLeftMouseButtonPress) OnLeftMouseButtonPressed();
 
-            if (IsLeftMouseButtonRelease()) OnLeftMouseButtonReleased();
+            if (isLeftMouseButtonRelease) OnLeftMouseButtonReleased();
 
-            if (IsLeftMouseButtonHold()) OnLeftMouseButtonHold();
+            if (isLeftMouseButtonHold) OnLeftMouseButtonHold();
 
-            if (IsMiddleMouseButtonPress()) OnMiddleMouseButtonPressed();
+            if (isMiddleMouseButtonPress) OnMiddleMouseButtonPressed();
 
-            if (IsMiddleMouseButtonRelease()) OnMiddleMouseButtonReleased();
+            if (isMiddleMouseButtonRelease) OnMiddleMouseButtonReleased();
 
-            if (IsMiddleMouseButtonHold()) OnMiddleMouseButtonHold();
+            if (isMiddleMouseButtonHold) OnMiddleMouseButtonHold();
 
-            if (IsRightMouseButtonPress()) OnRightMouseButtonPressed();
+            if (isRightMouseButtonPress) OnRightMouseButtonPressed();
 
-            if (IsRightMouseButtonRelease()) OnRightMouseButtonReleased();
+            if (isRightMouseButtonRelease) OnRightMouseButtonReleased();
 
-            if (IsRightMouseButtonHold()) OnRightMouseButtonHold();
+            if (isRightMouseButtonHold) OnRightMouseButtonHold();
 
-            if (IsMouseMoving()) OnMouseMoving();
+            if (isMouseMoving) OnMouseMoving();
 
-            if (IsMouseScrolling()) OnMouseScrolling();
+            if (isMouseScrolling) OnMouseScrolling();
+
+            if (isLeftMouseButtonDragging) OnLeftMouseButtonDragging();
+
+            if (isRightMouseButtonDragging) OnRightMouseButtonDragging();
+
+            if (isMiddleMouseButtonDragging) OnMiddleMouseButtonDragging();
         }
 
         private void OnLeftMouseButtonPressed()
         {
             onMouseEventChannel.RaiseLMBPressEvent();
+            _leftMouseButtonDragOrigin = mousePosition;
         }
 
         private void OnLeftMouseButtonReleased()
         {
             onMouseEventChannel.RaiseLMBReleaseEvent();
-            leftMouseButtonHoldFrames = 0;
+            _leftMouseButtonHoldFrames = 0;
+            onMouseEventChannel.RaiseLMBDragEvent(Vector2.zero);
         }
 
         private void OnLeftMouseButtonHold()
         {
             onMouseEventChannel.RaiseLMBHoldEvent();
-            leftMouseButtonHoldFrames++;
-            onMouseEventChannel.RaiseLMBHoldFramesEvent(leftMouseButtonHoldFrames);
+            _leftMouseButtonHoldFrames++;
+            onMouseEventChannel.RaiseLMBHoldFramesEvent(_leftMouseButtonHoldFrames);
         }
 
         private void OnMiddleMouseButtonPressed()
         {
             onMouseEventChannel.RaiseMMBPressEvent();
+            _middleMouseButtonDragOrigin = mousePosition;
         }
 
         private void OnMiddleMouseButtonReleased()
         {
             onMouseEventChannel.RaiseMMBReleaseEvent();
-            middleMouseButtonHoldFrames = 0;
+            _middleMouseButtonHoldFrames = 0;
+            onMouseEventChannel.RaiseMMBDragEvent(Vector2.zero);
         }
 
         private void OnMiddleMouseButtonHold()
         {
             onMouseEventChannel.RaiseMMBHoldEvent();
-            middleMouseButtonHoldFrames++;
-            onMouseEventChannel.RaiseMMBHoldFramesEvent(middleMouseButtonHoldFrames);
+            _middleMouseButtonHoldFrames++;
+            onMouseEventChannel.RaiseMMBHoldFramesEvent(_middleMouseButtonHoldFrames);
         }
 
         private void OnRightMouseButtonPressed()
         {
             onMouseEventChannel.RaiseRMBPressEvent();
+            _rightMouseButtonDragOrigin = mousePosition;
         }
 
         private void OnRightMouseButtonReleased()
         {
             onMouseEventChannel.RaiseRMBReleaseEvent();
-            rightMouseButtonHoldFrames = 0;
+            _rightMouseButtonHoldFrames = 0;
+            onMouseEventChannel.RaiseRMBDragEvent(Vector2.zero);
         }
 
         private void OnRightMouseButtonHold()
         {
             onMouseEventChannel.RaiseRMBHoldEvent();
-            rightMouseButtonHoldFrames++;
-            onMouseEventChannel.RaiseRMBHoldFramesEvent(rightMouseButtonHoldFrames);
+            _rightMouseButtonHoldFrames++;
+            onMouseEventChannel.RaiseRMBHoldFramesEvent(_rightMouseButtonHoldFrames);
         }
 
         private void OnMouseMoving()
@@ -131,6 +152,21 @@ namespace Eos.Runtime.Handler
         private void OnMouseScrolling()
         {
             onMouseEventChannel.RaiseMouseScrollDeltaEvent(mouseScrollDelta.y);
+        }
+
+        private void OnLeftMouseButtonDragging()
+        {
+            onMouseEventChannel.RaiseLMBDragEvent(leftMouseButtonDragOffset);
+        }
+
+        private void OnMiddleMouseButtonDragging()
+        {
+            onMouseEventChannel.RaiseMMBDragEvent(middleMouseButtonDragOffset);
+        }
+
+        private void OnRightMouseButtonDragging()
+        {
+            onMouseEventChannel.RaiseRMBDragEvent(rightMouseButtonDragOffset);
         }
     }
 }
