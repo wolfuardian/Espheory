@@ -3136,8 +3136,7 @@ PrefabInstance:
       propertyPath: cameraRaycastEventChannelSO
       value: 
       objectReference: {fileID: 11400000, guid: 548a6b1282913184184e1503ba1d2cea, type: 2}
-    m_RemovedComponents:
-    - {fileID: 7771526528649074749, guid: eb75ab8738acb2446ac32b602cf5fe64, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
