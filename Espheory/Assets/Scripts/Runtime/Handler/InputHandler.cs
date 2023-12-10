@@ -1,7 +1,7 @@
-using Eos.Events.ScriptableObjects;
 using UnityEngine;
 using Eos.Runtime.Core;
 using Eos.Runtime.Interface;
+using Eos.Events.ScriptableObjects;
 
 namespace Eos.Runtime.Handler
 {
@@ -25,6 +25,7 @@ namespace Eos.Runtime.Handler
         public bool IsMiddleMouseButtonRelease() => Input.GetMouseButtonUp(2);
         public bool IsMouseMoving() => mouseMoveDelta != Vector2.zero;
         public bool IsMouseScrolling() => mouseScrollDelta.y != 0;
+        
         [Header("Debug")]
         public int leftMouseButtonHoldFrames;
         public int middleMouseButtonHoldFrames;
@@ -131,7 +132,6 @@ namespace Eos.Runtime.Handler
 
         private void OnMouseScrolling()
         {
-            Debug.Log(mouseScrollDelta);
             var mouseScrollDeltaInt = (int)(mouseScrollDelta.y * 10f);
             onMouseEventChannel.RaiseMouseScrollDeltaEvent(mouseScrollDeltaInt);
         }

@@ -165,9 +165,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   onMouseEventChannel: {fileID: 11400000, guid: 58f2bb4769b81c241896b84638ff0355, type: 2}
-  leftMouseButtonHoldFrames: 0
-  middleMouseButtonHoldFrames: 0
-  rightMouseButtonHoldFrames: 0
+  onLMBPressedEventChannel: {fileID: 11400000, guid: 49d8c4847d04f284abe88cbadd587f83, type: 2}
+  onRMBPressedEventChannel: {fileID: 11400000, guid: 5fa12fa8ec29fd8409dd4e34559f0932, type: 2}
+  onMMBPressedEventChannel: {fileID: 11400000, guid: 5988f3f8f0b22354ca031a9c667b11a1, type: 2}
+  onMousePositionEventChannel: {fileID: 11400000, guid: 4774be1b3a847b34faa763474627e2ae, type: 2}
+  onMouseMovingEventChannel: {fileID: 11400000, guid: 14279754cd35306418e8f999afb41536, type: 2}
+  onMouseScrollingEventChannel: {fileID: 11400000, guid: b1a3e9f8e97945149ba17e837c4cca26, type: 2}
 --- !u!1 &1258059548
 GameObject:
   m_ObjectHideFlags: 0
@@ -179,7 +182,7 @@ GameObject:
   - component: {fileID: 1258059550}
   - component: {fileID: 1258059549}
   m_Layer: 0
-  m_Name: GlobalUpdate
+  m_Name: Update
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
