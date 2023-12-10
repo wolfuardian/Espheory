@@ -25,6 +25,7 @@ namespace Eos.Runtime.Handler
         public bool IsMiddleMouseButtonRelease() => Input.GetMouseButtonUp(2);
         public bool IsMouseMoving() => mouseMoveDelta != Vector2.zero;
         public bool IsMouseScrolling() => mouseScrollDelta.y != 0;
+        [Header("Debug")]
         public int leftMouseButtonHoldFrames;
         public int middleMouseButtonHoldFrames;
         public int rightMouseButtonHoldFrames;
