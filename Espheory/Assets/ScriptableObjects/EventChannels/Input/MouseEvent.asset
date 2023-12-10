@@ -9,6 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a8418e07d1f7cc3458ab2c4f5470ce92, type: 3}
-  m_Name: NewGameEventB
+  m_Script: {fileID: 11500000, guid: 88d98b367b2f1db4c8a322ba5a262012, type: 3}
+  m_Name: MouseEvent
   m_EditorClassIdentifier: 
