@@ -13,7 +13,7 @@ namespace Eos.Runtime.Handler
         public Vector3 mousePosition => Input.mousePosition;
         public Vector2 mouseMoveDelta => new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         public Vector2 mouseScrollDelta => Input.mouseScrollDelta;
-        
+
         public bool IsLeftMouseButtonHold() => Input.GetMouseButton(0);
         public bool IsLeftMouseButtonPress() => Input.GetMouseButtonDown(0);
         public bool IsLeftMouseButtonRelease() => Input.GetMouseButtonUp(0);
@@ -25,21 +25,24 @@ namespace Eos.Runtime.Handler
         public bool IsMiddleMouseButtonRelease() => Input.GetMouseButtonUp(2);
         public bool IsMouseMoving() => mouseMoveDelta != Vector2.zero;
         public bool IsMouseScrolling() => mouseScrollDelta.y != 0;
-        
-        [Header("Debug")]
-        public int leftMouseButtonHoldFrames;
-        public int middleMouseButtonHoldFrames;
-        public int rightMouseButtonHoldFrames;
+
+        [Header("Debug")] [SerializeField] private int leftMouseButtonHoldFrames;
+
+        [SerializeField] private int middleMouseButtonHoldFrames;
+        [SerializeField] private int rightMouseButtonHoldFrames;
         public bool IsShiftKeyPressed() => Input.GetKey(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift);
+        public bool IsUpdateHandlerIsNull() => UpdateHandler.instance == null;
 
 
         private void Start()
         {
+            if (IsUpdateHandlerIsNull()) return;
             UpdateHandler.instance.Register(this);
         }
 
         private void OnDestroy()
         {
+            if (IsUpdateHandlerIsNull()) return;
             UpdateHandler.instance.Unregister(this);
         }
 
@@ -124,16 +127,13 @@ namespace Eos.Runtime.Handler
 
         private void OnMouseMoving()
         {
-            var mousePositionInt = Vector2Int.RoundToInt(mousePosition * 10f);
-            var mouseMoveDeltaInt = Vector2Int.RoundToInt(mouseMoveDelta * 100f);
-            onMouseEventChannel.RaiseMousePositionEvent(mousePositionInt);
-            onMouseEventChannel.RaiseMouseMoveDeltaEvent(mouseMoveDeltaInt);
+            onMouseEventChannel.RaiseMousePositionEvent(mousePosition);
+            onMouseEventChannel.RaiseMouseMoveDeltaEvent(mouseMoveDelta);
         }
 
         private void OnMouseScrolling()
         {
-            var mouseScrollDeltaInt = (int)(mouseScrollDelta.y * 10f);
-            onMouseEventChannel.RaiseMouseScrollDeltaEvent(mouseScrollDeltaInt);
+            onMouseEventChannel.RaiseMouseScrollDeltaEvent(mouseScrollDelta.y);
         }
     }
 }

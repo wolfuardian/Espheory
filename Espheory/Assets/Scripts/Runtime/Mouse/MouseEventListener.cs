@@ -133,26 +133,26 @@ namespace Eos.Runtime.Mouse
             onRMBHoldFramesEventRaised?.Invoke(value);
         }
 
-        private void OnMousePositionEventRaised(Vector2Int value)
+        private void OnMousePositionEventRaised(Vector2 value)
         {
             onMousePositionXEventRaised?.Invoke(value.x);
             onMousePositionYEventRaised?.Invoke(value.y);
-            onMousePositionXStringEventRaised?.Invoke(value.x.ToString());
-            onMousePositionYStringEventRaised?.Invoke(value.y.ToString());
+            onMousePositionXStringEventRaised?.Invoke(value.x.ToString("F2"));
+            onMousePositionYStringEventRaised?.Invoke(value.y.ToString("F2"));
         }
 
-        private void OnMouseMoveDeltaEventRaised(Vector2Int value)
+        private void OnMouseMoveDeltaEventRaised(Vector2 value)
         {
             onMouseMoveDeltaXEventRaised?.Invoke(value.x);
             onMouseMoveDeltaYEventRaised?.Invoke(value.y);
-            onMouseMoveDeltaXStringEventRaised?.Invoke(value.x.ToString());
-            onMouseMoveDeltaYStringEventRaised?.Invoke(value.y.ToString());
+            onMouseMoveDeltaXStringEventRaised?.Invoke(value.x.ToString("F2"));
+            onMouseMoveDeltaYStringEventRaised?.Invoke(value.y.ToString("F2"));
         }
 
-        private void OnMouseScrollDeltaEventRaised(int value)
+        private void OnMouseScrollDeltaEventRaised(float value)
         {
             onMouseScrollDeltaEventRaised?.Invoke(value);
-            onMouseScrollDeltaStringEventRaised?.Invoke(value.ToString());
+            onMouseScrollDeltaStringEventRaised?.Invoke(value.ToString("F2"));
         }
     }
 }
