@@ -1,6 +1,6 @@
 {
     "name": "Scripts",
-    "rootNamespace": "Eos.Scripts",
+    "rootNamespace": "Eos",
     "references": [],
     "includePlatforms": [],
     "excludePlatforms": [],
