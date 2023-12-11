@@ -15,6 +15,8 @@ namespace Eos.Events.ScriptableObjects
         public UnityAction OnRMBPressEventRaised;
         public UnityAction OnRMBReleaseEventRaised;
         public UnityAction OnRMBHoldEventRaised;
+        public UnityAction OnScrollEventRaised;
+        public UnityAction OnScrollStopEventRaised;
         public UnityAction<int> OnLMBHoldFramesEventRaised;
         public UnityAction<int> OnMMBHoldFramesEventRaised;
         public UnityAction<int> OnRMBHoldFramesEventRaised;
@@ -34,6 +36,8 @@ namespace Eos.Events.ScriptableObjects
         public void RaiseRMBPressEvent() => OnRMBPressEventRaised?.Invoke();
         public void RaiseRMBReleaseEvent() => OnRMBReleaseEventRaised?.Invoke();
         public void RaiseRMBHoldEvent() => OnRMBHoldEventRaised?.Invoke();
+        public void RaiseScrollEvent() => OnScrollEventRaised?.Invoke();
+        public void RaiseScrollStopEvent() => OnScrollStopEventRaised?.Invoke();
         public void RaiseLMBHoldFramesEvent(int value) => OnLMBHoldFramesEventRaised?.Invoke(value);
         public void RaiseMMBHoldFramesEvent(int value) => OnMMBHoldFramesEventRaised?.Invoke(value);
         public void RaiseRMBHoldFramesEvent(int value) => OnRMBHoldFramesEventRaised?.Invoke(value);

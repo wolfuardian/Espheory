@@ -25,6 +25,7 @@ namespace Eos.Runtime.Handler
         public bool isMiddleMouseButtonRelease => Input.GetMouseButtonUp(2);
         public bool isMouseMoving => mouseMoveDelta != Vector2.zero;
         public bool isMouseScrolling => mouseScrollDelta.y != 0;
+        public bool isMouseScrollStop => mouseScrollDelta.y == 0;
         public bool isLeftMouseButtonDragging => isLeftMouseButtonHold && isMouseMoving;
         public bool isRightMouseButtonDragging => isRightMouseButtonHold && isMouseMoving;
         public bool isMiddleMouseButtonDragging => isMiddleMouseButtonHold && isMouseMoving;
@@ -75,6 +76,8 @@ namespace Eos.Runtime.Handler
             if (isMouseMoving) OnMouseMoving();
 
             if (isMouseScrolling) OnMouseScrolling();
+
+            if (isMouseScrollStop) OnMouseScrollStop();
 
             if (isLeftMouseButtonDragging) OnLeftMouseButtonDragging();
 
@@ -151,7 +154,14 @@ namespace Eos.Runtime.Handler
 
         private void OnMouseScrolling()
         {
+            onMouseEventChannel.RaiseScrollEvent();
             onMouseEventChannel.RaiseMouseScrollDeltaEvent(mouseScrollDelta.y);
+        }
+
+        private void OnMouseScrollStop()
+        {
+            onMouseEventChannel.RaiseScrollStopEvent();
+            onMouseEventChannel.RaiseMouseScrollDeltaEvent(0);
         }
 
         private void OnLeftMouseButtonDragging()

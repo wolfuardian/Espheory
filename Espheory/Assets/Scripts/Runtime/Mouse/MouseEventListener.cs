@@ -14,6 +14,9 @@ namespace Eos.Runtime.Mouse
 
         [SerializeField] private UnityEvent<bool> onRMBPressEventRaised;
         [SerializeField] private UnityEvent<bool> onMMBPressEventRaised;
+        [SerializeField] private UnityEvent<bool> onScrollingEventRaised;
+        [SerializeField] private UnityEvent<bool> onScrollUpEventRaised;
+        [SerializeField] private UnityEvent<bool> onScrollDownEventRaised;
         [SerializeField] private UnityEvent onLMBHoldEventRaised;
         [SerializeField] private UnityEvent onRMBHoldEventRaised;
         [SerializeField] private UnityEvent onMMBHoldEventRaised;
@@ -54,6 +57,8 @@ namespace Eos.Runtime.Mouse
             onMouseEventChannel.OnRMBPressEventRaised += OnRightMouseButtonPressed;
             onMouseEventChannel.OnRMBReleaseEventRaised += OnRightMouseButtonReleased;
             onMouseEventChannel.OnRMBHoldEventRaised += OnRightMouseButtonHold;
+            onMouseEventChannel.OnScrollEventRaised += OnScrolling;
+            onMouseEventChannel.OnScrollStopEventRaised += OnScrollStop;
             onMouseEventChannel.OnLMBHoldFramesEventRaised += OnLMBHoldFramesEventRaised;
             onMouseEventChannel.OnMMBHoldFramesEventRaised += OnMMBHoldFramesEventRaised;
             onMouseEventChannel.OnRMBHoldFramesEventRaised += OnRMBHoldFramesEventRaised;
@@ -76,6 +81,8 @@ namespace Eos.Runtime.Mouse
             onMouseEventChannel.OnRMBPressEventRaised -= OnRightMouseButtonPressed;
             onMouseEventChannel.OnRMBReleaseEventRaised -= OnRightMouseButtonReleased;
             onMouseEventChannel.OnRMBHoldEventRaised -= OnRightMouseButtonHold;
+            onMouseEventChannel.OnScrollEventRaised -= OnScrolling;
+            onMouseEventChannel.OnScrollStopEventRaised -= OnScrollStop;
             onMouseEventChannel.OnLMBHoldFramesEventRaised -= OnLMBHoldFramesEventRaised;
             onMouseEventChannel.OnMMBHoldFramesEventRaised -= OnMMBHoldFramesEventRaised;
             onMouseEventChannel.OnRMBHoldFramesEventRaised -= OnRMBHoldFramesEventRaised;
@@ -117,6 +124,20 @@ namespace Eos.Runtime.Mouse
         private void OnRightMouseButtonHold()
         {
             onRMBHoldEventRaised?.Invoke();
+        }
+
+        private void OnScrolling()
+        {
+            onScrollingEventRaised?.Invoke(true);
+            onScrollUpEventRaised?.Invoke(Input.mouseScrollDelta.y > 0);
+            onScrollDownEventRaised?.Invoke(Input.mouseScrollDelta.y < 0);
+        }
+
+        private void OnScrollStop()
+        {
+            onScrollingEventRaised?.Invoke(false);
+            onScrollUpEventRaised?.Invoke(false);
+            onScrollDownEventRaised?.Invoke(false);
         }
 
         private void OnMiddleMouseButtonPressed()
@@ -171,7 +192,7 @@ namespace Eos.Runtime.Mouse
             onMouseScrollDeltaEventRaised?.Invoke(value);
             onMouseScrollDeltaStringEventRaised?.Invoke(value.ToString("F2"));
         }
-        
+
         private void OnLMBDragEventRaised(Vector2 value)
         {
             onLMBDragXEventRaised?.Invoke(value.x);
