@@ -10,211 +10,180 @@ namespace Eos.Runtime.Mouse
         private MouseEventChannelSO onMouseEventChannel;
 
         [Header("UnityEvent Response")] [SerializeField]
-        private UnityEvent<bool> onLMBPressEventRaised;
+        private UnityEvent<bool> onLeftMouseButtonPress;
 
-        [SerializeField] private UnityEvent<bool> onRMBPressEventRaised;
-        [SerializeField] private UnityEvent<bool> onMMBPressEventRaised;
-        [SerializeField] private UnityEvent<bool> onScrollingEventRaised;
-        [SerializeField] private UnityEvent<bool> onScrollUpEventRaised;
-        [SerializeField] private UnityEvent<bool> onScrollDownEventRaised;
-        [SerializeField] private UnityEvent onLMBHoldEventRaised;
-        [SerializeField] private UnityEvent onRMBHoldEventRaised;
-        [SerializeField] private UnityEvent onMMBHoldEventRaised;
-        [SerializeField] private UnityEvent<float> onLMBHoldFramesEventRaised;
-        [SerializeField] private UnityEvent<float> onRMBHoldFramesEventRaised;
-        [SerializeField] private UnityEvent<float> onMMBHoldFramesEventRaised;
-        [SerializeField] private UnityEvent<float> onMousePositionXEventRaised;
-        [SerializeField] private UnityEvent<float> onMousePositionYEventRaised;
-        [SerializeField] private UnityEvent<float> onMouseMoveDeltaXEventRaised;
-        [SerializeField] private UnityEvent<float> onMouseMoveDeltaYEventRaised;
-        [SerializeField] private UnityEvent<float> onMouseScrollDeltaEventRaised;
-        [SerializeField] private UnityEvent<string> onMousePositionXStringEventRaised;
-        [SerializeField] private UnityEvent<string> onMousePositionYStringEventRaised;
-        [SerializeField] private UnityEvent<string> onMouseMoveDeltaXStringEventRaised;
-        [SerializeField] private UnityEvent<string> onMouseMoveDeltaYStringEventRaised;
-        [SerializeField] private UnityEvent<string> onMouseScrollDeltaStringEventRaised;
-        [SerializeField] private UnityEvent<float> onLMBDragXEventRaised;
-        [SerializeField] private UnityEvent<float> onLMBDragYEventRaised;
-        [SerializeField] private UnityEvent<float> onRMBDragXEventRaised;
-        [SerializeField] private UnityEvent<float> onRMBDragYEventRaised;
-        [SerializeField] private UnityEvent<float> onMMBDragXEventRaised;
-        [SerializeField] private UnityEvent<float> onMMBDragYEventRaised;
-        [SerializeField] private UnityEvent<string> onLMBDragXStringEventRaised;
-        [SerializeField] private UnityEvent<string> onLMBDragYStringEventRaised;
-        [SerializeField] private UnityEvent<string> onRMBDragXStringEventRaised;
-        [SerializeField] private UnityEvent<string> onRMBDragYStringEventRaised;
-        [SerializeField] private UnityEvent<string> onMMBDragXStringEventRaised;
-        [SerializeField] private UnityEvent<string> onMMBDragYStringEventRaised;
+        [SerializeField] private UnityEvent<bool> onRightMouseButtonPress;
+        [SerializeField] private UnityEvent<bool> onMiddleMouseButtonPress;
+        [SerializeField] private UnityEvent<bool> onScroll;
+        [SerializeField] private UnityEvent<bool> onScrollUp;
+        [SerializeField] private UnityEvent<bool> onScrollDown;
+        [SerializeField] private UnityEvent onLeftMouseButtonHold;
+        [SerializeField] private UnityEvent onRightMouseButtonHold;
+        [SerializeField] private UnityEvent onMiddleMouseButtonHold;
+        [SerializeField] private UnityEvent<float> onLeftMouseButtonHoldFrames;
+        [SerializeField] private UnityEvent<float> onRightMouseButtonHoldFrames;
+        [SerializeField] private UnityEvent<float> onMiddleMouseButtonHoldFrames;
+        [SerializeField] private UnityEvent<float> onMousePositionX;
+        [SerializeField] private UnityEvent<float> onMousePositionY;
+        [SerializeField] private UnityEvent<float> onMouseMoveDeltaX;
+        [SerializeField] private UnityEvent<float> onMouseMoveDeltaY;
+        [SerializeField] private UnityEvent<float> onMouseScrollDelta;
+        [SerializeField] private UnityEvent<float> onLeftMouseButtonDragX;
+        [SerializeField] private UnityEvent<float> onLeftMouseButtonDragY;
+        [SerializeField] private UnityEvent<float> onRightMouseButtonDragX;
+        [SerializeField] private UnityEvent<float> onRightMouseButtonDragY;
+        [SerializeField] private UnityEvent<float> onMiddleMouseButtonDragX;
+        [SerializeField] private UnityEvent<float> onMiddleMouseButtonDragY;
 
         private void OnEnable()
         {
-            onMouseEventChannel.OnLMBPressEventRaised += OnLeftMouseButtonPressed;
-            onMouseEventChannel.OnLMBReleaseEventRaised += OnLeftMouseButtonReleased;
-            onMouseEventChannel.OnLMBHoldEventRaised += OnLeftMouseButtonHold;
-            onMouseEventChannel.OnMMBPressEventRaised += OnMiddleMouseButtonPressed;
-            onMouseEventChannel.OnMMBReleaseEventRaised += OnMiddleMouseButtonReleased;
-            onMouseEventChannel.OnMMBHoldEventRaised += OnMiddleMouseButtonHold;
-            onMouseEventChannel.OnRMBPressEventRaised += OnRightMouseButtonPressed;
-            onMouseEventChannel.OnRMBReleaseEventRaised += OnRightMouseButtonReleased;
-            onMouseEventChannel.OnRMBHoldEventRaised += OnRightMouseButtonHold;
-            onMouseEventChannel.OnScrollEventRaised += OnScrolling;
-            onMouseEventChannel.OnScrollStopEventRaised += OnScrollStop;
-            onMouseEventChannel.OnLMBHoldFramesEventRaised += OnLMBHoldFramesEventRaised;
-            onMouseEventChannel.OnMMBHoldFramesEventRaised += OnMMBHoldFramesEventRaised;
-            onMouseEventChannel.OnRMBHoldFramesEventRaised += OnRMBHoldFramesEventRaised;
-            onMouseEventChannel.OnMousePositionEventRaised += OnMousePositionEventRaised;
-            onMouseEventChannel.OnMouseMoveDeltaEventRaised += OnMouseMoveDeltaEventRaised;
-            onMouseEventChannel.OnMouseScrollDeltaEventRaised += OnMouseScrollDeltaEventRaised;
-            onMouseEventChannel.OnLMBDragEventRaised += OnLMBDragEventRaised;
-            onMouseEventChannel.OnRMBDragEventRaised += OnRMBDragEventRaised;
-            onMouseEventChannel.OnMMBDragEventRaised += OnMMBDragEventRaised;
+            onMouseEventChannel.OnLeftMouseButtonPress += OnLeftMouseButtonPressed;
+            onMouseEventChannel.OnLeftMouseButtonRelease += OnLeftMouseButtonReleased;
+            onMouseEventChannel.OnLeftMouseButtonHold += OnLeftMouseButtonHold;
+            onMouseEventChannel.OnMiddleMouseButtonPress += OnMiddleMouseButtonPressed;
+            onMouseEventChannel.OnMiddleMouseButtonRelease += OnMiddleMouseButtonReleased;
+            onMouseEventChannel.OnMiddleMouseButtonHold += OnMiddleMouseButtonHold;
+            onMouseEventChannel.OnRightMouseButtonPress += OnRightMouseButtonPressed;
+            onMouseEventChannel.OnRightMouseButtonRelease += OnRightMouseButtonReleased;
+            onMouseEventChannel.OnRightMouseButtonHold += OnRightMouseButtonHold;
+            onMouseEventChannel.OnScroll += OnScrolling;
+            onMouseEventChannel.OnLeftMouseButtonHoldFrames += OnLMBHoldFrames;
+            onMouseEventChannel.OnMiddleMouseButtonHoldFrames += OnMMBHoldFrames;
+            onMouseEventChannel.OnRightMouseButtonHoldFrames += OnRMBHoldFrames;
+            onMouseEventChannel.OnMousePosition += OnMousePosition;
+            onMouseEventChannel.OnMouseMoveDelta += OnMouseMoveDelta;
+            onMouseEventChannel.OnMouseScrollDelta += OnMouseScrollDelta;
+            onMouseEventChannel.OnLeftMouseButtonDrag += OnLMBDrag;
+            onMouseEventChannel.OnRightMouseButtonDrag += OnRMBDrag;
+            onMouseEventChannel.OnMiddleMouseButtonDrag += OnMMBDrag;
         }
 
         private void OnDisable()
         {
-            onMouseEventChannel.OnLMBPressEventRaised -= OnLeftMouseButtonPressed;
-            onMouseEventChannel.OnLMBReleaseEventRaised -= OnLeftMouseButtonReleased;
-            onMouseEventChannel.OnLMBHoldEventRaised -= OnLeftMouseButtonHold;
-            onMouseEventChannel.OnMMBPressEventRaised -= OnMiddleMouseButtonPressed;
-            onMouseEventChannel.OnMMBReleaseEventRaised -= OnMiddleMouseButtonReleased;
-            onMouseEventChannel.OnMMBHoldEventRaised -= OnMiddleMouseButtonHold;
-            onMouseEventChannel.OnRMBPressEventRaised -= OnRightMouseButtonPressed;
-            onMouseEventChannel.OnRMBReleaseEventRaised -= OnRightMouseButtonReleased;
-            onMouseEventChannel.OnRMBHoldEventRaised -= OnRightMouseButtonHold;
-            onMouseEventChannel.OnScrollEventRaised -= OnScrolling;
-            onMouseEventChannel.OnScrollStopEventRaised -= OnScrollStop;
-            onMouseEventChannel.OnLMBHoldFramesEventRaised -= OnLMBHoldFramesEventRaised;
-            onMouseEventChannel.OnMMBHoldFramesEventRaised -= OnMMBHoldFramesEventRaised;
-            onMouseEventChannel.OnRMBHoldFramesEventRaised -= OnRMBHoldFramesEventRaised;
-            onMouseEventChannel.OnMousePositionEventRaised -= OnMousePositionEventRaised;
-            onMouseEventChannel.OnMouseMoveDeltaEventRaised -= OnMouseMoveDeltaEventRaised;
-            onMouseEventChannel.OnMouseScrollDeltaEventRaised -= OnMouseScrollDeltaEventRaised;
-            onMouseEventChannel.OnLMBDragEventRaised -= OnLMBDragEventRaised;
-            onMouseEventChannel.OnRMBDragEventRaised -= OnRMBDragEventRaised;
-            onMouseEventChannel.OnMMBDragEventRaised -= OnMMBDragEventRaised;
+            onMouseEventChannel.OnLeftMouseButtonPress -= OnLeftMouseButtonPressed;
+            onMouseEventChannel.OnLeftMouseButtonRelease -= OnLeftMouseButtonReleased;
+            onMouseEventChannel.OnLeftMouseButtonHold -= OnLeftMouseButtonHold;
+            onMouseEventChannel.OnMiddleMouseButtonPress -= OnMiddleMouseButtonPressed;
+            onMouseEventChannel.OnMiddleMouseButtonRelease -= OnMiddleMouseButtonReleased;
+            onMouseEventChannel.OnMiddleMouseButtonHold -= OnMiddleMouseButtonHold;
+            onMouseEventChannel.OnRightMouseButtonPress -= OnRightMouseButtonPressed;
+            onMouseEventChannel.OnRightMouseButtonRelease -= OnRightMouseButtonReleased;
+            onMouseEventChannel.OnRightMouseButtonHold -= OnRightMouseButtonHold;
+            onMouseEventChannel.OnScroll -= OnScrolling;
+            onMouseEventChannel.OnLeftMouseButtonHoldFrames -= OnLMBHoldFrames;
+            onMouseEventChannel.OnMiddleMouseButtonHoldFrames -= OnMMBHoldFrames;
+            onMouseEventChannel.OnRightMouseButtonHoldFrames -= OnRMBHoldFrames;
+            onMouseEventChannel.OnMousePosition -= OnMousePosition;
+            onMouseEventChannel.OnMouseMoveDelta -= OnMouseMoveDelta;
+            onMouseEventChannel.OnMouseScrollDelta -= OnMouseScrollDelta;
+            onMouseEventChannel.OnLeftMouseButtonDrag -= OnLMBDrag;
+            onMouseEventChannel.OnRightMouseButtonDrag -= OnRMBDrag;
+            onMouseEventChannel.OnMiddleMouseButtonDrag -= OnMMBDrag;
         }
 
         private void OnLeftMouseButtonPressed()
         {
-            onLMBPressEventRaised?.Invoke(true);
+            onLeftMouseButtonPress?.Invoke(true);
         }
 
         private void OnLeftMouseButtonReleased()
         {
-            onLMBPressEventRaised?.Invoke(false);
-            onLMBHoldFramesEventRaised?.Invoke(0);
+            onLeftMouseButtonPress?.Invoke(false);
+            onLeftMouseButtonHoldFrames?.Invoke(0);
         }
 
         private void OnLeftMouseButtonHold()
         {
-            onLMBHoldEventRaised?.Invoke();
+            onLeftMouseButtonHold?.Invoke();
         }
 
         private void OnRightMouseButtonPressed()
         {
-            onRMBPressEventRaised?.Invoke(true);
+            onRightMouseButtonPress?.Invoke(true);
         }
 
         private void OnRightMouseButtonReleased()
         {
-            onRMBPressEventRaised?.Invoke(false);
-            onRMBHoldFramesEventRaised?.Invoke(0);
+            onRightMouseButtonPress?.Invoke(false);
+            onRightMouseButtonHoldFrames?.Invoke(0);
         }
 
         private void OnRightMouseButtonHold()
         {
-            onRMBHoldEventRaised?.Invoke();
+            onRightMouseButtonHold?.Invoke();
         }
 
         private void OnScrolling()
         {
-            onScrollingEventRaised?.Invoke(true);
-            onScrollUpEventRaised?.Invoke(Input.mouseScrollDelta.y > 0);
-            onScrollDownEventRaised?.Invoke(Input.mouseScrollDelta.y < 0);
-        }
-
-        private void OnScrollStop()
-        {
-            onScrollingEventRaised?.Invoke(false);
-            onScrollUpEventRaised?.Invoke(false);
-            onScrollDownEventRaised?.Invoke(false);
+            onScroll?.Invoke(true);
+            onScrollUp?.Invoke(Input.mouseScrollDelta.y > 0);
+            onScrollDown?.Invoke(Input.mouseScrollDelta.y < 0);
         }
 
         private void OnMiddleMouseButtonPressed()
         {
-            onMMBPressEventRaised?.Invoke(true);
+            onMiddleMouseButtonPress?.Invoke(true);
         }
 
         private void OnMiddleMouseButtonReleased()
         {
-            onMMBPressEventRaised?.Invoke(false);
-            onMMBHoldFramesEventRaised?.Invoke(0);
+            onMiddleMouseButtonPress?.Invoke(false);
+            onMiddleMouseButtonHoldFrames?.Invoke(0);
         }
 
         private void OnMiddleMouseButtonHold()
         {
-            onMMBHoldEventRaised?.Invoke();
+            onMiddleMouseButtonHold?.Invoke();
         }
 
-        private void OnLMBHoldFramesEventRaised(int value)
+        private void OnLMBHoldFrames(int value)
         {
-            onLMBHoldFramesEventRaised?.Invoke(value);
+            onLeftMouseButtonHoldFrames?.Invoke(value);
         }
 
-        private void OnRMBHoldFramesEventRaised(int value)
+        private void OnRMBHoldFrames(int value)
         {
-            onRMBHoldFramesEventRaised?.Invoke(value);
+            onRightMouseButtonHoldFrames?.Invoke(value);
         }
 
-        private void OnMMBHoldFramesEventRaised(int value)
+        private void OnMMBHoldFrames(int value)
         {
-            onMMBHoldFramesEventRaised?.Invoke(value);
+            onMiddleMouseButtonHoldFrames?.Invoke(value);
         }
 
-        private void OnMousePositionEventRaised(Vector2 value)
+        private void OnMousePosition(Vector2 value)
         {
-            onMousePositionXEventRaised?.Invoke(value.x);
-            onMousePositionYEventRaised?.Invoke(value.y);
-            onMousePositionXStringEventRaised?.Invoke(value.x.ToString("F2"));
-            onMousePositionYStringEventRaised?.Invoke(value.y.ToString("F2"));
+            onMousePositionX?.Invoke(value.x);
+            onMousePositionY?.Invoke(value.y);
         }
 
-        private void OnMouseMoveDeltaEventRaised(Vector2 value)
+        private void OnMouseMoveDelta(Vector2 value)
         {
-            onMouseMoveDeltaXEventRaised?.Invoke(value.x);
-            onMouseMoveDeltaYEventRaised?.Invoke(value.y);
-            onMouseMoveDeltaXStringEventRaised?.Invoke(value.x.ToString("F2"));
-            onMouseMoveDeltaYStringEventRaised?.Invoke(value.y.ToString("F2"));
+            onMouseMoveDeltaX?.Invoke(value.x);
+            onMouseMoveDeltaY?.Invoke(value.y);
         }
 
-        private void OnMouseScrollDeltaEventRaised(float value)
+        private void OnMouseScrollDelta(float value)
         {
-            onMouseScrollDeltaEventRaised?.Invoke(value);
-            onMouseScrollDeltaStringEventRaised?.Invoke(value.ToString("F2"));
+            onMouseScrollDelta?.Invoke(value);
         }
 
-        private void OnLMBDragEventRaised(Vector2 value)
+        private void OnLMBDrag(Vector2 value)
         {
-            onLMBDragXEventRaised?.Invoke(value.x);
-            onLMBDragYEventRaised?.Invoke(value.y);
-            onLMBDragXStringEventRaised?.Invoke(value.x.ToString("F2"));
-            onLMBDragYStringEventRaised?.Invoke(value.y.ToString("F2"));
+            onLeftMouseButtonDragX?.Invoke(value.x);
+            onLeftMouseButtonDragY?.Invoke(value.y);
         }
 
-        private void OnRMBDragEventRaised(Vector2 value)
+        private void OnRMBDrag(Vector2 value)
         {
-            onRMBDragXEventRaised?.Invoke(value.x);
-            onRMBDragYEventRaised?.Invoke(value.y);
-            onRMBDragXStringEventRaised?.Invoke(value.x.ToString("F2"));
-            onRMBDragYStringEventRaised?.Invoke(value.y.ToString("F2"));
+            onRightMouseButtonDragX?.Invoke(value.x);
+            onRightMouseButtonDragY?.Invoke(value.y);
         }
 
-        private void OnMMBDragEventRaised(Vector2 value)
+        private void OnMMBDrag(Vector2 value)
         {
-            onMMBDragXEventRaised?.Invoke(value.x);
-            onMMBDragYEventRaised?.Invoke(value.y);
-            onMMBDragXStringEventRaised?.Invoke(value.x.ToString("F2"));
-            onMMBDragYStringEventRaised?.Invoke(value.y.ToString("F2"));
+            onMiddleMouseButtonDragX?.Invoke(value.x);
+            onMiddleMouseButtonDragY?.Invoke(value.y);
         }
     }
 }

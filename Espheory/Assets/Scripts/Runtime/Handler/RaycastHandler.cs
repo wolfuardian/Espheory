@@ -41,12 +41,12 @@ namespace Eos.Runtime.Handler
 
         private void OnEnable()
         {
-            onMouseEventChannelSO.OnMousePositionEventRaised += OnMouseMoving;
+            onMouseEventChannelSO.OnMousePosition += OnMouseMoving;
         }
 
         private void OnDisable()
         {
-            onMouseEventChannelSO.OnMousePositionEventRaised -= OnMouseMoving;
+            onMouseEventChannelSO.OnMousePosition -= OnMouseMoving;
         }
 
         private void OnMouseMoving(Vector2 position)
