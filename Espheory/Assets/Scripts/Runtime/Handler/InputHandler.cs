@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Eos.Runtime.Core;
 using Eos.Runtime.Interface;
@@ -42,18 +43,28 @@ namespace Eos.Runtime.Handler
 
         private void Start()
         {
+            if (mouseEventChannel == null)
+            {
+                Debug.Log("Mouse Event Channel is null", this);
+                return;
+            }
+
             if (!updateHandlerExists) return;
             UpdateHandler.instance.Register(this);
         }
 
         private void OnDestroy()
         {
+            if (mouseEventChannel == null) return;
+
             if (!updateHandlerExists) return;
             UpdateHandler.instance.Unregister(this);
         }
 
         public void Tick()
         {
+            if (mouseEventChannel == null) return;
+
             if (isLeftMouseButtonPressing) OnLeftMouseButtonPressed();
 
             if (isLeftMouseButtonReleasing) OnLeftMouseButtonReleased();
