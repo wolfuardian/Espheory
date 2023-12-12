@@ -164,10 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd98337613a54d0aa78e46ca021993cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  onMouseEventChannel: {fileID: 11400000, guid: 58f2bb4769b81c241896b84638ff0355, type: 2}
-  leftMouseButtonHoldFrames: 0
-  middleMouseButtonHoldFrames: 0
-  rightMouseButtonHoldFrames: 0
+  mouseEventChannel: {fileID: 0}
 --- !u!1 &1258059548
 GameObject:
   m_ObjectHideFlags: 0

@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4832725599001312121}
   - component: {fileID: 8271022197293419185}
   - component: {fileID: 709210385463544454}
+  - component: {fileID: 7453345628487916170}
   m_Layer: 5
   m_Name: StateCard
   m_TagString: Untagged
@@ -95,6 +96,88 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
+--- !u!114 &7453345628487916170
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 487718042704023629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eccf82d71b70b0a43acf68da405b88a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onMouseEventChannel: {fileID: 11400000, guid: 58f2bb4769b81c241896b84638ff0355, type: 2}
+  onLeftMouseButtonPress:
+    m_PersistentCalls:
+      m_Calls: []
+  onRightMouseButtonPress:
+    m_PersistentCalls:
+      m_Calls: []
+  onMiddleMouseButtonPress:
+    m_PersistentCalls:
+      m_Calls: []
+  onScroll:
+    m_PersistentCalls:
+      m_Calls: []
+  onScrollUp:
+    m_PersistentCalls:
+      m_Calls: []
+  onScrollDown:
+    m_PersistentCalls:
+      m_Calls: []
+  onLeftMouseButtonHold:
+    m_PersistentCalls:
+      m_Calls: []
+  onRightMouseButtonHold:
+    m_PersistentCalls:
+      m_Calls: []
+  onMiddleMouseButtonHold:
+    m_PersistentCalls:
+      m_Calls: []
+  onLeftMouseButtonHoldFrames:
+    m_PersistentCalls:
+      m_Calls: []
+  onRightMouseButtonHoldFrames:
+    m_PersistentCalls:
+      m_Calls: []
+  onMiddleMouseButtonHoldFrames:
+    m_PersistentCalls:
+      m_Calls: []
+  onMousePositionX:
+    m_PersistentCalls:
+      m_Calls: []
+  onMousePositionY:
+    m_PersistentCalls:
+      m_Calls: []
+  onMouseMoveDeltaX:
+    m_PersistentCalls:
+      m_Calls: []
+  onMouseMoveDeltaY:
+    m_PersistentCalls:
+      m_Calls: []
+  onMouseScrollDelta:
+    m_PersistentCalls:
+      m_Calls: []
+  onLeftMouseButtonDragX:
+    m_PersistentCalls:
+      m_Calls: []
+  onLeftMouseButtonDragY:
+    m_PersistentCalls:
+      m_Calls: []
+  onRightMouseButtonDragX:
+    m_PersistentCalls:
+      m_Calls: []
+  onRightMouseButtonDragY:
+    m_PersistentCalls:
+      m_Calls: []
+  onMiddleMouseButtonDragX:
+    m_PersistentCalls:
+      m_Calls: []
+  onMiddleMouseButtonDragY:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &2873882849294214290
 GameObject:
   m_ObjectHideFlags: 0
