@@ -8,12 +8,12 @@ namespace Eos.Runtime.Handler
     public class RaycastHandler : MonoBehaviour, ITick
     {
         [Header("Listening to")] [SerializeField]
-        private MouseEventChannelSO onMouseEventChannelSO;
+        private MouseEventChannelSO mouseEventChannel;
 
         [Header("Broadcasting on")] [SerializeField]
-        private BoolEventChannelSO onRaycastHitEventChannel;
+        private BoolEventChannelSO raycastHitEventChannel;
 
-        [SerializeField] private CameraRaycastEventChannelSO cameraRaycastEventChannelSO;
+        [SerializeField] private CameraRaycastEventChannelSO cameraRaycastEventChannel;
 
         private Camera _camera;
         private Vector3 _mousePosition;
@@ -29,24 +29,32 @@ namespace Eos.Runtime.Handler
 
         private void Start()
         {
+            if (mouseEventChannel == null)
+            {
+                Debug.Log("Mouse Event Channel is null", this);
+                return;
+            }
+
             if (IsUpdateHandlerIsNull()) return;
             UpdateHandler.instance.Register(this);
         }
 
         private void OnDestroy()
         {
+            if (mouseEventChannel == null) return;
+
             if (IsUpdateHandlerIsNull()) return;
             UpdateHandler.instance.Unregister(this);
         }
 
         private void OnEnable()
         {
-            onMouseEventChannelSO.OnMousePosition += OnMouseMoving;
+            mouseEventChannel.OnMousePosition += OnMouseMoving;
         }
 
         private void OnDisable()
         {
-            onMouseEventChannelSO.OnMousePosition -= OnMouseMoving;
+            mouseEventChannel.OnMousePosition -= OnMouseMoving;
         }
 
         private void OnMouseMoving(Vector2 position)
@@ -57,8 +65,8 @@ namespace Eos.Runtime.Handler
         public void Tick()
         {
             RaycastHitByCamera();
-            onRaycastHitEventChannel.RaiseEvent(isRaycastHit);
-            cameraRaycastEventChannelSO.RaiseEvent(raycastHitGameObject);
+            raycastHitEventChannel.RaiseEvent(isRaycastHit);
+            cameraRaycastEventChannel.RaiseEvent(raycastHitGameObject);
         }
 
         private void RaycastHitByCamera()
