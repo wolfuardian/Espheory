@@ -1,9 +1,9 @@
+using UnityEngine;
 using Eos.Runtime.Core;
 using Eos.Runtime.Interface;
 using Eos.Events.ScriptableObjects;
-using UnityEngine;
 
-namespace Eos.Runtime.Handler
+namespace Eos.Runtime
 {
     public class RaycastHandler : MonoBehaviour, ITick
     {
@@ -49,12 +49,12 @@ namespace Eos.Runtime.Handler
 
         private void OnEnable()
         {
-            mouseEventChannel.OnMousePosition += OnMouseMoving;
+            mouseEventChannel.onMousePosition += OnMouseMoving;
         }
 
         private void OnDisable()
         {
-            mouseEventChannel.OnMousePosition -= OnMouseMoving;
+            mouseEventChannel.onMousePosition -= OnMouseMoving;
         }
 
         private void OnMouseMoving(Vector2 position)

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 4465033240809654608}
   - component: {fileID: 46611652086594428}
   m_Layer: 0
-  m_Name: Main Camera
+  m_Name: CameraMain
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -101,8 +101,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2302940078852652545}
+  - component: {fileID: 3158338758729219263}
   m_Layer: 0
-  m_Name: PlayerController
+  m_Name: CameraController
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -124,6 +125,24 @@ Transform:
   - {fileID: 3441982372999280372}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3158338758729219263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2703975447247705653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a292246f4d369f4dac61cafb6ba02f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseEventChannel: {fileID: 11400000, guid: 58f2bb4769b81c241896b84638ff0355, type: 2}
+  cameraPivot: {fileID: 0}
+  cameraPitchYaw: {fileID: 1663238551367968294}
+  cameraDolly: {fileID: 3913245722864140409}
+  mainCamera: {fileID: 4465033240809654608}
+  cameraConfigData: {fileID: 11400000, guid: d145c448c9a8c6942847aa25d117074b, type: 2}
 --- !u!1 &5552783299165632279
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,7 +153,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3441982372999280372}
   m_Layer: 0
-  m_Name: CameraMove
+  m_Name: CameraPivot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

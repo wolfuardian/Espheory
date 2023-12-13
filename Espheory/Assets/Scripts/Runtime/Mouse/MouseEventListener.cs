@@ -37,48 +37,48 @@ namespace Eos.Runtime.Mouse
 
         private void OnEnable()
         {
-            mouseEventChannel.OnLeftMouseButtonPress += OnLeftMouseButtonPressed;
-            mouseEventChannel.OnLeftMouseButtonRelease += OnLeftMouseButtonReleased;
-            mouseEventChannel.OnLeftMouseButtonHold += OnLeftMouseButtonHold;
-            mouseEventChannel.OnMiddleMouseButtonPress += OnMiddleMouseButtonPressed;
-            mouseEventChannel.OnMiddleMouseButtonRelease += OnMiddleMouseButtonReleased;
-            mouseEventChannel.OnMiddleMouseButtonHold += OnMiddleMouseButtonHold;
-            mouseEventChannel.OnRightMouseButtonPress += OnRightMouseButtonPressed;
-            mouseEventChannel.OnRightMouseButtonRelease += OnRightMouseButtonReleased;
-            mouseEventChannel.OnRightMouseButtonHold += OnRightMouseButtonHold;
-            mouseEventChannel.OnScroll += OnScrolling;
-            mouseEventChannel.OnLeftMouseButtonHoldFrames += OnLMBHoldFrames;
-            mouseEventChannel.OnMiddleMouseButtonHoldFrames += OnMMBHoldFrames;
-            mouseEventChannel.OnRightMouseButtonHoldFrames += OnRMBHoldFrames;
-            mouseEventChannel.OnMousePosition += OnMousePosition;
-            mouseEventChannel.OnMouseMoveDelta += OnMouseMoveDelta;
-            mouseEventChannel.OnMouseScrollDelta += OnMouseScrollDelta;
-            mouseEventChannel.OnLeftMouseButtonDrag += OnLMBDrag;
-            mouseEventChannel.OnRightMouseButtonDrag += OnRMBDrag;
-            mouseEventChannel.OnMiddleMouseButtonDrag += OnMMBDrag;
+            mouseEventChannel.onLeftMouseButtonPress += OnLeftMouseButtonPressed;
+            mouseEventChannel.onLeftMouseButtonRelease += OnLeftMouseButtonReleased;
+            mouseEventChannel.onLeftMouseButtonHold += OnLeftMouseButtonHold;
+            mouseEventChannel.onMiddleMouseButtonPress += OnMiddleMouseButtonPressed;
+            mouseEventChannel.onMiddleMouseButtonRelease += OnMiddleMouseButtonReleased;
+            mouseEventChannel.onMiddleMouseButtonHold += OnMiddleMouseButtonHold;
+            mouseEventChannel.onRightMouseButtonPress += OnRightMouseButtonPressed;
+            mouseEventChannel.onRightMouseButtonRelease += OnRightMouseButtonReleased;
+            mouseEventChannel.onRightMouseButtonHold += OnRightMouseButtonHold;
+            mouseEventChannel.onScroll += OnScrolling;
+            mouseEventChannel.onLeftMouseButtonHoldFrames += OnLMBHoldFrames;
+            mouseEventChannel.onMiddleMouseButtonHoldFrames += OnMMBHoldFrames;
+            mouseEventChannel.onRightMouseButtonHoldFrames += OnRMBHoldFrames;
+            mouseEventChannel.onMousePosition += OnMousePosition;
+            mouseEventChannel.onMouseMoveDelta += OnMouseMoveDelta;
+            mouseEventChannel.onMouseScrollDelta += OnMouseScrollDelta;
+            mouseEventChannel.onLeftMouseButtonDragOffset += OnLMBDrag;
+            mouseEventChannel.onRightMouseButtonDragOffset += OnRMBDrag;
+            mouseEventChannel.onMiddleMouseButtonDragOffset += OnMMBDrag;
         }
 
         private void OnDisable()
         {
-            mouseEventChannel.OnLeftMouseButtonPress -= OnLeftMouseButtonPressed;
-            mouseEventChannel.OnLeftMouseButtonRelease -= OnLeftMouseButtonReleased;
-            mouseEventChannel.OnLeftMouseButtonHold -= OnLeftMouseButtonHold;
-            mouseEventChannel.OnMiddleMouseButtonPress -= OnMiddleMouseButtonPressed;
-            mouseEventChannel.OnMiddleMouseButtonRelease -= OnMiddleMouseButtonReleased;
-            mouseEventChannel.OnMiddleMouseButtonHold -= OnMiddleMouseButtonHold;
-            mouseEventChannel.OnRightMouseButtonPress -= OnRightMouseButtonPressed;
-            mouseEventChannel.OnRightMouseButtonRelease -= OnRightMouseButtonReleased;
-            mouseEventChannel.OnRightMouseButtonHold -= OnRightMouseButtonHold;
-            mouseEventChannel.OnScroll -= OnScrolling;
-            mouseEventChannel.OnLeftMouseButtonHoldFrames -= OnLMBHoldFrames;
-            mouseEventChannel.OnMiddleMouseButtonHoldFrames -= OnMMBHoldFrames;
-            mouseEventChannel.OnRightMouseButtonHoldFrames -= OnRMBHoldFrames;
-            mouseEventChannel.OnMousePosition -= OnMousePosition;
-            mouseEventChannel.OnMouseMoveDelta -= OnMouseMoveDelta;
-            mouseEventChannel.OnMouseScrollDelta -= OnMouseScrollDelta;
-            mouseEventChannel.OnLeftMouseButtonDrag -= OnLMBDrag;
-            mouseEventChannel.OnRightMouseButtonDrag -= OnRMBDrag;
-            mouseEventChannel.OnMiddleMouseButtonDrag -= OnMMBDrag;
+            mouseEventChannel.onLeftMouseButtonPress -= OnLeftMouseButtonPressed;
+            mouseEventChannel.onLeftMouseButtonRelease -= OnLeftMouseButtonReleased;
+            mouseEventChannel.onLeftMouseButtonHold -= OnLeftMouseButtonHold;
+            mouseEventChannel.onMiddleMouseButtonPress -= OnMiddleMouseButtonPressed;
+            mouseEventChannel.onMiddleMouseButtonRelease -= OnMiddleMouseButtonReleased;
+            mouseEventChannel.onMiddleMouseButtonHold -= OnMiddleMouseButtonHold;
+            mouseEventChannel.onRightMouseButtonPress -= OnRightMouseButtonPressed;
+            mouseEventChannel.onRightMouseButtonRelease -= OnRightMouseButtonReleased;
+            mouseEventChannel.onRightMouseButtonHold -= OnRightMouseButtonHold;
+            mouseEventChannel.onScroll -= OnScrolling;
+            mouseEventChannel.onLeftMouseButtonHoldFrames -= OnLMBHoldFrames;
+            mouseEventChannel.onMiddleMouseButtonHoldFrames -= OnMMBHoldFrames;
+            mouseEventChannel.onRightMouseButtonHoldFrames -= OnRMBHoldFrames;
+            mouseEventChannel.onMousePosition -= OnMousePosition;
+            mouseEventChannel.onMouseMoveDelta -= OnMouseMoveDelta;
+            mouseEventChannel.onMouseScrollDelta -= OnMouseScrollDelta;
+            mouseEventChannel.onLeftMouseButtonDragOffset -= OnLMBDrag;
+            mouseEventChannel.onRightMouseButtonDragOffset -= OnRMBDrag;
+            mouseEventChannel.onMiddleMouseButtonDragOffset -= OnMMBDrag;
         }
 
         private void OnLeftMouseButtonPressed()

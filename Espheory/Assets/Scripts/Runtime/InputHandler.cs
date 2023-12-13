@@ -104,7 +104,7 @@ namespace Eos.Runtime.Handler
         {
             mouseEventChannel.RaiseLeftMouseButtonReleaseEvent();
             _leftMouseButtonHoldFrames = 0;
-            mouseEventChannel.RaiseLeftMouseButtonDragEvent(Vector2.zero);
+            mouseEventChannel.RaiseLeftMouseButtonDragOffset(Vector2.zero);
         }
 
         private void OnLeftMouseButtonHeld()
@@ -112,26 +112,6 @@ namespace Eos.Runtime.Handler
             mouseEventChannel.RaiseLeftMouseButtonHoldEvent();
             _leftMouseButtonHoldFrames++;
             mouseEventChannel.RaiseLeftMouseButtonHoldFramesEvent(_leftMouseButtonHoldFrames);
-        }
-
-        private void OnMiddleMouseButtonPressed()
-        {
-            mouseEventChannel.RaiseMiddleMouseButtonPressEvent();
-            _middleMouseButtonDragOrigin = mousePosition;
-        }
-
-        private void OnMiddleMouseButtonReleased()
-        {
-            mouseEventChannel.RaiseMiddleMouseButtonReleaseEvent();
-            _middleMouseButtonHoldFrames = 0;
-            mouseEventChannel.RaiseMiddleMouseButtonDragEvent(Vector2.zero);
-        }
-
-        private void OnMiddleMouseButtonHeld()
-        {
-            mouseEventChannel.RaiseMiddleMouseButtonHoldEvent();
-            _middleMouseButtonHoldFrames++;
-            mouseEventChannel.RaiseMiddleMouseButtonHoldFramesEvent(_middleMouseButtonHoldFrames);
         }
 
         private void OnRightMouseButtonPressed()
@@ -144,7 +124,7 @@ namespace Eos.Runtime.Handler
         {
             mouseEventChannel.RaiseRightMouseButtonReleaseEvent();
             _rightMouseButtonHoldFrames = 0;
-            mouseEventChannel.RaiseRightMouseButtonDragEvent(Vector2.zero);
+            mouseEventChannel.RaiseRightMouseButtonDragOffset(Vector2.zero);
         }
 
         private void OnRightMouseButtonHeld()
@@ -154,19 +134,42 @@ namespace Eos.Runtime.Handler
             mouseEventChannel.RaiseRightMouseButtonHoldFramesEvent(_rightMouseButtonHoldFrames);
         }
 
-        private void OnLeftMouseButtonDragging()
+        private void OnMiddleMouseButtonPressed()
         {
-            mouseEventChannel.RaiseLeftMouseButtonDragEvent(leftMouseButtonDragOffset);
+            mouseEventChannel.RaiseMiddleMouseButtonPressEvent();
+            _middleMouseButtonDragOrigin = mousePosition;
         }
 
-        private void OnMiddleMouseButtonDragging()
+        private void OnMiddleMouseButtonReleased()
         {
-            mouseEventChannel.RaiseMiddleMouseButtonDragEvent(middleMouseButtonDragOffset);
+            mouseEventChannel.RaiseMiddleMouseButtonReleaseEvent();
+            _middleMouseButtonHoldFrames = 0;
+            mouseEventChannel.RaiseMiddleMouseButtonDragOffset(Vector2.zero);
+        }
+
+        private void OnMiddleMouseButtonHeld()
+        {
+            mouseEventChannel.RaiseMiddleMouseButtonHoldEvent();
+            _middleMouseButtonHoldFrames++;
+            mouseEventChannel.RaiseMiddleMouseButtonHoldFramesEvent(_middleMouseButtonHoldFrames);
+        }
+
+        private void OnLeftMouseButtonDragging()
+        {
+            mouseEventChannel.RaiseLeftMouseButtonDrag();
+            mouseEventChannel.RaiseLeftMouseButtonDragOffset(leftMouseButtonDragOffset);
         }
 
         private void OnRightMouseButtonDragging()
         {
-            mouseEventChannel.RaiseRightMouseButtonDragEvent(rightMouseButtonDragOffset);
+            mouseEventChannel.RaiseRightMouseButtonDrag();
+            mouseEventChannel.RaiseRightMouseButtonDragOffset(rightMouseButtonDragOffset);
+        }
+
+        private void OnMiddleMouseButtonDragging()
+        {
+            mouseEventChannel.RaiseMiddleMouseButtonDrag();
+            mouseEventChannel.RaiseMiddleMouseButtonDragOffset(middleMouseButtonDragOffset);
         }
 
         private void OnMouseMoved()
