@@ -1,6 +1,6 @@
+using Eos.Runtime.Events.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Events;
-using Eos.Events.ScriptableObjects;
 
 namespace Eos.Runtime.Mouse
 {

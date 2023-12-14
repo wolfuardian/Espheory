@@ -1,4 +1,4 @@
-namespace Eos.Runtime.Interface
+namespace Eos.Runtime.Core
 {
     public interface ITick
     {

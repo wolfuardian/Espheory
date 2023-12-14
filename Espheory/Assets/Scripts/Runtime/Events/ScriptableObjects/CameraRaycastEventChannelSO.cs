@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Eos.Events.ScriptableObjects
+namespace Eos.Runtime.Events.ScriptableObjects
 {
     /// <summary>
     /// 這個類別用於有一個 CameraRaycastDataSO 參數的事件。

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Eos.Events.ScriptableObjects
+namespace Eos.Runtime.Events.ScriptableObjects
 {
     /// <summary>
     /// This class is used for Events that have no arguments (Example: Exit game event)

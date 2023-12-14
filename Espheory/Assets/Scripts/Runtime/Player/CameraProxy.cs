@@ -1,8 +1,7 @@
 using UnityEngine;
 using Eos.Utils.Math;
-using Eos.Events.ScriptableObjects;
 using Eos.Runtime.Core;
-using Eos.Runtime.Interface;
+using Eos.Runtime.Events.ScriptableObjects;
 
 namespace Eos.Runtime.Player
 {
@@ -27,7 +26,7 @@ namespace Eos.Runtime.Player
         private Vector2 _mouseMoveDelta;
         private bool _isMiddleMouseButtonDragging;
 
-        public bool IsUpdateHandlerIsNull() => GlobalUpdater.instance == null;
+        public bool IsUpdateHandlerIsNull() => PersistentManager.instance == null;
 
         private void Awake()
         {
@@ -43,13 +42,13 @@ namespace Eos.Runtime.Player
         private void Start()
         {
             if (IsUpdateHandlerIsNull()) return;
-            GlobalUpdater.instance.Register(this);
+            PersistentManager.instance.Register(this);
         }
 
         private void OnDestroy()
         {
             if (IsUpdateHandlerIsNull()) return;
-            GlobalUpdater.instance.Unregister(this);
+            PersistentManager.instance.Unregister(this);
         }
 
         private void OnEnable()

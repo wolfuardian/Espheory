@@ -1,14 +1,13 @@
 using UnityEngine;
 using System.Collections.Generic;
-using Eos.Runtime.Interface;
 
 namespace Eos.Runtime.Core
 {
-    public class GlobalUpdater : MonoBehaviour
+    public class PersistentManager : MonoBehaviour
     {
-        public static GlobalUpdater instance { get; private set; }
+        public static PersistentManager instance { get; private set; }
 
-        private readonly List<ITick> _handlers = new();
+        private readonly List<ITick> _actors = new();
 
         private void Awake()
         {
@@ -30,19 +29,19 @@ namespace Eos.Runtime.Core
 
         public void Register(ITick tick)
         {
-            _handlers.Add(tick);
+            _actors.Add(tick);
         }
 
         public void Unregister(ITick tick)
         {
-            _handlers.Remove(tick);
+            _actors.Remove(tick);
         }
 
         private void Update()
         {
-            foreach (var handler in _handlers)
+            foreach (var actor in _actors)
             {
-                handler.Tick();
+                actor.Tick();
             }
         }
     }

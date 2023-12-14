@@ -1,19 +1,17 @@
-using Eos.Events.ScriptableObjects;
-using Eos.Runtime.Core;
-using Eos.Runtime.Interface;
+using Eos.Runtime.Events.ScriptableObjects;
 using UnityEngine;
 
-namespace Eos.Runtime
+namespace Eos.Runtime.Core
 {
-    public class InputHandler : MonoBehaviour, ITick
+    public class ModuleInputReader : ModuleBase
     {
         [Header("Broadcasting on")] [SerializeField]
         private MouseEventChannelSO mouseEventChannel;
 
         public Vector3 mousePosition => Input.mousePosition;
-        public Vector2 mouseMoveDelta => new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
+        public Vector2 mouseMoveDelta => new(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         public Vector2 mouseScrollDelta => Input.mouseScrollDelta;
-        public bool updateHandlerExists => GlobalUpdater.instance != null;
+        public bool updateHandlerExists => PersistentManager.instance != null;
         public bool isLeftMouseButtonHolding => Input.GetMouseButton(0);
         public bool isLeftMouseButtonPressing => Input.GetMouseButtonDown(0);
         public bool isLeftMouseButtonReleasing => Input.GetMouseButtonUp(0);
@@ -49,7 +47,7 @@ namespace Eos.Runtime
             }
 
             if (!updateHandlerExists) return;
-            GlobalUpdater.instance.Register(this);
+            PersistentManager.instance.Register(this);
         }
 
         private void OnDestroy()
@@ -57,10 +55,10 @@ namespace Eos.Runtime
             if (mouseEventChannel == null) return;
 
             if (!updateHandlerExists) return;
-            GlobalUpdater.instance.Unregister(this);
+            PersistentManager.instance.Unregister(this);
         }
 
-        public void Tick()
+        public override void Tick()
         {
             if (mouseEventChannel == null) return;
 

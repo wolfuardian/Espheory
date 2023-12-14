@@ -1,7 +1,6 @@
 using UnityEngine;
 using Eos.Runtime.Core;
-using Eos.Runtime.Interface;
-using Eos.Events.ScriptableObjects;
+using Eos.Runtime.Events.ScriptableObjects;
 
 namespace Eos.Runtime
 {
@@ -20,7 +19,7 @@ namespace Eos.Runtime
         [Header("Debug")] [SerializeField] private bool isRaycastHit;
         [SerializeField] private GameObject raycastHitGameObject;
 
-        public bool IsUpdateHandlerIsNull() => GlobalUpdater.instance == null;
+        public bool IsUpdateHandlerIsNull() => PersistentManager.instance == null;
 
         private void Awake()
         {
@@ -36,7 +35,7 @@ namespace Eos.Runtime
             }
 
             if (IsUpdateHandlerIsNull()) return;
-            GlobalUpdater.instance.Register(this);
+            PersistentManager.instance.Register(this);
         }
 
         private void OnDestroy()
@@ -44,7 +43,7 @@ namespace Eos.Runtime
             if (mouseEventChannel == null) return;
 
             if (IsUpdateHandlerIsNull()) return;
-            GlobalUpdater.instance.Unregister(this);
+            PersistentManager.instance.Unregister(this);
         }
 
         private void OnEnable()

@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Eos.Events.ScriptableObjects
+namespace Eos.Runtime.Events.ScriptableObjects
 {
     [CreateAssetMenu(menuName = "Events/Mouse Event Channel")]
     public class MouseEventChannelSO : ScriptableObject

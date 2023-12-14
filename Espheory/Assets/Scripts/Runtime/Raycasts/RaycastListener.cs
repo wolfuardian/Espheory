@@ -1,5 +1,5 @@
 using System;
-using Eos.Events.ScriptableObjects;
+using Eos.Runtime.Events.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Events;
 
