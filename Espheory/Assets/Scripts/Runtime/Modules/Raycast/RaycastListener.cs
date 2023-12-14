@@ -1,9 +1,8 @@
-using System;
 using Eos.Runtime.Events.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Eos.Runtime.Raycasts
+namespace Eos.Runtime.Modules.Raycast
 {
     public class RaycastListener : MonoBehaviour
     {

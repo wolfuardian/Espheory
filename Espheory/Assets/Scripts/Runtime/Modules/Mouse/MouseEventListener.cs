@@ -2,7 +2,7 @@ using Eos.Runtime.Events.ScriptableObjects;
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Eos.Runtime.Mouse
+namespace Eos.Runtime.Modules.Mouse
 {
     public class MouseEventListener : MonoBehaviour
     {

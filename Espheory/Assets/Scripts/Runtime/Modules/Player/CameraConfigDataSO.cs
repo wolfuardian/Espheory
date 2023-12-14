@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Eos.Runtime.Player
+namespace Eos.Runtime.Modules.Player
 {
     [CreateAssetMenu(menuName = "Data/Camera Config Data")]
     public class CameraConfigDataSO : ScriptableObject

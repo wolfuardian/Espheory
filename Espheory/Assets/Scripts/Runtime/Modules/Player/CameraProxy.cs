@@ -1,9 +1,9 @@
-using UnityEngine;
-using Eos.Utils.Math;
 using Eos.Runtime.Core;
 using Eos.Runtime.Events.ScriptableObjects;
+using Eos.Utils.Math;
+using UnityEngine;
 
-namespace Eos.Runtime.Player
+namespace Eos.Runtime.Modules.Player
 {
     public class CameraProxy : MonoBehaviour, ITick
     {

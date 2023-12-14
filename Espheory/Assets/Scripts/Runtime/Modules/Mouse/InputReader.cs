@@ -1,7 +1,8 @@
+using Eos.Runtime.Core;
 using Eos.Runtime.Events.ScriptableObjects;
 using UnityEngine;
 
-namespace Eos.Runtime.Core
+namespace Eos.Runtime.Modules.Mouse
 {
     public class InputReader : ModuleBase
     {

@@ -1,8 +1,8 @@
-using UnityEngine;
 using Eos.Runtime.Core;
 using Eos.Runtime.Events.ScriptableObjects;
+using UnityEngine;
 
-namespace Eos.Runtime
+namespace Eos.Runtime.Modules.Raycast
 {
     public class RaycastHandler : MonoBehaviour, ITick
     {
