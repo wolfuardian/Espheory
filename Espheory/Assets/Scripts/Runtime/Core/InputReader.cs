@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Eos.Runtime.Core
 {
-    public class ModuleInputReader : ModuleBase
+    public class InputReader : ModuleBase
     {
         [Header("Broadcasting on")] [SerializeField]
         private MouseEventChannelSO mouseEventChannel;
