@@ -5,9 +5,9 @@ namespace Eos.Runtime.Player
     [CreateAssetMenu(menuName = "Data/Camera Config Data")]
     public class CameraConfigDataSO : ScriptableObject
     {
-        public float scrollSpeed = 1f;
-        public float pitchSpeed = 10f;
-        public float yawSpeed = 10f;
-        public float interpSpeed = 4f;
+        public float scrollStrength = 1f;
+        public float pitchStrength = 1f;
+        public float yawStrength = 1f;
+        public float interpSpeed = 10f;
     }
 }

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f699817db6184fcc94300b637ee10089, type: 3}
   m_Name: PlayerCameraConfig
   m_EditorClassIdentifier: 
-  scrollSpeed: 1
-  pitchSpeed: 1
-  yawSpeed: 1
+  scrollStrength: 1
+  pitchStrength: 1
+  yawStrength: 1
   interpSpeed: 10

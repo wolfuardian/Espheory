@@ -1,10 +1,9 @@
-using System;
-using UnityEngine;
+using Eos.Events.ScriptableObjects;
 using Eos.Runtime.Core;
 using Eos.Runtime.Interface;
-using Eos.Events.ScriptableObjects;
+using UnityEngine;
 
-namespace Eos.Runtime.Handler
+namespace Eos.Runtime
 {
     public class InputHandler : MonoBehaviour, ITick
     {
@@ -14,7 +13,7 @@ namespace Eos.Runtime.Handler
         public Vector3 mousePosition => Input.mousePosition;
         public Vector2 mouseMoveDelta => new Vector2(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         public Vector2 mouseScrollDelta => Input.mouseScrollDelta;
-        public bool updateHandlerExists => UpdateHandler.instance != null;
+        public bool updateHandlerExists => GlobalUpdater.instance != null;
         public bool isLeftMouseButtonHolding => Input.GetMouseButton(0);
         public bool isLeftMouseButtonPressing => Input.GetMouseButtonDown(0);
         public bool isLeftMouseButtonReleasing => Input.GetMouseButtonUp(0);
@@ -50,7 +49,7 @@ namespace Eos.Runtime.Handler
             }
 
             if (!updateHandlerExists) return;
-            UpdateHandler.instance.Register(this);
+            GlobalUpdater.instance.Register(this);
         }
 
         private void OnDestroy()
@@ -58,7 +57,7 @@ namespace Eos.Runtime.Handler
             if (mouseEventChannel == null) return;
 
             if (!updateHandlerExists) return;
-            UpdateHandler.instance.Unregister(this);
+            GlobalUpdater.instance.Unregister(this);
         }
 
         public void Tick()

@@ -27,7 +27,7 @@ namespace Eos.Runtime.Player
         private Vector2 _mouseMoveDelta;
         private bool _isMiddleMouseButtonDragging;
 
-        public bool IsUpdateHandlerIsNull() => UpdateHandler.instance == null;
+        public bool IsUpdateHandlerIsNull() => GlobalUpdater.instance == null;
 
         private void Awake()
         {
@@ -43,13 +43,13 @@ namespace Eos.Runtime.Player
         private void Start()
         {
             if (IsUpdateHandlerIsNull()) return;
-            UpdateHandler.instance.Register(this);
+            GlobalUpdater.instance.Register(this);
         }
 
         private void OnDestroy()
         {
             if (IsUpdateHandlerIsNull()) return;
-            UpdateHandler.instance.Unregister(this);
+            GlobalUpdater.instance.Unregister(this);
         }
 
         private void OnEnable()
@@ -70,13 +70,13 @@ namespace Eos.Runtime.Player
 
         private void OnMouseScrollDelta(float value)
         {
-            _targetCameraDolly.y += value * cameraConfigData.scrollSpeed * -1f;
+            _targetCameraDolly.z += value * cameraConfigData.scrollStrength * 1f;
         }
 
         private void OnMiddleMouseButtonDrag()
         {
-            _targetCameraPitchYaw.z += _mouseMoveDelta.y * cameraConfigData.pitchSpeed * -1f;
-            _targetCameraPitchYaw.y += _mouseMoveDelta.x * cameraConfigData.yawSpeed;
+            _targetCameraPitchYaw.x += _mouseMoveDelta.y * cameraConfigData.pitchStrength * -1f;
+            _targetCameraPitchYaw.y += _mouseMoveDelta.x * cameraConfigData.yawStrength;
         }
 
         public void Tick()

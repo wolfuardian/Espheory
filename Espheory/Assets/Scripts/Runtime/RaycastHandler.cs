@@ -20,7 +20,7 @@ namespace Eos.Runtime
         [Header("Debug")] [SerializeField] private bool isRaycastHit;
         [SerializeField] private GameObject raycastHitGameObject;
 
-        public bool IsUpdateHandlerIsNull() => UpdateHandler.instance == null;
+        public bool IsUpdateHandlerIsNull() => GlobalUpdater.instance == null;
 
         private void Awake()
         {
@@ -36,7 +36,7 @@ namespace Eos.Runtime
             }
 
             if (IsUpdateHandlerIsNull()) return;
-            UpdateHandler.instance.Register(this);
+            GlobalUpdater.instance.Register(this);
         }
 
         private void OnDestroy()
@@ -44,7 +44,7 @@ namespace Eos.Runtime
             if (mouseEventChannel == null) return;
 
             if (IsUpdateHandlerIsNull()) return;
-            UpdateHandler.instance.Unregister(this);
+            GlobalUpdater.instance.Unregister(this);
         }
 
         private void OnEnable()
