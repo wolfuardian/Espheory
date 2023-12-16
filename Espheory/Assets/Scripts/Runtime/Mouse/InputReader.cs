@@ -2,17 +2,18 @@ using Eos.Runtime.Core;
 using Eos.Runtime.Events.ScriptableObjects;
 using UnityEngine;
 
-namespace Eos.Runtime.Modules.Mouse
+namespace Eos.Runtime.Mouse
 {
     public class InputReader : ModuleBase
     {
+        public bool updateHandlerExists => PersistentManager.instance != null;
+
         [Header("Broadcasting on")] [SerializeField]
         private MouseEventChannelSO mouseEventChannel;
 
         public Vector3 mousePosition => Input.mousePosition;
         public Vector2 mouseMoveDelta => new(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         public Vector2 mouseScrollDelta => Input.mouseScrollDelta;
-        public bool updateHandlerExists => PersistentManager.instance != null;
         public bool isLeftMouseButtonHolding => Input.GetMouseButton(0);
         public bool isLeftMouseButtonPressing => Input.GetMouseButtonDown(0);
         public bool isLeftMouseButtonReleasing => Input.GetMouseButtonUp(0);
@@ -172,6 +173,7 @@ namespace Eos.Runtime.Modules.Mouse
 
         private void OnMouseMoved()
         {
+            mouseEventChannel.RaiseMouseMoveEvent();
             mouseEventChannel.RaiseMousePositionEvent(mousePosition);
             mouseEventChannel.RaiseMouseMoveDeltaEvent(mouseMoveDelta);
         }

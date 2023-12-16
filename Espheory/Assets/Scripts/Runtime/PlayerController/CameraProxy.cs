@@ -3,12 +3,15 @@ using Eos.Runtime.Events.ScriptableObjects;
 using Eos.Utils.Math;
 using UnityEngine;
 
-namespace Eos.Runtime.Modules.Player
+namespace Eos.Runtime.PlayerController
 {
-    public class CameraProxy : MonoBehaviour, ITick
+    public class CameraProxy : ModuleBase
     {
         [Header("Listening to")] [SerializeField]
-        private MouseEventChannelSO mouseEventChannel;
+        private MouseEventChannelSO mouseEvent;
+
+        [Header("Broadcasting on")] [SerializeField]
+        private CameraEventChannelSO cameraEvent;
 
         [Header("Binding")] [SerializeField] private Transform cameraPivot;
         [SerializeField] private Transform cameraPitchYaw;
@@ -43,6 +46,7 @@ namespace Eos.Runtime.Modules.Player
         {
             if (IsUpdateHandlerIsNull()) return;
             PersistentManager.instance.Register(this);
+            OnCameraPossessed(mainCamera);
         }
 
         private void OnDestroy()
@@ -53,16 +57,21 @@ namespace Eos.Runtime.Modules.Player
 
         private void OnEnable()
         {
-            mouseEventChannel.onMouseMoveDelta += OnMouseMoveDelta;
-            mouseEventChannel.onMouseScrollDelta += OnMouseScrollDelta;
-            mouseEventChannel.onMiddleMouseButtonDrag += OnMiddleMouseButtonDrag;
+            mouseEvent.onMouseMoveDelta += OnMouseMoveDelta;
+            mouseEvent.onMouseScrollDelta += OnMouseScrollDelta;
+            mouseEvent.onMiddleMouseButtonDrag += OnMiddleMouseButtonDrag;
         }
 
         private void OnDisable()
         {
-            mouseEventChannel.onMouseMoveDelta -= OnMouseMoveDelta;
-            mouseEventChannel.onMouseScrollDelta -= OnMouseScrollDelta;
-            mouseEventChannel.onMiddleMouseButtonDrag -= OnMiddleMouseButtonDrag;
+            mouseEvent.onMouseMoveDelta -= OnMouseMoveDelta;
+            mouseEvent.onMouseScrollDelta -= OnMouseScrollDelta;
+            mouseEvent.onMiddleMouseButtonDrag -= OnMiddleMouseButtonDrag;
+        }
+
+        private void OnCameraPossessed(Camera value)
+        {
+            cameraEvent.RaiseCameraPossessedEvent(value);
         }
 
         private void OnMouseMoveDelta(Vector2 value) => _mouseMoveDelta = value;
@@ -78,7 +87,7 @@ namespace Eos.Runtime.Modules.Player
             _targetCameraPitchYaw.y += _mouseMoveDelta.x * cameraConfigData.yawStrength;
         }
 
-        public void Tick()
+        public override void Tick()
         {
             UpdatePivot(_currentCameraPivot, _targetCameraPivot, Time.deltaTime, cameraConfigData.interpSpeed);
             UpdatePitchYaw(_currentCameraPitchYaw, _targetCameraPitchYaw, Time.deltaTime, cameraConfigData.interpSpeed);

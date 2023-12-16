@@ -10,5 +10,5 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b29697ca3c83c3243881266ba6506cb1, type: 3}
-  m_Name: CameraRaycastEvent
+  m_Name: CameraEvent
   m_EditorClassIdentifier: 

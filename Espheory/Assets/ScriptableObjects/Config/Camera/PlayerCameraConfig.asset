@@ -16,3 +16,24 @@ MonoBehaviour:
   pitchStrength: 1
   yawStrength: 1
   interpSpeed: 10
+  fieldOfView: 70
+  nearClippingPlane: 0.1
+  farClippingPlane: 1000
+  followTarget: {fileID: 0}
+  cameraOffset: {x: 0, y: 0, z: 0}
+  rotationSensitivity: 1
+  zoomSpeed: 5
+  positionStabilization:
+    enablePositionStabilization: 1
+  rotationStabilization:
+    enableRotationStabilization: 1
+  enableCollisionDetection: 1
+  viewAngleLimits: {x: -90, y: 90}
+  enableSmoothMovement: 1
+  autoFocus:
+    enableAutoFocus: 1
+  cameraExposure:
+    exposureValue: 1
+  cameraQuality:
+    resolutionWidth: 1920
+    resolutionHeight: 1080
