@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Eos.Runtime.Events.ScriptableObjects
+namespace Eos.Runtime.Events.ScriptableObjects.PlayerController
 {
     [CreateAssetMenu(menuName = "Events/Camera Event Channel")]
     public class CameraEventChannelSO : ScriptableObject

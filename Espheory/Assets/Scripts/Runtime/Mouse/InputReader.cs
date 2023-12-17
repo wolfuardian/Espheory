@@ -1,5 +1,6 @@
 using Eos.Runtime.Core;
 using Eos.Runtime.Events.ScriptableObjects;
+using Eos.Runtime.Events.ScriptableObjects.PlayerController;
 using UnityEngine;
 
 namespace Eos.Runtime.Mouse
@@ -42,21 +43,11 @@ namespace Eos.Runtime.Mouse
 
         private void Start()
         {
-            if (mouseEventChannel == null)
-            {
-                Debug.Log("Mouse Event Channel is null", this);
-                return;
-            }
-
-            if (!updateHandlerExists) return;
             PersistentManager.instance.Register(this);
         }
 
         private void OnDestroy()
         {
-            if (mouseEventChannel == null) return;
-
-            if (!updateHandlerExists) return;
             PersistentManager.instance.Unregister(this);
         }
 
@@ -174,7 +165,7 @@ namespace Eos.Runtime.Mouse
         private void OnMouseMoved()
         {
             mouseEventChannel.RaiseMouseMoveEvent();
-            mouseEventChannel.RaiseMousePositionEvent(mousePosition);
+            mouseEventChannel.RaiseMousePositionChangeEvent(mousePosition);
             mouseEventChannel.RaiseMouseMoveDeltaEvent(mouseMoveDelta);
         }
 

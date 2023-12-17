@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-namespace Eos.Runtime.Events.ScriptableObjects
+namespace Eos.Runtime.Events.ScriptableObjects.PlayerController
 {
     [CreateAssetMenu(menuName = "Events/Mouse Event Channel")]
     public class MouseEventChannelSO : ScriptableObject
@@ -19,7 +19,7 @@ namespace Eos.Runtime.Events.ScriptableObjects
         public UnityAction<int> onLeftMouseButtonHoldFrames;
         public UnityAction<int> onRightMouseButtonHoldFrames;
         public UnityAction<int> onMiddleMouseButtonHoldFrames;
-        public UnityAction<Vector2> onMousePosition;
+        public UnityAction<Vector2> onMousePositionChanged;
         public UnityAction onMouseMove;
         public UnityAction<Vector2> onMouseMoveDelta;
         public UnityAction<float> onMouseScrollDelta;
@@ -44,7 +44,7 @@ namespace Eos.Runtime.Events.ScriptableObjects
         public void RaiseRightMouseButtonHoldFramesEvent(int value) => onRightMouseButtonHoldFrames?.Invoke(value);
         public void RaiseMiddleMouseButtonHoldFramesEvent(int value) => onMiddleMouseButtonHoldFrames?.Invoke(value);
         public void RaiseScrollEvent() => onScroll?.Invoke();
-        public void RaiseMousePositionEvent(Vector2 value) => onMousePosition?.Invoke(value);
+        public void RaiseMousePositionChangeEvent(Vector2 value) => onMousePositionChanged?.Invoke(value);
         public void RaiseMouseMoveEvent() => onMouseMove?.Invoke();
         public void RaiseMouseMoveDeltaEvent(Vector2 value) => onMouseMoveDelta?.Invoke(value);
         public void RaiseMouseScrollDeltaEvent(float value) => onMouseScrollDelta?.Invoke(value);

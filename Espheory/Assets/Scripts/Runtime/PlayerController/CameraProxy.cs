@@ -1,5 +1,6 @@
 using Eos.Runtime.Core;
 using Eos.Runtime.Events.ScriptableObjects;
+using Eos.Runtime.Events.ScriptableObjects.PlayerController;
 using Eos.Utils.Math;
 using UnityEngine;
 
@@ -44,14 +45,12 @@ namespace Eos.Runtime.PlayerController
 
         private void Start()
         {
-            if (IsUpdateHandlerIsNull()) return;
             PersistentManager.instance.Register(this);
             OnCameraPossessed(mainCamera);
         }
 
         private void OnDestroy()
         {
-            if (IsUpdateHandlerIsNull()) return;
             PersistentManager.instance.Unregister(this);
         }
 

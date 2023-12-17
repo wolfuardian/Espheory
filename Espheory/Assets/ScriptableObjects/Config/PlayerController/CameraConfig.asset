@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f699817db6184fcc94300b637ee10089, type: 3}
-  m_Name: PlayerCameraConfig
+  m_Name: CameraConfig
   m_EditorClassIdentifier: 
   scrollStrength: 1
   pitchStrength: 1

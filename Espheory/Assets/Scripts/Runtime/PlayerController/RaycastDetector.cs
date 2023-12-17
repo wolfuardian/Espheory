@@ -1,5 +1,6 @@
 using Eos.Runtime.Core;
 using Eos.Runtime.Events.ScriptableObjects;
+using Eos.Runtime.Events.ScriptableObjects.PlayerController;
 using UnityEngine;
 
 namespace Eos.Runtime.PlayerController
@@ -16,34 +17,24 @@ namespace Eos.Runtime.PlayerController
         [Header("Broadcasting on")] [SerializeField]
         private RaycastEventChannelSO raycastEvent;
 
-        public GameObject raycastHitGameObject => GetRaycastHitGameObjectByCamera(_mainCamera);
-        public bool isRayCastHitOnCollider => raycastHitGameObject != null;
+        public RaycastHit raycastHit => GetRaycastHitByCamera(_mainCamera);
+        public bool isRayCastHitOnCollider => raycastHit.collider != null;
         private Vector3 _mousePosition;
         private Camera _mainCamera;
 
         private void Start()
         {
-            if (mouseEvent == null)
-            {
-                Debug.Log("Mouse Event Channel is null", this);
-                return;
-            }
-
-            if (isUpdateHandlerIsNull) return;
             PersistentManager.instance.Register(this);
         }
 
         private void OnDestroy()
         {
-            if (mouseEvent == null) return;
-
-            if (isUpdateHandlerIsNull) return;
             PersistentManager.instance.Unregister(this);
         }
 
         private void OnEnable()
         {
-            mouseEvent.onMousePosition += OnMousePosition;
+            mouseEvent.onMousePositionChanged += OnMousePositionChanged;
             cameraEvent.onCameraPossessed += OnCameraPossessed;
         }
 
@@ -55,26 +46,21 @@ namespace Eos.Runtime.PlayerController
 
         private void OnDisable()
         {
-            mouseEvent.onMousePosition -= OnMousePosition;
+            mouseEvent.onMousePositionChanged -= OnMousePositionChanged;
             cameraEvent.onCameraPossessed -= OnCameraPossessed;
         }
 
         public override void Tick()
         {
-            if (mouseEvent == null) return;
-
-            if (isRayCastHitOnCollider)
-            {
-                raycastEvent.RaiseRaycastHitEvent();
-                raycastEvent.RaiseRaycastHitGameObjectEvent(raycastHitGameObject);
-            }
+            if (isRayCastHitOnCollider) raycastEvent.RaiseRaycastHitEvent(raycastHit);
         }
 
-        private void OnMousePosition(Vector2 value) => _mousePosition = value;
+        private void OnMousePositionChanged(Vector2 value) => _mousePosition = value;
 
-        private GameObject GetRaycastHitGameObjectByCamera(Camera cam) =>
-            Physics.Raycast(cam.ScreenPointToRay(_mousePosition), out var hit)
-                ? hit.collider.gameObject
-                : null;
+
+        private RaycastHit GetRaycastHitByCamera(Camera currentCamera) =>
+            Physics.Raycast(currentCamera.ScreenPointToRay(_mousePosition), out var hit)
+                ? hit
+                : default;
     }
 }

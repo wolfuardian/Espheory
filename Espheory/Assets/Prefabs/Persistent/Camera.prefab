@@ -103,6 +103,7 @@ GameObject:
   - component: {fileID: 2302940078852652545}
   - component: {fileID: 3158338758729219263}
   - component: {fileID: 1354281880037099158}
+  - component: {fileID: 4230852514575449927}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -160,8 +161,22 @@ MonoBehaviour:
   mouseEvent: {fileID: 11400000, guid: 58f2bb4769b81c241896b84638ff0355, type: 2}
   cameraEvent: {fileID: 11400000, guid: 548a6b1282913184184e1503ba1d2cea, type: 2}
   raycastEvent: {fileID: 11400000, guid: 16095557d5833124dab85b048c41f8a9, type: 2}
-  _mousePosition: {x: 0, y: 0, z: 0}
-  _mainCamera: {fileID: 0}
+--- !u!114 &4230852514575449927
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2703975447247705653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8308ffddad3333141b81903f16375428, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  raycastEvent: {fileID: 11400000, guid: 16095557d5833124dab85b048c41f8a9, type: 2}
+  mouseEvent: {fileID: 11400000, guid: 58f2bb4769b81c241896b84638ff0355, type: 2}
+  cursorEvent: {fileID: 11400000, guid: 8685490a47b6e53439c1d366212a610a, type: 2}
+  cursorConfigData: {fileID: 11400000, guid: 59670917e2542dd4cbb9102c2a2cb0fb, type: 2}
 --- !u!1 &5552783299165632279
 GameObject:
   m_ObjectHideFlags: 0
