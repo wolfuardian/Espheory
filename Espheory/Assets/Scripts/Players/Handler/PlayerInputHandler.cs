@@ -1,5 +1,6 @@
 #region
 
+using Eos.Players.Main;
 using UnityEngine;
 using Zenject;
 
@@ -11,7 +12,7 @@ namespace Eos.Players.Handler
     {
         #region Public Variables
 
-        [Inject] private CameraInputState inputState;
+        [Inject] private PlayerInputState inputState;
 
         #endregion
 
@@ -20,12 +21,13 @@ namespace Eos.Players.Handler
 
         public void Tick()
         {
+            inputState.SetPitch(Input.GetAxis("Mouse Y"));
+            inputState.SetYaw(Input.GetAxis("Mouse X"));
+            inputState.SetDolly(Input.GetAxis("Mouse ScrollWheel"));
             inputState.SetHorizontal(Input.mouseScrollDelta.x);
             inputState.SetVertical(Input.mouseScrollDelta.y);
         }
 
         #endregion
-
-
     }
 }
