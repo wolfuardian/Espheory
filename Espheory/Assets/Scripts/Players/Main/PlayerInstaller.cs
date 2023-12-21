@@ -1,6 +1,7 @@
 #region
 
 using Eos.Players.Handler;
+using UnityEngine;
 using Zenject;
 
 #endregion
@@ -15,6 +16,12 @@ namespace Eos.Players.Main
         {
             Container.BindInterfacesTo<PlayerInputHandler>().AsSingle();
             Container.Bind<PlayerInputState>().AsSingle();
+        }
+
+        public override void Start()
+        {
+            
+            base.Start();
         }
 
         #endregion

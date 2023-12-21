@@ -2,15 +2,16 @@
 
 using Eos.Players.Main;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using Zenject;
 
 #endregion
 
 namespace Eos.Players.Handler
 {
-    public class PlayerInputHandler : ITickable
+    public class PlayerInputHandler : ITickable, IInitializable
     {
-        #region Public Variables
+        #region Private Variables
 
         [Inject] private PlayerInputState inputState;
 
@@ -19,13 +20,32 @@ namespace Eos.Players.Handler
 
         #region Public Methods
 
+        public void Initialize()
+        {
+            var mainControl = new MainControl();
+            mainControl.Player.Enable();
+            mainControl.Player.Dodge.performed += OnDodge;
+        }
+
         public void Tick()
         {
-            inputState.SetPitch(Input.GetAxis("Mouse Y"));
-            inputState.SetYaw(Input.GetAxis("Mouse X"));
-            inputState.SetDolly(Input.GetAxis("Mouse ScrollWheel"));
-            inputState.SetHorizontal(Input.mouseScrollDelta.x);
-            inputState.SetVertical(Input.mouseScrollDelta.y);
+        }
+
+        #endregion
+
+
+        #region Private Methods
+
+        private void OnDodge(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                inputState.SetDodge(true);
+            }
+            else if (context.canceled)
+            {
+                inputState.SetDodge(false);
+            }
         }
 
         #endregion
