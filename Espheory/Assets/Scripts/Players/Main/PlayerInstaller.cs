@@ -7,7 +7,7 @@ using Zenject;
 
 namespace Eos.Players.Main
 {
-    public class PlayerCharacterInstaller : MonoInstaller
+    public class PlayerInstaller : MonoInstaller
     {
         #region Public Methods
 
