@@ -18,12 +18,6 @@ namespace Eos.Players.Main
             Container.Bind<PlayerInputState>().AsSingle();
         }
 
-        public override void Start()
-        {
-            
-            base.Start();
-        }
-
         #endregion
     }
 }
