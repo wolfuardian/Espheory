@@ -18,15 +18,15 @@ namespace Eos.Players.Main
 
         #region Public Methods
 
-        public void SetPitch(float       pitch)         => Pitch = pitch;
-        public void SetYaw(float         yaw)           => Yaw = yaw;
-        public void SetHorizontal(float  horizontal)    => Horizontal = horizontal;
-        public void SetVertical(float    vertical)      => Vertical = vertical;
-        public void SetLevelOfDolly(int  levelOfDolly)  => LevelOfDolly = levelOfDolly;
-        public void SetDodge(bool        dodge)         => Dodge = dodge;
-        public void SetTurnAround(bool   turnAround)    => TurnAround = turnAround;
-        public void SetLockOnTarget(bool lockOnTarget)  => LockOnTarget = lockOnTarget;
-        public void SetIndexOfTarget(int indexOfTarget) => IndexOfTarget = indexOfTarget;
+        public void SetPitch(float        pitch)         => Pitch = pitch;
+        public void SetYaw(float          yaw)           => Yaw = yaw;
+        public void SetHorizontal(float   horizontal)    => Horizontal = horizontal;
+        public void SetVertical(float     vertical)      => Vertical = vertical;
+        public void SetLevelOfDolly(int levelOfDolly)  => LevelOfDolly = levelOfDolly;
+        public void SetDodge(bool         dodge)         => Dodge = dodge;
+        public void SetTurnAround(bool    turnAround)    => TurnAround = turnAround;
+        public void SetLockOnTarget(bool  lockOnTarget)  => LockOnTarget = lockOnTarget;
+        public void SetIndexOfTarget(int  indexOfTarget) => IndexOfTarget = indexOfTarget;
 
         #endregion
     }

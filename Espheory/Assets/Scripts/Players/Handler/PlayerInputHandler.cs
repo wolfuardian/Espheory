@@ -14,8 +14,7 @@ namespace Eos.Players.Handler
         #region Private Variables
 
         [Inject] private PlayerInputState inputState;
-        private          int              levelOfDolly;
-        private const    int              MaxDollyLevel = 3;
+        private const    int              maxDollyLevel = 3;
 
         #endregion
 
@@ -60,7 +59,7 @@ namespace Eos.Players.Handler
         {
             if (ctx.performed)
             {
-                inputState.SetLevelOfDolly(levelOfDolly + 1);
+                inputState.SetLevelOfDolly((inputState.LevelOfDolly + 1) % maxDollyLevel);
             }
         }
 
