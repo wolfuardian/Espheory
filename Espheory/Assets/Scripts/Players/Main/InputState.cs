@@ -1,6 +1,6 @@
 namespace Eos.Players.Main
 {
-    public class PlayerInputState
+    public class InputState
     {
         #region Public Variables
 
@@ -19,6 +19,7 @@ namespace Eos.Players.Main
 
         #region Public Methods
 
+        public void SetLookaround(bool   val) => IsLookaround = val;
         public void SetPitchDelta(float  val) => PitchDelta = val;
         public void SetYawDelta(float    val) => YawDelta = val;
         public void SetHorizontal(float  val) => Horizontal = val;

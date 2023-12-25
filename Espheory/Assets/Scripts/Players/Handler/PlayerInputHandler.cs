@@ -13,17 +13,13 @@ namespace Eos.Players.Handler
     {
         #region Private Variables
 
-        [Inject] private PlayerInputState inputState;
-        private const    int              maxDollyLevel = 3;
+        private readonly InputState _inputState;
+        private const    int        maxDollyLevel = 3;
 
         #endregion
 
 
         #region Public Methods
-
-        public void Tick()
-        {
-        }
 
         public void Initialize()
         {
@@ -37,12 +33,16 @@ namespace Eos.Players.Handler
             mainControl.Player.LockOnTarget.performed   += OnLockOnTarget;
         }
 
+        public void Tick()
+        {
+        }
+
         public void OnPitchYawDelta(InputAction.CallbackContext ctx)
         {
             if (ctx.performed)
             {
-                inputState.SetPitchDelta(ctx.ReadValue<Vector2>().y);
-                inputState.SetYawDelta(ctx.ReadValue<Vector2>().x);
+                _inputState.SetPitchDelta(ctx.ReadValue<Vector2>().y);
+                _inputState.SetYawDelta(ctx.ReadValue<Vector2>().x);
             }
         }
 
@@ -50,8 +50,8 @@ namespace Eos.Players.Handler
         {
             if (ctx.performed)
             {
-                inputState.SetHorizontal(ctx.ReadValue<Vector2>().x);
-                inputState.SetVertical(ctx.ReadValue<Vector2>().y);
+                _inputState.SetHorizontal(ctx.ReadValue<Vector2>().x);
+                _inputState.SetVertical(ctx.ReadValue<Vector2>().y);
             }
         }
 
@@ -59,7 +59,7 @@ namespace Eos.Players.Handler
         {
             if (ctx.performed)
             {
-                inputState.SetLevelOfDolly((inputState.LevelOfDolly + 1) % maxDollyLevel);
+                _inputState.SetLevelOfDolly((_inputState.LevelOfDolly + 1) % maxDollyLevel);
             }
         }
 
@@ -67,7 +67,7 @@ namespace Eos.Players.Handler
         {
             if (ctx.performed)
             {
-                inputState.SetDodge(ctx.performed);
+                _inputState.SetDodge(ctx.performed);
             }
         }
 
@@ -75,7 +75,7 @@ namespace Eos.Players.Handler
         {
             if (ctx.performed)
             {
-                inputState.SetTurnAround(ctx.performed);
+                _inputState.SetTurnAround(ctx.performed);
             }
         }
 
@@ -83,7 +83,7 @@ namespace Eos.Players.Handler
         {
             if (ctx.performed)
             {
-                inputState.SetLockOnTarget(ctx.performed);
+                _inputState.SetLockOnTarget(ctx.performed);
             }
         }
 
@@ -91,7 +91,7 @@ namespace Eos.Players.Handler
         {
             if (ctx.performed)
             {
-                inputState.SetLockOnTarget(false);
+                _inputState.SetLockOnTarget(false);
             }
         }
 
@@ -99,7 +99,7 @@ namespace Eos.Players.Handler
         {
             if (context.performed)
             {
-                inputState.SetIndexOfTarget(inputState.IndexOfTarget + 1);
+                _inputState.SetIndexOfTarget(_inputState.IndexOfTarget + 1);
             }
         }
 
@@ -107,7 +107,7 @@ namespace Eos.Players.Handler
         {
             if (context.performed)
             {
-                inputState.SetIndexOfTarget(inputState.IndexOfTarget - 1);
+                _inputState.SetIndexOfTarget(_inputState.IndexOfTarget - 1);
             }
         }
 
@@ -115,7 +115,7 @@ namespace Eos.Players.Handler
         {
             if (ctx.performed)
             {
-                inputState.SetIndexOfTarget((int)ctx.ReadValue<float>());
+                _inputState.SetIndexOfTarget((int)ctx.ReadValue<float>());
             }
         }
 
