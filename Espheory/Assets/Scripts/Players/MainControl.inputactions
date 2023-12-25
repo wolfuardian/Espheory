@@ -6,6 +6,15 @@
             "id": "515def80-2939-46f8-b09d-128827227315",
             "actions": [
                 {
+                    "name": "LookAround",
+                    "type": "Button",
+                    "id": "962f67b7-1467-4e35-8b9c-2fc576ef06b3",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "PitchYawDelta",
                     "type": "Value",
                     "id": "1cd3710e-cddd-4658-8aa7-b588312d9f45",
@@ -89,37 +98,15 @@
             ],
             "bindings": [
                 {
-                    "name": "One Modifier",
-                    "id": "b7bd135a-3b76-4a7f-af40-dfcc0319a2db",
-                    "path": "OneModifier",
+                    "name": "",
+                    "id": "0f39719e-652f-4e5b-be65-1228709e05c7",
+                    "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
-                    "groups": "",
+                    "groups": "PC",
                     "action": "PitchYawDelta",
-                    "isComposite": true,
+                    "isComposite": false,
                     "isPartOfComposite": false
-                },
-                {
-                    "name": "Modifier",
-                    "id": "9ff76eb4-b565-42e7-8ee2-fe34ba126e2d",
-                    "path": "<Mouse>/rightButton",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "PC",
-                    "action": "PitchYawDelta",
-                    "isComposite": false,
-                    "isPartOfComposite": true
-                },
-                {
-                    "name": "Binding",
-                    "id": "b97085a9-3988-41f5-a6f6-e0cada710d0e",
-                    "path": "<Pointer>/delta",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "PC",
-                    "action": "PitchYawDelta",
-                    "isComposite": false,
-                    "isPartOfComposite": true
                 },
                 {
                     "name": "",
@@ -261,6 +248,17 @@
                     "processors": "",
                     "groups": "PC",
                     "action": "PrevTarget",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e23176dc-36ca-46d7-a198-5b4142fa900d",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "LookAround",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

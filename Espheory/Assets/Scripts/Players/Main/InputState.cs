@@ -19,16 +19,16 @@ namespace Eos.Players.Main
 
         #region Public Methods
 
-        public void SetLookaround(bool   val) => IsLookaround = val;
-        public void SetPitchDelta(float  val) => PitchDelta = val;
-        public void SetYawDelta(float    val) => YawDelta = val;
-        public void SetHorizontal(float  val) => Horizontal = val;
-        public void SetVertical(float    val) => Vertical = val;
-        public void SetLevelOfDolly(int  val) => LevelOfDolly = val;
-        public void SetDodge(bool        val) => Dodge = val;
-        public void SetTurnAround(bool   val) => TurnAround = val;
-        public void SetLockOnTarget(bool val) => LockOnTarget = val;
-        public void SetIndexOfTarget(int val) => IndexOfTarget = val;
+        public void SetLookaround(bool   lookAround)    => IsLookaround = lookAround;
+        public void SetPitchDelta(float  pitchDelta)    => PitchDelta = pitchDelta;
+        public void SetYawDelta(float    yawDelta)      => YawDelta = yawDelta;
+        public void SetHorizontal(float  horizontal)    => Horizontal = horizontal;
+        public void SetVertical(float    vertical)      => Vertical = vertical;
+        public void SetLevelOfDolly(int  levelOfDolly)  => LevelOfDolly = levelOfDolly;
+        public void SetDodge(bool        dodge)         => Dodge = dodge;
+        public void SetTurnAround(bool   turnAround)    => TurnAround = turnAround;
+        public void SetLockOnTarget(bool lockOnTarget)  => LockOnTarget = lockOnTarget;
+        public void SetIndexOfTarget(int indexOfTarget) => IndexOfTarget = indexOfTarget;
 
         #endregion
     }

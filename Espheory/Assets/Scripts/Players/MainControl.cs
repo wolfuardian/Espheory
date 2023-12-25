@@ -28,6 +28,15 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
             ""id"": ""515def80-2939-46f8-b09d-128827227315"",
             ""actions"": [
                 {
+                    ""name"": ""LookAround"",
+                    ""type"": ""Button"",
+                    ""id"": ""962f67b7-1467-4e35-8b9c-2fc576ef06b3"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": ""Press"",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""PitchYawDelta"",
                     ""type"": ""Value"",
                     ""id"": ""1cd3710e-cddd-4658-8aa7-b588312d9f45"",
@@ -111,37 +120,15 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
             ],
             ""bindings"": [
                 {
-                    ""name"": ""One Modifier"",
-                    ""id"": ""b7bd135a-3b76-4a7f-af40-dfcc0319a2db"",
-                    ""path"": ""OneModifier"",
+                    ""name"": """",
+                    ""id"": ""0f39719e-652f-4e5b-be65-1228709e05c7"",
+                    ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": """",
+                    ""groups"": ""PC"",
                     ""action"": ""PitchYawDelta"",
-                    ""isComposite"": true,
+                    ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""Modifier"",
-                    ""id"": ""9ff76eb4-b565-42e7-8ee2-fe34ba126e2d"",
-                    ""path"": ""<Mouse>/rightButton"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""PC"",
-                    ""action"": ""PitchYawDelta"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Binding"",
-                    ""id"": ""b97085a9-3988-41f5-a6f6-e0cada710d0e"",
-                    ""path"": ""<Pointer>/delta"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""PC"",
-                    ""action"": ""PitchYawDelta"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": """",
@@ -285,6 +272,17 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
                     ""action"": ""PrevTarget"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e23176dc-36ca-46d7-a198-5b4142fa900d"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""LookAround"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -321,6 +319,7 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
 }");
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
+        m_Player_LookAround = m_Player.FindAction("LookAround", throwIfNotFound: true);
         m_Player_PitchYawDelta = m_Player.FindAction("PitchYawDelta", throwIfNotFound: true);
         m_Player_NextDollyLevel = m_Player.FindAction("NextDollyLevel", throwIfNotFound: true);
         m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
@@ -391,6 +390,7 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
     // Player
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
+    private readonly InputAction m_Player_LookAround;
     private readonly InputAction m_Player_PitchYawDelta;
     private readonly InputAction m_Player_NextDollyLevel;
     private readonly InputAction m_Player_Dodge;
@@ -404,6 +404,7 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
     {
         private @MainControl m_Wrapper;
         public PlayerActions(@MainControl wrapper) { m_Wrapper = wrapper; }
+        public InputAction @LookAround => m_Wrapper.m_Player_LookAround;
         public InputAction @PitchYawDelta => m_Wrapper.m_Player_PitchYawDelta;
         public InputAction @NextDollyLevel => m_Wrapper.m_Player_NextDollyLevel;
         public InputAction @Dodge => m_Wrapper.m_Player_Dodge;
@@ -422,6 +423,9 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
+            @LookAround.started += instance.OnLookAround;
+            @LookAround.performed += instance.OnLookAround;
+            @LookAround.canceled += instance.OnLookAround;
             @PitchYawDelta.started += instance.OnPitchYawDelta;
             @PitchYawDelta.performed += instance.OnPitchYawDelta;
             @PitchYawDelta.canceled += instance.OnPitchYawDelta;
@@ -453,6 +457,9 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
 
         private void UnregisterCallbacks(IPlayerActions instance)
         {
+            @LookAround.started -= instance.OnLookAround;
+            @LookAround.performed -= instance.OnLookAround;
+            @LookAround.canceled -= instance.OnLookAround;
             @PitchYawDelta.started -= instance.OnPitchYawDelta;
             @PitchYawDelta.performed -= instance.OnPitchYawDelta;
             @PitchYawDelta.canceled -= instance.OnPitchYawDelta;
@@ -517,6 +524,7 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
     }
     public interface IPlayerActions
     {
+        void OnLookAround(InputAction.CallbackContext context);
         void OnPitchYawDelta(InputAction.CallbackContext context);
         void OnNextDollyLevel(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);

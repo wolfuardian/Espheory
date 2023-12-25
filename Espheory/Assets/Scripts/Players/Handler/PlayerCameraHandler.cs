@@ -14,18 +14,22 @@ namespace Eos.Players.Handler
 
         private readonly InputState _inputState;
 
+        #endregion
+
+        #region Public Methods
+
         public PlayerCameraHandler(InputState inputState)
         {
             _inputState = inputState;
         }
 
-        #endregion
-
-        #region Public Methods
-
         public void Tick()
         {
-            Debug.Log(_inputState.IsLookaround);
+            if (_inputState.IsLookaround)
+            {
+                Debug.Log("Mouse X: " + _inputState.YawDelta + " Mouse Y: " + _inputState.PitchDelta);
+                // TODO: Rotate camera
+            }
         }
 
         #endregion

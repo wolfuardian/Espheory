@@ -13,9 +13,9 @@ namespace Eos.Players.Main
 
         public override void InstallBindings()
         {
+            Container.Bind<InputState>().AsSingle();
             Container.BindInterfacesTo<PlayerInputHandler>().AsSingle();
             Container.BindInterfacesTo<PlayerCameraHandler>().AsSingle();
-            Container.Bind<InputState>().AsSingle();
         }
 
         #endregion

@@ -21,10 +21,17 @@ namespace Eos.Players.Handler
 
         #region Public Methods
 
+        public PlayerInputHandler(InputState inputState)
+        {
+            _inputState = inputState;
+        }
+
         public void Initialize()
         {
             var mainControl = new MainControl();
             mainControl.Player.Enable();
+            mainControl.Player.LookAround.performed     += OnLookAround;
+            mainControl.Player.LookAround.canceled      += OnCancelLookAround;
             mainControl.Player.PitchYawDelta.performed  += OnPitchYawDelta;
             mainControl.Player.Movement.performed       += OnMovement;
             mainControl.Player.NextDollyLevel.performed += OnNextDollyLevel;
@@ -37,12 +44,27 @@ namespace Eos.Players.Handler
         {
         }
 
+        public void OnLookAround(InputAction.CallbackContext ctx)
+        {
+            _inputState.SetLookaround(true);
+        }
+
+        private void OnCancelLookAround(InputAction.CallbackContext ctx)
+        {
+            _inputState.SetLookaround(false);
+        }
+
         public void OnPitchYawDelta(InputAction.CallbackContext ctx)
         {
-            if (ctx.performed)
+            if (_inputState.IsLookaround)
             {
                 _inputState.SetPitchDelta(ctx.ReadValue<Vector2>().y);
                 _inputState.SetYawDelta(ctx.ReadValue<Vector2>().x);
+            }
+            else
+            {
+                _inputState.SetPitchDelta(0);
+                _inputState.SetYawDelta(0);
             }
         }
 
