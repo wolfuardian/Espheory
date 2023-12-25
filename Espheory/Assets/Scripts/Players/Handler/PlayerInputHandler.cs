@@ -31,8 +31,9 @@ namespace Eos.Players.Handler
             var mainControl = new MainControl();
             mainControl.Player.Enable();
             mainControl.Player.LookAround.performed     += OnLookAround;
-            mainControl.Player.LookAround.canceled      += OnCancelLookAround;
-            mainControl.Player.PitchYawDelta.performed  += OnPitchYawDelta;
+            mainControl.Player.LookAround.canceled      += OnLookAround;
+            mainControl.Player.Pointer.performed        += OnPointer;
+            mainControl.Player.Pointer.canceled         += OnPointer;
             mainControl.Player.Movement.performed       += OnMovement;
             mainControl.Player.NextDollyLevel.performed += OnNextDollyLevel;
             mainControl.Player.Dodge.performed          += OnDodge;
@@ -46,22 +47,21 @@ namespace Eos.Players.Handler
 
         public void OnLookAround(InputAction.CallbackContext ctx)
         {
-            _inputState.SetLookaround(true);
+            if (ctx.performed)
+                _inputState.SetLookAround(true);
+            else if (ctx.canceled)
+                _inputState.SetLookAround(false);
         }
 
-        private void OnCancelLookAround(InputAction.CallbackContext ctx)
+        public void OnPointer(InputAction.CallbackContext ctx)
         {
-            _inputState.SetLookaround(false);
-        }
-
-        public void OnPitchYawDelta(InputAction.CallbackContext ctx)
-        {
-            if (_inputState.IsLookaround)
+            if (!_inputState.IsLookAround) return;
+            if (ctx.performed)
             {
                 _inputState.SetPitchDelta(ctx.ReadValue<Vector2>().y);
                 _inputState.SetYawDelta(ctx.ReadValue<Vector2>().x);
             }
-            else
+            else if (ctx.canceled)
             {
                 _inputState.SetPitchDelta(0);
                 _inputState.SetYawDelta(0);

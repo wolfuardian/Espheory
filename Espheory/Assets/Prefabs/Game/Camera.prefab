@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5812850341286917610}
+  - component: {fileID: 7482650353156728747}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Untagged
@@ -32,6 +33,24 @@ Transform:
   - {fileID: 6057282049645470688}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7482650353156728747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1113651902932340570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 5812850341286917610}
+  _identifier: Camera
+  _useSceneContext: 1
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!1 &1781769337571686101
 GameObject:
   m_ObjectHideFlags: 0
@@ -43,8 +62,9 @@ GameObject:
   - component: {fileID: 924649185734249038}
   - component: {fileID: 6419645489231511142}
   - component: {fileID: 7924283203000093533}
+  - component: {fileID: 4700455049811240541}
   m_Layer: 0
-  m_Name: CameraMain
+  m_Name: MainCamera
   m_TagString: MainCamera
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -124,6 +144,24 @@ AudioListener:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1781769337571686101}
   m_Enabled: 1
+--- !u!114 &4700455049811240541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1781769337571686101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 6419645489231511142}
+  _identifier: MainCamera
+  _useSceneContext: 1
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!1 &2248158781407044426
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,6 +171,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3898949131571647571}
+  - component: {fileID: 748694863953562624}
   m_Layer: 0
   m_Name: CameraPitchYaw
   m_TagString: Untagged
@@ -156,6 +195,24 @@ Transform:
   - {fileID: 1897268353007467350}
   m_Father: {fileID: 6057282049645470688}
   m_LocalEulerAnglesHint: {x: 65, y: 0, z: 0}
+--- !u!114 &748694863953562624
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2248158781407044426}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 3898949131571647571}
+  _identifier: CameraPitchYaw
+  _useSceneContext: 1
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!1 &4672164115950311773
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,6 +222,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6057282049645470688}
+  - component: {fileID: 6530543086648055795}
   m_Layer: 0
   m_Name: CameraPivot
   m_TagString: Untagged
@@ -188,6 +246,24 @@ Transform:
   - {fileID: 3898949131571647571}
   m_Father: {fileID: 5812850341286917610}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6530543086648055795
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4672164115950311773}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 6057282049645470688}
+  _identifier: CameraPivot
+  _useSceneContext: 1
+  _context: {fileID: 0}
+  _bindType: 0
 --- !u!1 &7464135668200635164
 GameObject:
   m_ObjectHideFlags: 0
@@ -197,6 +273,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1897268353007467350}
+  - component: {fileID: 4673764046917204356}
   m_Layer: 0
   m_Name: CameraDolly
   m_TagString: Untagged
@@ -220,3 +297,21 @@ Transform:
   - {fileID: 924649185734249038}
   m_Father: {fileID: 3898949131571647571}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4673764046917204356
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7464135668200635164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0166d8ff8d905b048b2448179e1f5d11, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _components:
+  - {fileID: 1897268353007467350}
+  _identifier: CameraDolly
+  _useSceneContext: 1
+  _context: {fileID: 0}
+  _bindType: 0

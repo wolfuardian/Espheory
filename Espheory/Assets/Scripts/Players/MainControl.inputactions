@@ -15,7 +15,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "PitchYawDelta",
+                    "name": "Pointer",
                     "type": "Value",
                     "id": "1cd3710e-cddd-4658-8aa7-b588312d9f45",
                     "expectedControlType": "Vector2",
@@ -99,12 +99,12 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "0f39719e-652f-4e5b-be65-1228709e05c7",
+                    "id": "d5788563-028b-4fca-aed6-c19a97679199",
                     "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
-                    "action": "PitchYawDelta",
+                    "action": "Pointer",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

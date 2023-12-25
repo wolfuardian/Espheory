@@ -37,7 +37,7 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""PitchYawDelta"",
+                    ""name"": ""Pointer"",
                     ""type"": ""Value"",
                     ""id"": ""1cd3710e-cddd-4658-8aa7-b588312d9f45"",
                     ""expectedControlType"": ""Vector2"",
@@ -121,12 +121,12 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
             ""bindings"": [
                 {
                     ""name"": """",
-                    ""id"": ""0f39719e-652f-4e5b-be65-1228709e05c7"",
+                    ""id"": ""d5788563-028b-4fca-aed6-c19a97679199"",
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""PC"",
-                    ""action"": ""PitchYawDelta"",
+                    ""action"": ""Pointer"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -320,7 +320,7 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_LookAround = m_Player.FindAction("LookAround", throwIfNotFound: true);
-        m_Player_PitchYawDelta = m_Player.FindAction("PitchYawDelta", throwIfNotFound: true);
+        m_Player_Pointer = m_Player.FindAction("Pointer", throwIfNotFound: true);
         m_Player_NextDollyLevel = m_Player.FindAction("NextDollyLevel", throwIfNotFound: true);
         m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
@@ -391,7 +391,7 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_LookAround;
-    private readonly InputAction m_Player_PitchYawDelta;
+    private readonly InputAction m_Player_Pointer;
     private readonly InputAction m_Player_NextDollyLevel;
     private readonly InputAction m_Player_Dodge;
     private readonly InputAction m_Player_Movement;
@@ -405,7 +405,7 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
         private @MainControl m_Wrapper;
         public PlayerActions(@MainControl wrapper) { m_Wrapper = wrapper; }
         public InputAction @LookAround => m_Wrapper.m_Player_LookAround;
-        public InputAction @PitchYawDelta => m_Wrapper.m_Player_PitchYawDelta;
+        public InputAction @Pointer => m_Wrapper.m_Player_Pointer;
         public InputAction @NextDollyLevel => m_Wrapper.m_Player_NextDollyLevel;
         public InputAction @Dodge => m_Wrapper.m_Player_Dodge;
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
@@ -426,9 +426,9 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
             @LookAround.started += instance.OnLookAround;
             @LookAround.performed += instance.OnLookAround;
             @LookAround.canceled += instance.OnLookAround;
-            @PitchYawDelta.started += instance.OnPitchYawDelta;
-            @PitchYawDelta.performed += instance.OnPitchYawDelta;
-            @PitchYawDelta.canceled += instance.OnPitchYawDelta;
+            @Pointer.started += instance.OnPointer;
+            @Pointer.performed += instance.OnPointer;
+            @Pointer.canceled += instance.OnPointer;
             @NextDollyLevel.started += instance.OnNextDollyLevel;
             @NextDollyLevel.performed += instance.OnNextDollyLevel;
             @NextDollyLevel.canceled += instance.OnNextDollyLevel;
@@ -460,9 +460,9 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
             @LookAround.started -= instance.OnLookAround;
             @LookAround.performed -= instance.OnLookAround;
             @LookAround.canceled -= instance.OnLookAround;
-            @PitchYawDelta.started -= instance.OnPitchYawDelta;
-            @PitchYawDelta.performed -= instance.OnPitchYawDelta;
-            @PitchYawDelta.canceled -= instance.OnPitchYawDelta;
+            @Pointer.started -= instance.OnPointer;
+            @Pointer.performed -= instance.OnPointer;
+            @Pointer.canceled -= instance.OnPointer;
             @NextDollyLevel.started -= instance.OnNextDollyLevel;
             @NextDollyLevel.performed -= instance.OnNextDollyLevel;
             @NextDollyLevel.canceled -= instance.OnNextDollyLevel;
@@ -525,7 +525,7 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
     public interface IPlayerActions
     {
         void OnLookAround(InputAction.CallbackContext context);
-        void OnPitchYawDelta(InputAction.CallbackContext context);
+        void OnPointer(InputAction.CallbackContext context);
         void OnNextDollyLevel(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);

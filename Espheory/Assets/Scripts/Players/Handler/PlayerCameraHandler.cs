@@ -12,7 +12,11 @@ namespace Eos.Players.Handler
     {
         #region Public Variables
 
-        private readonly InputState _inputState;
+        private readonly                                InputState _inputState;
+        [Inject(Id = "MainCamera")]     public readonly Camera     MainCamera;
+        [Inject(Id = "CameraPivot")]    public readonly Transform  CameraPivot;
+        [Inject(Id = "CameraPitchYaw")] public readonly Transform  CameraPitchYaw;
+        [Inject(Id = "CameraDolly")]    public readonly Transform  CameraDolly;
 
         #endregion
 
@@ -25,11 +29,15 @@ namespace Eos.Players.Handler
 
         public void Tick()
         {
-            if (_inputState.IsLookaround)
-            {
-                Debug.Log("Mouse X: " + _inputState.YawDelta + " Mouse Y: " + _inputState.PitchDelta);
-                // TODO: Rotate camera
-            }
+            if (!_inputState.IsLookAround) return;
+
+            var eulerAngles = CameraPitchYaw.eulerAngles;
+            eulerAngles = new Vector3(
+                eulerAngles.x - _inputState.PitchDelta * 0.1f,
+                eulerAngles.y + _inputState.YawDelta * 0.1f,
+                eulerAngles.z
+            );
+            CameraPitchYaw.eulerAngles = eulerAngles;
         }
 
         #endregion
