@@ -28,7 +28,7 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
             ""id"": ""515def80-2939-46f8-b09d-128827227315"",
             ""actions"": [
                 {
-                    ""name"": ""PitchYaw"",
+                    ""name"": ""PitchYawDelta"",
                     ""type"": ""Value"",
                     ""id"": ""1cd3710e-cddd-4658-8aa7-b588312d9f45"",
                     ""expectedControlType"": ""Vector2"",
@@ -117,7 +117,7 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""PitchYaw"",
+                    ""action"": ""PitchYawDelta"",
                     ""isComposite"": true,
                     ""isPartOfComposite"": false
                 },
@@ -128,7 +128,7 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""PC"",
-                    ""action"": ""PitchYaw"",
+                    ""action"": ""PitchYawDelta"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -139,7 +139,7 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""PC"",
-                    ""action"": ""PitchYaw"",
+                    ""action"": ""PitchYawDelta"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
                 },
@@ -321,7 +321,7 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
 }");
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
-        m_Player_PitchYaw = m_Player.FindAction("PitchYaw", throwIfNotFound: true);
+        m_Player_PitchYawDelta = m_Player.FindAction("PitchYawDelta", throwIfNotFound: true);
         m_Player_NextDollyLevel = m_Player.FindAction("NextDollyLevel", throwIfNotFound: true);
         m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
         m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
@@ -391,7 +391,7 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
     // Player
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
-    private readonly InputAction m_Player_PitchYaw;
+    private readonly InputAction m_Player_PitchYawDelta;
     private readonly InputAction m_Player_NextDollyLevel;
     private readonly InputAction m_Player_Dodge;
     private readonly InputAction m_Player_Movement;
@@ -404,7 +404,7 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
     {
         private @MainControl m_Wrapper;
         public PlayerActions(@MainControl wrapper) { m_Wrapper = wrapper; }
-        public InputAction @PitchYaw => m_Wrapper.m_Player_PitchYaw;
+        public InputAction @PitchYawDelta => m_Wrapper.m_Player_PitchYawDelta;
         public InputAction @NextDollyLevel => m_Wrapper.m_Player_NextDollyLevel;
         public InputAction @Dodge => m_Wrapper.m_Player_Dodge;
         public InputAction @Movement => m_Wrapper.m_Player_Movement;
@@ -422,9 +422,9 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
-            @PitchYaw.started += instance.OnPitchYaw;
-            @PitchYaw.performed += instance.OnPitchYaw;
-            @PitchYaw.canceled += instance.OnPitchYaw;
+            @PitchYawDelta.started += instance.OnPitchYawDelta;
+            @PitchYawDelta.performed += instance.OnPitchYawDelta;
+            @PitchYawDelta.canceled += instance.OnPitchYawDelta;
             @NextDollyLevel.started += instance.OnNextDollyLevel;
             @NextDollyLevel.performed += instance.OnNextDollyLevel;
             @NextDollyLevel.canceled += instance.OnNextDollyLevel;
@@ -453,9 +453,9 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
 
         private void UnregisterCallbacks(IPlayerActions instance)
         {
-            @PitchYaw.started -= instance.OnPitchYaw;
-            @PitchYaw.performed -= instance.OnPitchYaw;
-            @PitchYaw.canceled -= instance.OnPitchYaw;
+            @PitchYawDelta.started -= instance.OnPitchYawDelta;
+            @PitchYawDelta.performed -= instance.OnPitchYawDelta;
+            @PitchYawDelta.canceled -= instance.OnPitchYawDelta;
             @NextDollyLevel.started -= instance.OnNextDollyLevel;
             @NextDollyLevel.performed -= instance.OnNextDollyLevel;
             @NextDollyLevel.canceled -= instance.OnNextDollyLevel;
@@ -517,7 +517,7 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
     }
     public interface IPlayerActions
     {
-        void OnPitchYaw(InputAction.CallbackContext context);
+        void OnPitchYawDelta(InputAction.CallbackContext context);
         void OnNextDollyLevel(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
         void OnMovement(InputAction.CallbackContext context);

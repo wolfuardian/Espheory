@@ -29,7 +29,7 @@ namespace Eos.Players.Handler
         {
             var mainControl = new MainControl();
             mainControl.Player.Enable();
-            mainControl.Player.PitchYaw.performed       += OnPitchYaw;
+            mainControl.Player.PitchYawDelta.performed  += OnPitchYawDelta;
             mainControl.Player.Movement.performed       += OnMovement;
             mainControl.Player.NextDollyLevel.performed += OnNextDollyLevel;
             mainControl.Player.Dodge.performed          += OnDodge;
@@ -37,12 +37,12 @@ namespace Eos.Players.Handler
             mainControl.Player.LockOnTarget.performed   += OnLockOnTarget;
         }
 
-        public void OnPitchYaw(InputAction.CallbackContext ctx)
+        public void OnPitchYawDelta(InputAction.CallbackContext ctx)
         {
             if (ctx.performed)
             {
-                inputState.SetPitch(ctx.ReadValue<Vector2>().y);
-                inputState.SetYaw(ctx.ReadValue<Vector2>().x);
+                inputState.SetPitchDelta(ctx.ReadValue<Vector2>().y);
+                inputState.SetYawDelta(ctx.ReadValue<Vector2>().x);
             }
         }
 

@@ -6,7 +6,7 @@
             "id": "515def80-2939-46f8-b09d-128827227315",
             "actions": [
                 {
-                    "name": "PitchYaw",
+                    "name": "PitchYawDelta",
                     "type": "Value",
                     "id": "1cd3710e-cddd-4658-8aa7-b588312d9f45",
                     "expectedControlType": "Vector2",
@@ -95,7 +95,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "PitchYaw",
+                    "action": "PitchYawDelta",
                     "isComposite": true,
                     "isPartOfComposite": false
                 },
@@ -106,7 +106,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
-                    "action": "PitchYaw",
+                    "action": "PitchYawDelta",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },
@@ -117,7 +117,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
-                    "action": "PitchYaw",
+                    "action": "PitchYawDelta",
                     "isComposite": false,
                     "isPartOfComposite": true
                 },

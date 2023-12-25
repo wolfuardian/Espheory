@@ -4,8 +4,9 @@ namespace Eos.Players.Main
     {
         #region Public Variables
 
-        public float Pitch         { get; private set; }
-        public float Yaw           { get; private set; }
+        public bool  IsLookaround  { get; private set; }
+        public float PitchDelta    { get; private set; }
+        public float YawDelta      { get; private set; }
         public int   LevelOfDolly  { get; private set; }
         public float Horizontal    { get; private set; }
         public float Vertical      { get; private set; }
@@ -18,15 +19,15 @@ namespace Eos.Players.Main
 
         #region Public Methods
 
-        public void SetPitch(float        pitch)         => Pitch = pitch;
-        public void SetYaw(float          yaw)           => Yaw = yaw;
-        public void SetHorizontal(float   horizontal)    => Horizontal = horizontal;
-        public void SetVertical(float     vertical)      => Vertical = vertical;
-        public void SetLevelOfDolly(int levelOfDolly)  => LevelOfDolly = levelOfDolly;
-        public void SetDodge(bool         dodge)         => Dodge = dodge;
-        public void SetTurnAround(bool    turnAround)    => TurnAround = turnAround;
-        public void SetLockOnTarget(bool  lockOnTarget)  => LockOnTarget = lockOnTarget;
-        public void SetIndexOfTarget(int  indexOfTarget) => IndexOfTarget = indexOfTarget;
+        public void SetPitchDelta(float  val) => PitchDelta = val;
+        public void SetYawDelta(float    val) => YawDelta = val;
+        public void SetHorizontal(float  val) => Horizontal = val;
+        public void SetVertical(float    val) => Vertical = val;
+        public void SetLevelOfDolly(int  val) => LevelOfDolly = val;
+        public void SetDodge(bool        val) => Dodge = val;
+        public void SetTurnAround(bool   val) => TurnAround = val;
+        public void SetLockOnTarget(bool val) => LockOnTarget = val;
+        public void SetIndexOfTarget(int val) => IndexOfTarget = val;
 
         #endregion
     }
