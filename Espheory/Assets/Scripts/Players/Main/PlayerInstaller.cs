@@ -16,6 +16,7 @@ namespace Eos.Players.Main
             Container.Bind<InputState>().AsSingle();
             Container.BindInterfacesTo<PlayerInputHandler>().AsSingle();
             Container.BindInterfacesTo<PlayerCameraHandler>().AsSingle();
+            Container.BindInterfacesTo<PlayerCharacterHandler>().AsSingle();
         }
 
         #endregion

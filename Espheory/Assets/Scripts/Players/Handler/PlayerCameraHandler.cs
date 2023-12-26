@@ -12,20 +12,15 @@ namespace Eos.Players.Handler
     {
         #region Public Variables
 
-        private readonly                                InputState _inputState;
-        [Inject(Id = "MainCamera")]     public readonly Camera     MainCamera;
-        [Inject(Id = "CameraPivot")]    public readonly Transform  CameraPivot;
-        [Inject(Id = "CameraPitchYaw")] public readonly Transform  CameraPitchYaw;
-        [Inject(Id = "CameraDolly")]    public readonly Transform  CameraDolly;
+        [Inject]                        private readonly InputState _inputState;
+        [Inject(Id = "MainCamera")]     public readonly  Camera     MainCamera;
+        [Inject(Id = "CameraPivot")]    public readonly  Transform  CameraPivot;
+        [Inject(Id = "CameraPitchYaw")] public readonly  Transform  CameraPitchYaw;
+        [Inject(Id = "CameraDolly")]    public readonly  Transform  CameraDolly;
 
         #endregion
 
         #region Public Methods
-
-        public PlayerCameraHandler(InputState inputState)
-        {
-            _inputState = inputState;
-        }
 
         public void Tick()
         {
@@ -33,7 +28,7 @@ namespace Eos.Players.Handler
 
             var eulerAngles = CameraPitchYaw.eulerAngles;
             eulerAngles = new Vector3(
-                eulerAngles.x - _inputState.PitchDelta * 0.1f,
+                eulerAngles.x,
                 eulerAngles.y + _inputState.YawDelta * 0.1f,
                 eulerAngles.z
             );

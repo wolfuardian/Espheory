@@ -35,6 +35,7 @@ namespace Eos.Players.Handler
             mainControl.Player.Pointer.performed        += OnPointer;
             mainControl.Player.Pointer.canceled         += OnPointer;
             mainControl.Player.Movement.performed       += OnMovement;
+            mainControl.Player.Movement.canceled        += OnMovement;
             mainControl.Player.NextDollyLevel.performed += OnNextDollyLevel;
             mainControl.Player.Dodge.performed          += OnDodge;
             mainControl.Player.TurnAround.performed     += OnTurnAround;
@@ -74,6 +75,11 @@ namespace Eos.Players.Handler
             {
                 _inputState.SetHorizontal(ctx.ReadValue<Vector2>().x);
                 _inputState.SetVertical(ctx.ReadValue<Vector2>().y);
+            }
+            else if (ctx.canceled)
+            {
+                _inputState.SetHorizontal(0);
+                _inputState.SetVertical(0);
             }
         }
 
