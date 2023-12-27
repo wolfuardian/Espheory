@@ -49,14 +49,19 @@ namespace Eos.Players.Handler
         public void OnLookAround(InputAction.CallbackContext ctx)
         {
             if (ctx.performed)
+            {
                 _inputState.SetLookAround(true);
+            }
             else if (ctx.canceled)
+            {
                 _inputState.SetLookAround(false);
+                _inputState.LookAround.Cooldown();
+            }
         }
 
         public void OnPointer(InputAction.CallbackContext ctx)
         {
-            if (!_inputState.IsLookAround) return;
+            if (!_inputState.LookAround.Active) return;
             if (ctx.performed)
             {
                 _inputState.SetPitchDelta(ctx.ReadValue<Vector2>().y);
