@@ -6,7 +6,7 @@ namespace Eos.Players.Main
     {
         #region Public Variables
 
-        public bool  IsLookAround  { get; private set; }
+        public bool  LookAround    { get; private set; }
         public float PitchDelta    { get; private set; }
         public float YawDelta      { get; private set; }
         public int   LevelOfDolly  { get; private set; }
@@ -21,7 +21,7 @@ namespace Eos.Players.Main
 
         #region Public Methods
 
-        public void SetLookAround(bool   lookAround)    => IsLookAround = lookAround;
+        public void SetLookAround(bool   lookAround)    => LookAround = lookAround;
         public void SetPitchDelta(float  pitchDelta)    => PitchDelta = pitchDelta;
         public void SetYawDelta(float    yawDelta)      => YawDelta = yawDelta;
         public void SetHorizontal(float  horizontal)    => Horizontal = horizontal;

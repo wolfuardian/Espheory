@@ -24,7 +24,7 @@ namespace Eos.Players.Handler
 
         public void Tick()
         {
-            if (!_inputState.IsLookAround) return;
+            if (!_inputState.LookAround) return;
 
             var eulerAngles = CameraPitchYaw.eulerAngles;
             eulerAngles = new Vector3(

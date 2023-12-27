@@ -56,7 +56,7 @@ namespace Eos.Players.Handler
 
         public void OnPointer(InputAction.CallbackContext ctx)
         {
-            if (!_inputState.IsLookAround) return;
+            if (!_inputState.LookAround) return;
             if (ctx.performed)
             {
                 _inputState.SetPitchDelta(ctx.ReadValue<Vector2>().y);
