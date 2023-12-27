@@ -23,6 +23,16 @@ namespace Eos.Players.Handler
 
         public void Tick()
         {
+            UpdatePlayerRotation();
+            UpdatePlayerPosition();
+        }
+
+        #endregion
+
+        #region Private Methods
+
+        private void UpdatePlayerRotation()
+        {
             var eulerAngles = Player.eulerAngles;
             eulerAngles = new Vector3(
                 eulerAngles.x,
@@ -30,9 +40,12 @@ namespace Eos.Players.Handler
                 eulerAngles.z
             );
             Player.eulerAngles = eulerAngles;
+        }
 
-            var moveDirection = CameraPitchYaw.forward * _inputState.Vertical +
-                                CameraPitchYaw.right * _inputState.Horizontal;
+        private void UpdatePlayerPosition()
+        {
+            var moveDirection = CameraPitchYaw.forward * _inputState.MoveDirection.y +
+                                CameraPitchYaw.right * _inputState.MoveDirection.x;
             PlayerController.position += new Vector3(
                 moveDirection.x * 0.1f,
                 0,

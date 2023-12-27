@@ -15,6 +15,33 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "MoveForward",
+                    "type": "Button",
+                    "id": "6e59c279-9a6e-44e7-ab5f-1b303f93f8e0",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "MoveHorizontal",
+                    "type": "Value",
+                    "id": "69ff55a9-ea54-464b-97b3-912d30e06ff0",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "MoveVertical",
+                    "type": "Value",
+                    "id": "180be205-58dc-467c-b35c-8d2ee73c8a2e",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "Press",
+                    "initialStateCheck": true
+                },
+                {
                     "name": "Pointer",
                     "type": "Value",
                     "id": "1cd3710e-cddd-4658-8aa7-b588312d9f45",
@@ -261,6 +288,105 @@
                     "action": "LookAround",
                     "isComposite": false,
                     "isPartOfComposite": false
+                },
+                {
+                    "name": "One Modifier",
+                    "id": "641a1c6f-06e6-4942-bd7c-6bf5be9d7026",
+                    "path": "OneModifier",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveForward",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "modifier",
+                    "id": "7fd4a9c2-f526-43de-89ca-44df0708fc65",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "MoveForward",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "binding",
+                    "id": "ce19ff97-2918-44fd-b441-177db6ad249a",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "MoveForward",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "244d453a-20d9-4712-9d85-0aa699d02c2a",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveHorizontal",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "411f0a3f-5c20-420a-8a9d-b90e5e1ac240",
+                    "path": "<Keyboard>/#(A)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "MoveHorizontal",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "b26f6a32-1d96-4ec4-9f72-f2f97b5e5bc7",
+                    "path": "<Keyboard>/#(D)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "MoveHorizontal",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "1D Axis",
+                    "id": "2e062c79-b911-4827-bef6-482054201f76",
+                    "path": "1DAxis",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "MoveVertical",
+                    "isComposite": true,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "negative",
+                    "id": "3fdb121f-99a2-49da-bc81-c097fd79520c",
+                    "path": "<Keyboard>/#(S)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "MoveVertical",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "positive",
+                    "id": "42993bc6-d40e-4bec-9eae-7b0d602418f3",
+                    "path": "<Keyboard>/#(W)",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "MoveVertical",
+                    "isComposite": false,
+                    "isPartOfComposite": true
                 }
             ]
         }

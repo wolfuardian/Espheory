@@ -1,7 +1,6 @@
 #region
 
 using Eos.Players.Main;
-using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
@@ -13,8 +12,11 @@ namespace Eos.Players.Handler
     {
         #region Public Variables
 
-        [Inject]                          private readonly InputState _inputState;
-        [Inject(Id = "DEBUG_LookAround")] public readonly  Toggle     DEBUG_LookAround;
+        [Inject]                           private readonly InputState _inputState;
+        [Inject(Id = "D_LOOK_AROUND")]     public readonly  Toggle     LookAroundDebugger;
+        [Inject(Id = "D_MOVE_FORWARD")]    public readonly  Toggle     MoveForwardDebugger;
+        [Inject(Id = "D_MOVE_HORIZONTAL")] public readonly  Toggle     MoveHorizontalDebugger;
+        [Inject(Id = "D_MOVE_VERTICAL")]   public readonly  Toggle     MoveVerticalDebugger;
 
         #endregion
 
@@ -22,7 +24,10 @@ namespace Eos.Players.Handler
 
         public void Tick()
         {
-            DEBUG_LookAround.isOn = _inputState.LookAround;
+            LookAroundDebugger.isOn     = _inputState.LookAround;
+            MoveForwardDebugger.isOn    = _inputState.MoveForward;
+            MoveHorizontalDebugger.isOn = _inputState.MoveHorizontal;
+            MoveVerticalDebugger.isOn   = _inputState.MoveVertical;
         }
 
         #endregion
