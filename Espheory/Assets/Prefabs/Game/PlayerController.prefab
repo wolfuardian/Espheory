@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7538108586259222883}
   - component: {fileID: 6993223387308118669}
   - component: {fileID: 486057766724822391}
+  - component: {fileID: 8710441452867236758}
   m_Layer: 0
   m_Name: PlayerController
   m_TagString: Untagged
@@ -66,7 +67,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ba8f12abf37ae4409394fad8e939499, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  messageDisplayPrefab: {fileID: 3670547879334609926, guid: 82cc13904561d3b4285b30c3e8868ae3, type: 3}
 --- !u!114 &486057766724822391
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -85,6 +85,18 @@ MonoBehaviour:
   _useSceneContext: 1
   _context: {fileID: 0}
   _bindType: 0
+--- !u!114 &8710441452867236758
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4847438323484167783}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 26b8a985f12742889075abfd698cc469, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6642373574250098958
 PrefabInstance:
   m_ObjectHideFlags: 0
