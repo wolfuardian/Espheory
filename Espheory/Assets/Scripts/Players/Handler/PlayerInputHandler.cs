@@ -4,6 +4,7 @@ using Zenject;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Eos.Players.Main;
+using Eos.Utils;
 using Eos.Utils.Gameplay;
 
 #endregion
@@ -14,8 +15,9 @@ namespace Eos.Players.Handler
     {
         #region Private Variables
 
-        private readonly InputState _inputState;
-        private const    int        maxDollyLevel = 3;
+        [Inject] private readonly InputState      _inputState;
+        [Inject] private          IMessageDisplay _messageDisplay;
+        private const             int             maxDollyLevel = 3;
 
         #endregion
 
@@ -31,6 +33,7 @@ namespace Eos.Players.Handler
         {
             var mainControl = new MainControl();
             mainControl.Player.Enable();
+            mainControl.Player.Select.performed         += OnSelect; // SELECT
             mainControl.Player.LookAround.performed     += OnLookAround; // LOOK_AROUND
             mainControl.Player.LookAround.canceled      += OnLookAround; // 
             mainControl.Player.MoveForward.performed    += OnMoveForward; // MOVE_FORWARD
@@ -53,6 +56,15 @@ namespace Eos.Players.Handler
         public void Tick()
         {
             UpdateMoveDirection();
+        }
+
+        public void OnSelect(InputAction.CallbackContext context)
+        {
+            _messageDisplay.SetDuration(0.25f);
+            _messageDisplay.Print("OnSelect");
+            if (context.performed)
+            {
+            }
         }
 
         public void OnLookAround(InputAction.CallbackContext context)

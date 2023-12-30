@@ -6,6 +6,15 @@
             "id": "515def80-2939-46f8-b09d-128827227315",
             "actions": [
                 {
+                    "name": "Select",
+                    "type": "Button",
+                    "id": "455bb10a-7e69-4ad1-a346-2eb67e32b587",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "LookAround",
                     "type": "Button",
                     "id": "962f67b7-1467-4e35-8b9c-2fc576ef06b3",
@@ -387,6 +396,17 @@
                     "action": "MoveVertical",
                     "isComposite": false,
                     "isPartOfComposite": true
+                },
+                {
+                    "name": "",
+                    "id": "ac0d7d8e-7a5f-473c-bbfb-18466ccd9ed7",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
                 }
             ]
         }

@@ -9229,7 +9229,6 @@ GameObject:
   - component: {fileID: 5734283143864345639}
   - component: {fileID: 773085146378882608}
   - component: {fileID: 9012718440818901307}
-  - component: {fileID: 5790853526837814053}
   m_Layer: 5
   m_Name: Canvas_Debug
   m_TagString: Untagged
@@ -9280,23 +9279,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!114 &5790853526837814053
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4964562100790084508}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 08eca9f7688a0a24685b89133b020c8e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _scriptableObjectInstallers: []
-  _monoInstallers: []
-  _installerPrefabs: []
-  _autoRun: 1
-  _kernel: {fileID: 0}
 --- !u!1001 &6913677228644586173
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9305,10 +9287,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 585954471627559662, guid: 9a531e39f9d57944492d390f2a9ad04a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 2367432410808575264, guid: 9a531e39f9d57944492d390f2a9ad04a, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -9352,26 +9330,6 @@ PrefabInstance:
     - target: {fileID: 4847438323484167783, guid: 9a531e39f9d57944492d390f2a9ad04a, type: 3}
       propertyPath: m_Name
       value: PlayerController
-      objectReference: {fileID: 0}
-    - target: {fileID: 5078371604942539352, guid: 9a531e39f9d57944492d390f2a9ad04a, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5078371604942539352, guid: 9a531e39f9d57944492d390f2a9ad04a, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -25
-      objectReference: {fileID: 0}
-    - target: {fileID: 7653210064370214237, guid: 9a531e39f9d57944492d390f2a9ad04a, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.92387956
-      objectReference: {fileID: 0}
-    - target: {fileID: 7653210064370214237, guid: 9a531e39f9d57944492d390f2a9ad04a, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0.38268343
-      objectReference: {fileID: 0}
-    - target: {fileID: 7653210064370214237, guid: 9a531e39f9d57944492d390f2a9ad04a, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 45
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

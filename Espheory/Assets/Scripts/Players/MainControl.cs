@@ -28,6 +28,15 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
             ""id"": ""515def80-2939-46f8-b09d-128827227315"",
             ""actions"": [
                 {
+                    ""name"": ""Select"",
+                    ""type"": ""Button"",
+                    ""id"": ""455bb10a-7e69-4ad1-a346-2eb67e32b587"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""LookAround"",
                     ""type"": ""Button"",
                     ""id"": ""962f67b7-1467-4e35-8b9c-2fc576ef06b3"",
@@ -409,6 +418,17 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
                     ""action"": ""MoveVertical"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ac0d7d8e-7a5f-473c-bbfb-18466ccd9ed7"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""PC"",
+                    ""action"": ""Select"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -445,6 +465,7 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
 }");
         // Player
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
+        m_Player_Select = m_Player.FindAction("Select", throwIfNotFound: true);
         m_Player_LookAround = m_Player.FindAction("LookAround", throwIfNotFound: true);
         m_Player_MoveForward = m_Player.FindAction("MoveForward", throwIfNotFound: true);
         m_Player_MoveHorizontal = m_Player.FindAction("MoveHorizontal", throwIfNotFound: true);
@@ -519,6 +540,7 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
     // Player
     private readonly InputActionMap m_Player;
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
+    private readonly InputAction m_Player_Select;
     private readonly InputAction m_Player_LookAround;
     private readonly InputAction m_Player_MoveForward;
     private readonly InputAction m_Player_MoveHorizontal;
@@ -536,6 +558,7 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
     {
         private @MainControl m_Wrapper;
         public PlayerActions(@MainControl wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Select => m_Wrapper.m_Player_Select;
         public InputAction @LookAround => m_Wrapper.m_Player_LookAround;
         public InputAction @MoveForward => m_Wrapper.m_Player_MoveForward;
         public InputAction @MoveHorizontal => m_Wrapper.m_Player_MoveHorizontal;
@@ -558,6 +581,9 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_PlayerActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_PlayerActionsCallbackInterfaces.Add(instance);
+            @Select.started += instance.OnSelect;
+            @Select.performed += instance.OnSelect;
+            @Select.canceled += instance.OnSelect;
             @LookAround.started += instance.OnLookAround;
             @LookAround.performed += instance.OnLookAround;
             @LookAround.canceled += instance.OnLookAround;
@@ -601,6 +627,9 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
 
         private void UnregisterCallbacks(IPlayerActions instance)
         {
+            @Select.started -= instance.OnSelect;
+            @Select.performed -= instance.OnSelect;
+            @Select.canceled -= instance.OnSelect;
             @LookAround.started -= instance.OnLookAround;
             @LookAround.performed -= instance.OnLookAround;
             @LookAround.canceled -= instance.OnLookAround;
@@ -677,6 +706,7 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
     }
     public interface IPlayerActions
     {
+        void OnSelect(InputAction.CallbackContext context);
         void OnLookAround(InputAction.CallbackContext context);
         void OnMoveForward(InputAction.CallbackContext context);
         void OnMoveHorizontal(InputAction.CallbackContext context);
