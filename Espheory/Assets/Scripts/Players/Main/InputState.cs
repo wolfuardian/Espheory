@@ -13,6 +13,7 @@ namespace Eos.Players.Main
         public float   Horizontal     { get; private set; }
         public float   Vertical       { get; private set; }
         public Vector2 MoveDirection  { get; private set; }
+        public Vector2 MouseDelta     { get; private set; }
         public float   PitchDelta     { get; private set; }
         public float   YawDelta       { get; private set; }
         public int     LevelOfDolly   { get; private set; }
@@ -35,6 +36,7 @@ namespace Eos.Players.Main
         public void SetHorizontal(float      horizontal)     => Horizontal = horizontal;
         public void SetVertical(float        vertical)       => Vertical = vertical;
         public void SetMoveDirection(Vector2 moveDirection)  => MoveDirection = moveDirection;
+        public void SetMouseDelta(Vector2    mouseDelta)     => MouseDelta = mouseDelta;
         public void SetPitchDelta(float      pitchDelta)     => PitchDelta = pitchDelta;
         public void SetYawDelta(float        yawDelta)       => YawDelta = yawDelta;
         public void SetLevelOfDolly(int      levelOfDolly)   => LevelOfDolly = levelOfDolly;

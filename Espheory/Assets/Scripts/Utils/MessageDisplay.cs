@@ -19,8 +19,8 @@ namespace Eos.Utils
     {
         private readonly Queue<Message> _messages       = new();
         private readonly List<Message>  _activeMessages = new();
-        private const    int            count           = 10;
-        private          float          _duration       = 0.5f;
+        private const    int            count           = 20;
+        private          float          _duration       = 0.1f;
 
 
         private void OnGUI()

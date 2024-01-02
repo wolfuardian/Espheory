@@ -100,15 +100,6 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Movement"",
-                    ""type"": ""Value"",
-                    ""id"": ""21d42863-b3a8-47fb-ba24-cb046d5893ee"",
-                    ""expectedControlType"": ""Vector2"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": true
-                },
-                {
                     ""name"": ""TurnAround"",
                     ""type"": ""Button"",
                     ""id"": ""823ccb02-ad9e-4b1c-bfe7-80bbd825ebfb"",
@@ -187,61 +178,6 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
                     ""action"": ""Dodge"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""2D Vector"",
-                    ""id"": ""3f34221f-4c87-4a89-b678-a1dad4e0f42f"",
-                    ""path"": ""2DVector"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Movement"",
-                    ""isComposite"": true,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": ""Up"",
-                    ""id"": ""db1a771a-f189-4c3b-a830-4bfa11f26157"",
-                    ""path"": ""<Keyboard>/#(W)"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""PC"",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Down"",
-                    ""id"": ""a49b24f5-a406-43ab-8078-e1e74b9f0a7a"",
-                    ""path"": ""<Keyboard>/#(S)"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""PC"",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Left"",
-                    ""id"": ""5a2d7335-88b4-4acf-b8cf-1838f2f5dd85"",
-                    ""path"": ""<Keyboard>/#(A)"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""PC"",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
-                },
-                {
-                    ""name"": ""Right"",
-                    ""id"": ""c40e2b4e-69e8-4fc0-aa11-1624cf98fbe9"",
-                    ""path"": ""<Keyboard>/#(D)"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": ""PC"",
-                    ""action"": ""Movement"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": true
                 },
                 {
                     ""name"": """",
@@ -473,7 +409,6 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
         m_Player_Pointer = m_Player.FindAction("Pointer", throwIfNotFound: true);
         m_Player_NextDollyLevel = m_Player.FindAction("NextDollyLevel", throwIfNotFound: true);
         m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
-        m_Player_Movement = m_Player.FindAction("Movement", throwIfNotFound: true);
         m_Player_TurnAround = m_Player.FindAction("TurnAround", throwIfNotFound: true);
         m_Player_LockOnTarget = m_Player.FindAction("LockOnTarget", throwIfNotFound: true);
         m_Player_UnlockTarget = m_Player.FindAction("UnlockTarget", throwIfNotFound: true);
@@ -548,7 +483,6 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Pointer;
     private readonly InputAction m_Player_NextDollyLevel;
     private readonly InputAction m_Player_Dodge;
-    private readonly InputAction m_Player_Movement;
     private readonly InputAction m_Player_TurnAround;
     private readonly InputAction m_Player_LockOnTarget;
     private readonly InputAction m_Player_UnlockTarget;
@@ -566,7 +500,6 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
         public InputAction @Pointer => m_Wrapper.m_Player_Pointer;
         public InputAction @NextDollyLevel => m_Wrapper.m_Player_NextDollyLevel;
         public InputAction @Dodge => m_Wrapper.m_Player_Dodge;
-        public InputAction @Movement => m_Wrapper.m_Player_Movement;
         public InputAction @TurnAround => m_Wrapper.m_Player_TurnAround;
         public InputAction @LockOnTarget => m_Wrapper.m_Player_LockOnTarget;
         public InputAction @UnlockTarget => m_Wrapper.m_Player_UnlockTarget;
@@ -605,9 +538,6 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
             @Dodge.started += instance.OnDodge;
             @Dodge.performed += instance.OnDodge;
             @Dodge.canceled += instance.OnDodge;
-            @Movement.started += instance.OnMovement;
-            @Movement.performed += instance.OnMovement;
-            @Movement.canceled += instance.OnMovement;
             @TurnAround.started += instance.OnTurnAround;
             @TurnAround.performed += instance.OnTurnAround;
             @TurnAround.canceled += instance.OnTurnAround;
@@ -651,9 +581,6 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
             @Dodge.started -= instance.OnDodge;
             @Dodge.performed -= instance.OnDodge;
             @Dodge.canceled -= instance.OnDodge;
-            @Movement.started -= instance.OnMovement;
-            @Movement.performed -= instance.OnMovement;
-            @Movement.canceled -= instance.OnMovement;
             @TurnAround.started -= instance.OnTurnAround;
             @TurnAround.performed -= instance.OnTurnAround;
             @TurnAround.canceled -= instance.OnTurnAround;
@@ -714,7 +641,6 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
         void OnPointer(InputAction.CallbackContext context);
         void OnNextDollyLevel(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
-        void OnMovement(InputAction.CallbackContext context);
         void OnTurnAround(InputAction.CallbackContext context);
         void OnLockOnTarget(InputAction.CallbackContext context);
         void OnUnlockTarget(InputAction.CallbackContext context);

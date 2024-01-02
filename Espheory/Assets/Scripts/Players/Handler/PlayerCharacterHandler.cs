@@ -16,6 +16,7 @@ namespace Eos.Players.Handler
         [Inject(Id = "Player")]           public readonly  Transform  Player;
         [Inject(Id = "PlayerController")] public readonly  Transform  PlayerController;
         [Inject(Id = "CameraPitchYaw")]   public readonly  Transform  CameraPitchYaw;
+        [Inject(Id = "MoveSpeed")]        public           float      MoveSpeed { get; }
 
         #endregion
 
@@ -23,15 +24,15 @@ namespace Eos.Players.Handler
 
         public void Tick()
         {
-            UpdatePlayerRotation();
-            UpdatePlayerPosition();
+            HRotatePlayerByCamera();
+            MovePlayer();
         }
 
         #endregion
 
         #region Private Methods
 
-        private void UpdatePlayerRotation()
+        private void HRotatePlayerByCamera()
         {
             var eulerAngles = Player.eulerAngles;
             eulerAngles = new Vector3(
@@ -42,14 +43,15 @@ namespace Eos.Players.Handler
             Player.eulerAngles = eulerAngles;
         }
 
-        private void UpdatePlayerPosition()
+        private void MovePlayer()
         {
             var moveDirection = CameraPitchYaw.forward * _inputState.MoveDirection.y +
                                 CameraPitchYaw.right * _inputState.MoveDirection.x;
+            var moveDelta = moveDirection.normalized;
             PlayerController.position += new Vector3(
-                moveDirection.x * 0.1f,
+                moveDelta.x * MoveSpeed,
                 0,
-                moveDirection.z * 0.1f
+                moveDelta.z * MoveSpeed
             );
         }
 

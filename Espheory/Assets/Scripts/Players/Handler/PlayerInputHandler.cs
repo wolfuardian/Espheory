@@ -45,8 +45,6 @@ namespace Eos.Players.Handler
 
             mainControl.Player.Pointer.performed        += OnPointer;
             mainControl.Player.Pointer.canceled         += OnPointer;
-            mainControl.Player.Movement.performed       += OnMovement;
-            mainControl.Player.Movement.canceled        += OnMovement;
             mainControl.Player.NextDollyLevel.performed += OnNextDollyLevel;
             mainControl.Player.Dodge.performed          += OnDodge;
             mainControl.Player.TurnAround.performed     += OnTurnAround;
@@ -56,28 +54,36 @@ namespace Eos.Players.Handler
         public void Tick()
         {
             UpdateMoveDirection();
+            UpdateMoveDelta();
         }
+
 
         public void OnSelect(InputAction.CallbackContext context)
         {
-            _messageDisplay.SetDuration(0.25f);
-            _messageDisplay.Print("OnSelect");
             if (context.performed)
             {
+                _messageDisplay.Print("OnSelect");
             }
         }
 
         public void OnLookAround(InputAction.CallbackContext context)
         {
-            if (context.performed)
+            if (context.started)
+            {
+                _inputState.SetPitchDelta(0);
+                _inputState.SetYawDelta(0);
+            }
+            else if (context.performed)
             {
                 GameplayUtils.MouseLock();
                 _inputState.SetLookAround(true);
+                _messageDisplay.Print("OnLookAround: " + _inputState.LookAround);
             }
             else if (context.canceled)
             {
                 GameplayUtils.MouseUnlock();
                 _inputState.SetLookAround(false);
+                _messageDisplay.Print("OnLookAround: " + _inputState.LookAround);
             }
         }
 
@@ -86,10 +92,12 @@ namespace Eos.Players.Handler
             if (context.performed)
             {
                 _inputState.SetMoveForward(true);
+                _messageDisplay.Print("OnMoveForward: " + _inputState.MoveForward);
             }
             else if (context.canceled)
             {
                 _inputState.SetMoveForward(false);
+                _messageDisplay.Print("OnMoveForward: " + _inputState.MoveForward);
             }
         }
 
@@ -99,10 +107,13 @@ namespace Eos.Players.Handler
             {
                 _inputState.SetMoveHorizontal(true);
                 _inputState.SetHorizontal(context.ReadValue<float>());
+                _messageDisplay.Print("OnMoveHorizontal: " + _inputState.MoveHorizontal);
+                _messageDisplay.Print("OnHorizontal: " + _inputState.Horizontal);
             }
             else if (context.canceled)
             {
                 _inputState.SetMoveHorizontal(false);
+                _messageDisplay.Print("OnMoveHorizontal: " + _inputState.MoveHorizontal);
             }
         }
 
@@ -112,10 +123,13 @@ namespace Eos.Players.Handler
             {
                 _inputState.SetMoveVertical(true);
                 _inputState.SetVertical(context.ReadValue<float>());
+                _messageDisplay.Print("OnMoveVertical: " + _inputState.MoveVertical);
+                _messageDisplay.Print("OnVertical: " + _inputState.Vertical);
             }
             else if (context.canceled)
             {
                 _inputState.SetMoveVertical(false);
+                _messageDisplay.Print("OnMoveVertical: " + _inputState.MoveVertical);
             }
         }
 
@@ -124,27 +138,12 @@ namespace Eos.Players.Handler
             if (!_inputState.LookAround) return;
             if (context.performed)
             {
-                _inputState.SetPitchDelta(context.ReadValue<Vector2>().y);
-                _inputState.SetYawDelta(context.ReadValue<Vector2>().x);
+                _inputState.SetMouseDelta(context.ReadValue<Vector2>());
+                _messageDisplay.Print("OnPointer: " + _inputState.MouseDelta);
             }
             else if (context.canceled)
             {
-                _inputState.SetPitchDelta(0);
-                _inputState.SetYawDelta(0);
-            }
-        }
-
-        public void OnMovement(InputAction.CallbackContext context)
-        {
-            if (context.performed)
-            {
-                _inputState.SetHorizontal(context.ReadValue<Vector2>().x);
-                _inputState.SetVertical(context.ReadValue<Vector2>().y);
-            }
-            else if (context.canceled)
-            {
-                _inputState.SetHorizontal(0);
-                _inputState.SetVertical(0);
+                _inputState.SetMouseDelta(Vector2.zero);
             }
         }
 
@@ -224,6 +223,14 @@ namespace Eos.Players.Handler
             moveDirection += _inputState.MoveVertical ? Vector2.up * _inputState.Vertical : Vector2.zero;
             moveDirection =  moveDirection.normalized;
             _inputState.SetMoveDirection(moveDirection);
+        }
+
+        private void UpdateMoveDelta()
+        {
+            var mouseDelta = _inputState.LookAround ? _inputState.MouseDelta : Vector2.zero;
+            _inputState.SetPitchDelta(mouseDelta.y);
+            _inputState.SetYawDelta(mouseDelta.x);
+            _inputState.SetMouseDelta(Vector2.zero);
         }
 
         #endregion
