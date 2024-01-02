@@ -1,13 +1,11 @@
 #region
 
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 #endregion
 
-namespace Eos.Utils
+namespace Eos.Utils.Debug
 {
     public interface IMessageDisplay
     {

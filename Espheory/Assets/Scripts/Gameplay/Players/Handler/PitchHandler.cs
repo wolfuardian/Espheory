@@ -1,12 +1,10 @@
 #region
 
-using UnityEngine;
-using UnityEngine.UI;
 using Zenject;
 
 #endregion
 
-namespace Eos.Players.Handler
+namespace Eos.Gameplay.Players.Handler
 {
     public class PitchHandler : ITickable
     {

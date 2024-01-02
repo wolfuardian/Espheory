@@ -4,7 +4,7 @@ using Zenject;
 
 #endregion
 
-namespace Eos.Battle.Main
+namespace Eos.Gameplay.Battle.Main
 {
     public class BattleInstaller : MonoInstaller
     {

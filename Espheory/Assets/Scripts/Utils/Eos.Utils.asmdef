@@ -1,5 +1,5 @@
 {
-    "name": "Scripts",
+    "name": "Eos.Utils",
     "rootNamespace": "Eos",
     "references": [],
     "includePlatforms": [

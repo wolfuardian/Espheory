@@ -1,15 +1,15 @@
 #region
 
-using Zenject;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using Eos.Players.Main;
-using Eos.Utils;
-using Eos.Utils.Gameplay;
+using Zenject;
+using Eos.Utils.Debug;
+using Eos.Utils.System;
+using Eos.Gameplay.Players.Main;
 
 #endregion
 
-namespace Eos.Players.Handler
+namespace Eos.Gameplay.Players.Handler
 {
     public class PlayerInputHandler : ITickable, IInitializable, MainControl.IPlayerActions
     {

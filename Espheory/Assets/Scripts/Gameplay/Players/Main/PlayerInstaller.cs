@@ -1,12 +1,12 @@
 #region
 
-using Eos.Players.Handler;
-using Eos.Utils;
+using Eos.Gameplay.Players.Handler;
+using Eos.Utils.Debug;
 using Zenject;
 
 #endregion
 
-namespace Eos.Players.Main
+namespace Eos.Gameplay.Players.Main
 {
     public class PlayerInstaller : MonoInstaller
     {

@@ -1,7 +1,4 @@
-using UnityEditor.Graphs;
-using UnityEngine;
-
-namespace Eos.Utils
+namespace Eos.Utils.Debug
 {
     public class Message
     {

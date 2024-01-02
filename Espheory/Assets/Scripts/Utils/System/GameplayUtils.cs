@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Eos.Utils.Gameplay
+namespace Eos.Utils.System
 {
     public class GameplayUtils
     {
