@@ -20,7 +20,7 @@ namespace Eos.Gameplay.Players.Data
 
         public override void InstallBindings()
         {
-            Container.Bind<float>().WithId("MoveSpeed").FromInstance(moveSpeed);
+            Container.Bind<float>().WithId("MOVE_SPEED").FromInstance(moveSpeed);
         }
 
         #endregion
