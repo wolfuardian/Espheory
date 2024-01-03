@@ -44,7 +44,7 @@ namespace Eos.Gameplay.Players.Handler
 
         private Vector3 CalculateCharacterDirection()
         {
-            return (_cameraPitchYaw.transform.ForwardDirection(_inputState.MoveDirection.y) +
+            return (_character.transform.ForwardDirection(_inputState.MoveDirection.y) +
                     _cameraPitchYaw.transform.RightDirection(_inputState.MoveDirection.x)).normalized;
         }
 
