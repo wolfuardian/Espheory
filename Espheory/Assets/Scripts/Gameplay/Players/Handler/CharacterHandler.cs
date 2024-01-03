@@ -3,6 +3,8 @@
 using UnityEngine;
 using Zenject;
 using Eos.Gameplay.Players.Main;
+using Eos.Gameplay.Players.Mono;
+using Eos.Utils.System;
 
 #endregion
 
@@ -10,58 +12,55 @@ namespace Eos.Gameplay.Players.Handler
 {
     public class CharacterHandler : ITickable
     {
-        #region Public Variables
+        #region Injected Variables
 
-        [Inject]                        private readonly InputState inputState;
-        [Inject(Id = "Player")]         public readonly  Transform  Player;
-        [Inject(Id = "Character")]      public readonly  Transform  Character;
-        [Inject(Id = "CameraPitchYaw")] public readonly  Transform  CameraPitchYaw;
-        [Inject(Id = "MoveSpeed")]      public           float      MoveSpeed { get; }
+        [Inject]                      private readonly InputState      _inputState;
+        [Inject]                      private readonly MPlayer         _player;
+        [Inject]                      private readonly MCharacter      _character;
+        [Inject]                      private readonly MCameraPitchYaw _cameraPitchYaw;
+        [Inject(Id = "MOVE_SPEED")]   private readonly float           _moveSpeed;
+        [Inject(Id = "LAYER_GROUND")] private readonly string          _groundLayerName;
 
         #endregion
-
-        #region Public Methods
 
         public void Tick()
         {
-            AlignCharacterWithCamera();
-            MovePlayer();
+            RotateCharacterTowardsCamera();
+            MoveCharacter();
+            AdjustCharacterPositionToGround();
         }
 
-        #endregion
-
-        #region Private Methods
-
-        private Vector3 CharacterDirection
+        private void RotateCharacterTowardsCamera()
         {
-            get
+            var targetYRotation = _cameraPitchYaw.transform.eulerAngles.y;
+            _character.transform.SetYRotation(targetYRotation);
+        }
+
+        private void MoveCharacter()
+        {
+            var direction = CalculateCharacterDirection();
+            _player.transform.MovePosition(direction, _moveSpeed);
+        }
+
+        private Vector3 CalculateCharacterDirection()
+        {
+            return (_cameraPitchYaw.transform.ForwardDirection(_inputState.MoveDirection.y) +
+                    _cameraPitchYaw.transform.RightDirection(_inputState.MoveDirection.x)).normalized;
+        }
+
+        private void AdjustCharacterPositionToGround()
+        {
+            if (GroundRaycast(_player.transform.position, out var hit))
             {
-                var characterDirection = CameraPitchYaw.forward * inputState.MoveDirection.y +
-                                         CameraPitchYaw.right * inputState.MoveDirection.x;
-                return characterDirection.normalized;
+                _player.transform.SetYPosition(hit.point.y);
             }
         }
 
-        private void AlignCharacterWithCamera()
+        private bool GroundRaycast(Vector3 position, out RaycastHit hit)
         {
-            var eulerAngles = Character.eulerAngles;
-            eulerAngles = new Vector3(
-                eulerAngles.x,
-                CameraPitchYaw.eulerAngles.y,
-                eulerAngles.z
-            );
-            Character.eulerAngles = eulerAngles;
+            var groundLayerMask = LayerMask.GetMask(_groundLayerName);
+            return Physics.Raycast(position, Vector3.up,   out hit, Mathf.Infinity, groundLayerMask) ||
+                   Physics.Raycast(position, Vector3.down, out hit, Mathf.Infinity, groundLayerMask);
         }
-
-        private void MovePlayer()
-        {
-            Player.position += new Vector3(
-                CharacterDirection.x * MoveSpeed,
-                0,
-                CharacterDirection.z * MoveSpeed
-            );
-        }
-
-        #endregion
     }
 }
