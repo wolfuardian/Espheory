@@ -1,13 +1,13 @@
 #region
 
-using Zenject;
-using Eos.Gameplay.Players.Main;
-using Eos.Gameplay.Players.Mono;
+using Eos.Gameplay.Player.Main;
+using Eos.Gameplay.Player.Mono;
 using Eos.Utils.System;
+using Zenject;
 
 #endregion
 
-namespace Eos.Gameplay.Players.Handler
+namespace Eos.Gameplay.Player.Handler
 {
     public class CameraHandler : ITickable
     {

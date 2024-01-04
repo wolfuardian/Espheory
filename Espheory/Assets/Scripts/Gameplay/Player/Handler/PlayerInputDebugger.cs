@@ -1,12 +1,12 @@
 #region
 
-using Eos.Gameplay.Players.Main;
+using Eos.Gameplay.Player.Main;
 using UnityEngine.UI;
 using Zenject;
 
 #endregion
 
-namespace Eos.Gameplay.Players.Handler
+namespace Eos.Gameplay.Player.Handler
 {
     public class PlayerInputDebugger : ITickable
     {

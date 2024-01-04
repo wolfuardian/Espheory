@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Eos.Gameplay.Players.Main
+namespace Eos.Gameplay.Player.Main
 {
     public class InputState
     {

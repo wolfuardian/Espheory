@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Eos.Gameplay.Players.Mono
+namespace Eos.Gameplay.Player.Mono
 {
     public class MCharacter : MonoBehaviour
     {

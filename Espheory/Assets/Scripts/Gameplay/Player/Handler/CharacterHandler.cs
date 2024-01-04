@@ -1,14 +1,14 @@
 #region
 
+using Eos.Gameplay.Player.Main;
+using Eos.Gameplay.Player.Mono;
+using Eos.Utils.System;
 using UnityEngine;
 using Zenject;
-using Eos.Gameplay.Players.Main;
-using Eos.Gameplay.Players.Mono;
-using Eos.Utils.System;
 
 #endregion
 
-namespace Eos.Gameplay.Players.Handler
+namespace Eos.Gameplay.Player.Handler
 {
     public class CharacterHandler : ITickable
     {

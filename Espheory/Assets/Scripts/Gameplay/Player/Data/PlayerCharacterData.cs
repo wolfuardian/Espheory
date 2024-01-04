@@ -5,7 +5,7 @@ using Zenject;
 
 #endregion
 
-namespace Eos.Gameplay.Players.Data
+namespace Eos.Gameplay.Player.Data
 {
     [CreateAssetMenu(fileName = "PlayerCharacterData", menuName = "PlayerCharacterData", order = 0)]
     public class PlayerCharacterData : ScriptableObjectInstaller
