@@ -18,6 +18,7 @@ namespace Eos.Gameplay.Player.Handler
         [Inject] private readonly InputState      _inputState;
         [Inject] private          IMessageDisplay _messageDisplay;
         private const             int             maxDollyLevel = 3;
+        private                   bool            select;
 
         #endregion
 
@@ -33,15 +34,15 @@ namespace Eos.Gameplay.Player.Handler
         {
             var mainControl = new MainControl();
             mainControl.Player.Enable();
-            mainControl.Player.Select.performed         += OnSelect; // SELECT
-            mainControl.Player.LookAround.performed     += OnLookAround; // LOOK_AROUND
-            mainControl.Player.LookAround.canceled      += OnLookAround; // 
-            mainControl.Player.MoveForward.performed    += OnMoveForward; // MOVE_FORWARD
-            mainControl.Player.MoveForward.canceled     += OnMoveForward; // 
-            mainControl.Player.MoveHorizontal.performed += OnMoveHorizontal; // MOVE_HORIZONTAL
-            mainControl.Player.MoveHorizontal.canceled  += OnMoveHorizontal; // 
-            mainControl.Player.MoveVertical.performed   += OnMoveVertical; // MOVE_VERTICAL
-            mainControl.Player.MoveVertical.canceled    += OnMoveVertical; // 
+            mainControl.Player.Select.performed         += OnSelect;
+            mainControl.Player.LookAround.performed     += OnLookAround;
+            mainControl.Player.LookAround.canceled      += OnLookAround;
+            mainControl.Player.MoveForward.performed    += OnMoveForward;
+            mainControl.Player.MoveForward.canceled     += OnMoveForward;
+            mainControl.Player.MoveHorizontal.performed += OnMoveHorizontal;
+            mainControl.Player.MoveHorizontal.canceled  += OnMoveHorizontal;
+            mainControl.Player.MoveVertical.performed   += OnMoveVertical;
+            mainControl.Player.MoveVertical.canceled    += OnMoveVertical;
 
             mainControl.Player.Pointer.performed        += OnPointer;
             mainControl.Player.Pointer.canceled         += OnPointer;
@@ -55,15 +56,26 @@ namespace Eos.Gameplay.Player.Handler
         {
             UpdateMoveDirection();
             UpdateMoveDelta();
+
+            _inputState.SetSelect(false);
+
+            if (select)
+            {
+                _inputState.SetSelect(true);
+                select = false;
+            }
+
+
+            if (_inputState.Select)
+            {
+                _messageDisplay.Print("OnSelect");
+            }
         }
 
 
         public void OnSelect(InputAction.CallbackContext context)
         {
-            if (context.performed)
-            {
-                _messageDisplay.Print("OnSelect");
-            }
+            select = context.performed;
         }
 
         public void OnLookAround(InputAction.CallbackContext context)

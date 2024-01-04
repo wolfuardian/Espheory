@@ -6,10 +6,11 @@ namespace Eos.Gameplay.Player.Main
     {
         #region Public Variables
 
-        public bool    LookAround     { get; private set; } // LOOK_AROUND
-        public bool    MoveForward    { get; private set; } // MOVE_FORWARD
-        public bool    MoveHorizontal { get; private set; } // MOVE_HORIZONTAL
-        public bool    MoveVertical   { get; private set; } // MOVE_VERTICAL
+        public bool    Select         { get; private set; }
+        public bool    LookAround     { get; private set; }
+        public bool    MoveForward    { get; private set; }
+        public bool    MoveHorizontal { get; private set; }
+        public bool    MoveVertical   { get; private set; }
         public float   Horizontal     { get; private set; }
         public float   Vertical       { get; private set; }
         public Vector2 MoveDirection  { get; private set; }
@@ -18,8 +19,6 @@ namespace Eos.Gameplay.Player.Main
         public float   YawDelta       { get; private set; }
         public int     LevelOfDolly   { get; private set; }
 
-        // public float Horizontal          { get; private set; }
-        // public float Vertical            { get; private set; }
         public bool Dodge         { get; private set; }
         public bool TurnAround    { get; private set; }
         public bool LockOnTarget  { get; private set; }
@@ -29,6 +28,7 @@ namespace Eos.Gameplay.Player.Main
 
         #region Public Methods
 
+        public void SetSelect(bool           select)         => Select = select;
         public void SetLookAround(bool       lookAround)     => LookAround = lookAround;
         public void SetMoveForward(bool      moveForward)    => MoveForward = moveForward;
         public void SetMoveHorizontal(bool   moveHorizontal) => MoveHorizontal = moveHorizontal;
