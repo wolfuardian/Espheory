@@ -44,12 +44,13 @@ namespace Eos.Gameplay.Player.Handler
             mainControl.Player.MoveVertical.performed   += OnMoveVertical;
             mainControl.Player.MoveVertical.canceled    += OnMoveVertical;
 
-            mainControl.Player.Pointer.performed        += OnPointer;
-            mainControl.Player.Pointer.canceled         += OnPointer;
-            mainControl.Player.NextDollyLevel.performed += OnNextDollyLevel;
-            mainControl.Player.Dodge.performed          += OnDodge;
-            mainControl.Player.TurnAround.performed     += OnTurnAround;
-            mainControl.Player.LockOnTarget.performed   += OnLockOnTarget;
+            mainControl.Player.PointerDelta.performed    += OnPointerDelta;
+            mainControl.Player.PointerDelta.canceled     += OnPointerDelta;
+            mainControl.Player.PointerPosition.performed += OnPointerPosition;
+            mainControl.Player.NextDollyLevel.performed  += OnNextDollyLevel;
+            mainControl.Player.Dodge.performed           += OnDodge;
+            mainControl.Player.TurnAround.performed      += OnTurnAround;
+            mainControl.Player.LockOnTarget.performed    += OnLockOnTarget;
         }
 
         public void Tick()
@@ -145,7 +146,7 @@ namespace Eos.Gameplay.Player.Handler
             }
         }
 
-        public void OnPointer(InputAction.CallbackContext context)
+        public void OnPointerDelta(InputAction.CallbackContext context)
         {
             if (!_inputState.LookAround) return;
             if (context.performed)
@@ -156,6 +157,15 @@ namespace Eos.Gameplay.Player.Handler
             else if (context.canceled)
             {
                 _inputState.SetMouseDelta(Vector2.zero);
+            }
+        }
+
+        public void OnPointerPosition(InputAction.CallbackContext context)
+        {
+            if (context.performed)
+            {
+                _inputState.SetPointerPosition(context.ReadValue<Vector2>());
+                _messageDisplay.Print("OnPointerPosition: " + _inputState.PointerPosition);
             }
         }
 

@@ -1,5 +1,6 @@
 #region
 
+using Eos.Gameplay.Context.Scene;
 using Zenject;
 
 #endregion
@@ -12,6 +13,7 @@ namespace Eos.Gameplay.Battle.Main
 
         public override void InstallBindings()
         {
+            Container.Bind<ACursor>().FromComponentInHierarchy().AsSingle();
         }
 
         #endregion

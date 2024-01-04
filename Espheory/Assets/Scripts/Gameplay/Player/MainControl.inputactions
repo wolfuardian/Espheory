@@ -51,9 +51,18 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Pointer",
+                    "name": "PointerDelta",
                     "type": "Value",
                     "id": "1cd3710e-cddd-4658-8aa7-b588312d9f45",
+                    "expectedControlType": "Vector2",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "PointerPosition",
+                    "type": "Value",
+                    "id": "18cef54f-f938-4c1e-9f92-f320ab491371",
                     "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
@@ -131,7 +140,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "PC",
-                    "action": "Pointer",
+                    "action": "PointerDelta",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -341,6 +350,17 @@
                     "processors": "",
                     "groups": "PC",
                     "action": "Select",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6ae8b5a6-3870-4255-95a5-af9787f6b699",
+                    "path": "<Mouse>/position",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "PC",
+                    "action": "PointerPosition",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

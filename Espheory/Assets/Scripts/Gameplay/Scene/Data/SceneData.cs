@@ -15,6 +15,7 @@ namespace Eos.Gameplay.Scene.Data
         [SerializeField] private string groundLayerName = "Ground";
         [SerializeField] private string wallLayerName   = "Wall";
         [SerializeField] private string portalLayerName = "Portal";
+        [SerializeField] private string cursorLayerName = "Cursor";
 
         #endregion
 
@@ -25,6 +26,7 @@ namespace Eos.Gameplay.Scene.Data
             Container.Bind<string>().WithId("LAYER_GROUND").FromInstance(groundLayerName);
             Container.Bind<string>().WithId("LAYER_WALL").FromInstance(wallLayerName);
             Container.Bind<string>().WithId("LAYER_PORTAL").FromInstance(portalLayerName);
+            Container.Bind<string>().WithId("LAYER_CURSOR").FromInstance(cursorLayerName);
         }
 
         #endregion

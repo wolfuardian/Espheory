@@ -16,6 +16,7 @@ namespace Eos.Gameplay.Player.Main
         public override void InstallBindings()
         {
             Container.Bind<APlayer>().FromComponentInHierarchy().AsSingle();
+            Container.Bind<ACamera>().FromComponentInHierarchy().AsSingle();
             Container.Bind<ACharacter>().FromComponentInHierarchy().AsSingle();
             Container.Bind<ACameraPitchYaw>().FromComponentInHierarchy().AsSingle();
 
@@ -24,6 +25,7 @@ namespace Eos.Gameplay.Player.Main
             Container.BindInterfacesTo<PlayerInputHandler>().AsSingle();
             Container.BindInterfacesTo<CameraHandler>().AsSingle();
             Container.BindInterfacesTo<CharacterHandler>().AsSingle();
+            Container.BindInterfacesTo<CursorHandler>().AsSingle();
             Container.BindInterfacesTo<PlayerInputDebugger>().AsSingle();
         }
 
