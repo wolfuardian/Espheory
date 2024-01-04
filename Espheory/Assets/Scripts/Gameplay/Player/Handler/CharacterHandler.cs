@@ -1,7 +1,7 @@
 #region
 
+using Eos.Gameplay.Context.Scene;
 using Eos.Gameplay.Player.Main;
-using Eos.Gameplay.Player.Mono;
 using Eos.Utils.System;
 using UnityEngine;
 using Zenject;
@@ -15,9 +15,9 @@ namespace Eos.Gameplay.Player.Handler
         #region Injected Variables
 
         [Inject]                      private readonly InputState      _inputState;
-        [Inject]                      private readonly MPlayer         _player;
-        [Inject]                      private readonly MCharacter      _character;
-        [Inject]                      private readonly MCameraPitchYaw _cameraPitchYaw;
+        [Inject]                      private readonly APlayer         _player;
+        [Inject]                      private readonly ACharacter      _character;
+        [Inject]                      private readonly ACameraPitchYaw _cameraPitchYaw;
         [Inject(Id = "MOVE_SPEED")]   private readonly float           _moveSpeed;
         [Inject(Id = "LAYER_GROUND")] private readonly string          _groundLayerName;
 

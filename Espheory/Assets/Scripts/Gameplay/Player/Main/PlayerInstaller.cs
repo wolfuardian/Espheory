@@ -1,7 +1,7 @@
 #region
 
+using Eos.Gameplay.Context.Scene;
 using Eos.Gameplay.Player.Handler;
-using Eos.Gameplay.Player.Mono;
 using Eos.Utils.Debug;
 using Zenject;
 
@@ -15,9 +15,9 @@ namespace Eos.Gameplay.Player.Main
 
         public override void InstallBindings()
         {
-            Container.Bind<MPlayer>().FromComponentInHierarchy().AsSingle();
-            Container.Bind<MCharacter>().FromComponentInHierarchy().AsSingle();
-            Container.Bind<MCameraPitchYaw>().FromComponentInHierarchy().AsSingle();
+            Container.Bind<APlayer>().FromComponentInHierarchy().AsSingle();
+            Container.Bind<ACharacter>().FromComponentInHierarchy().AsSingle();
+            Container.Bind<ACameraPitchYaw>().FromComponentInHierarchy().AsSingle();
 
             Container.BindInterfacesTo<MessageDisplay>().FromComponentInHierarchy().AsSingle();
             Container.Bind<InputState>().AsSingle();

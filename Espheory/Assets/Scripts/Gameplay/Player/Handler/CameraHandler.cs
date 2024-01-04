@@ -1,7 +1,7 @@
 #region
 
+using Eos.Gameplay.Context.Scene;
 using Eos.Gameplay.Player.Main;
-using Eos.Gameplay.Player.Mono;
 using Eos.Utils.System;
 using Zenject;
 
@@ -14,7 +14,7 @@ namespace Eos.Gameplay.Player.Handler
         #region Public Variables
 
         [Inject] private readonly InputState      _inputState;
-        [Inject] private readonly MCameraPitchYaw _cameraPitchYaw;
+        [Inject] private readonly ACameraPitchYaw _cameraPitchYaw;
 
         #endregion
 
