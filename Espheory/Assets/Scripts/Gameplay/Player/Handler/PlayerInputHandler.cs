@@ -1,11 +1,11 @@
 #region
 
-using Eos.Gameplay.Player.Main;
+using Zenject;
+using UnityEngine;
 using Eos.Utils.Debug;
 using Eos.Utils.System;
-using UnityEngine;
 using UnityEngine.InputSystem;
-using Zenject;
+using Eos.Gameplay.Player.Main;
 
 #endregion
 
@@ -15,10 +15,10 @@ namespace Eos.Gameplay.Player.Handler
     {
         #region Private Variables
 
-        [Inject] private readonly InputState      _inputState;
-        [Inject] private          IMessageDisplay _messageDisplay;
+        [Inject] private readonly InputState      m_InputState;
+        [Inject] private          IMessageDisplay m_MessageDisplay;
         private const             int             maxDollyLevel = 3;
-        private                   bool            select;
+        private                   bool            m_Select;
 
         #endregion
 
@@ -27,7 +27,7 @@ namespace Eos.Gameplay.Player.Handler
 
         public PlayerInputHandler(InputState inputState)
         {
-            _inputState = inputState;
+            m_InputState = inputState;
         }
 
         public void Initialize()
@@ -58,45 +58,45 @@ namespace Eos.Gameplay.Player.Handler
             UpdateMoveDirection();
             UpdateMoveDelta();
 
-            _inputState.SetSelect(false);
+            m_InputState.SetSelect(false);
 
-            if (select)
+            if (m_Select)
             {
-                _inputState.SetSelect(true);
-                select = false;
+                m_InputState.SetSelect(true);
+                m_Select = false;
             }
 
 
-            if (_inputState.Select)
+            if (m_InputState.Select)
             {
-                _messageDisplay.Print("OnSelect");
+                m_MessageDisplay.Print("OnSelect");
             }
         }
 
 
         public void OnSelect(InputAction.CallbackContext context)
         {
-            select = context.performed;
+            m_Select = context.performed;
         }
 
         public void OnLookAround(InputAction.CallbackContext context)
         {
             if (context.started)
             {
-                _inputState.SetPitchDelta(0);
-                _inputState.SetYawDelta(0);
+                m_InputState.SetPitchDelta(0);
+                m_InputState.SetYawDelta(0);
             }
             else if (context.performed)
             {
                 GameplayUtils.MouseLock();
-                _inputState.SetLookAround(true);
-                _messageDisplay.Print("OnLookAround: " + _inputState.LookAround);
+                m_InputState.SetLookAround(true);
+                m_MessageDisplay.Print("OnLookAround: " + m_InputState.LookAround);
             }
             else if (context.canceled)
             {
                 GameplayUtils.MouseUnlock();
-                _inputState.SetLookAround(false);
-                _messageDisplay.Print("OnLookAround: " + _inputState.LookAround);
+                m_InputState.SetLookAround(false);
+                m_MessageDisplay.Print("OnLookAround: " + m_InputState.LookAround);
             }
         }
 
@@ -104,13 +104,13 @@ namespace Eos.Gameplay.Player.Handler
         {
             if (context.performed)
             {
-                _inputState.SetMoveForward(true);
-                _messageDisplay.Print("OnMoveForward: " + _inputState.MoveForward);
+                m_InputState.SetMoveForward(true);
+                m_MessageDisplay.Print("OnMoveForward: " + m_InputState.MoveForward);
             }
             else if (context.canceled)
             {
-                _inputState.SetMoveForward(false);
-                _messageDisplay.Print("OnMoveForward: " + _inputState.MoveForward);
+                m_InputState.SetMoveForward(false);
+                m_MessageDisplay.Print("OnMoveForward: " + m_InputState.MoveForward);
             }
         }
 
@@ -118,15 +118,15 @@ namespace Eos.Gameplay.Player.Handler
         {
             if (context.performed)
             {
-                _inputState.SetMoveHorizontal(true);
-                _inputState.SetHorizontal(context.ReadValue<float>());
-                _messageDisplay.Print("OnMoveHorizontal: " + _inputState.MoveHorizontal);
-                _messageDisplay.Print("OnHorizontal: " + _inputState.Horizontal);
+                m_InputState.SetMoveHorizontal(true);
+                m_InputState.SetHorizontal(context.ReadValue<float>());
+                m_MessageDisplay.Print("OnMoveHorizontal: " + m_InputState.MoveHorizontal);
+                m_MessageDisplay.Print("OnHorizontal: " + m_InputState.Horizontal);
             }
             else if (context.canceled)
             {
-                _inputState.SetMoveHorizontal(false);
-                _messageDisplay.Print("OnMoveHorizontal: " + _inputState.MoveHorizontal);
+                m_InputState.SetMoveHorizontal(false);
+                m_MessageDisplay.Print("OnMoveHorizontal: " + m_InputState.MoveHorizontal);
             }
         }
 
@@ -134,29 +134,29 @@ namespace Eos.Gameplay.Player.Handler
         {
             if (context.performed)
             {
-                _inputState.SetMoveVertical(true);
-                _inputState.SetVertical(context.ReadValue<float>());
-                _messageDisplay.Print("OnMoveVertical: " + _inputState.MoveVertical);
-                _messageDisplay.Print("OnVertical: " + _inputState.Vertical);
+                m_InputState.SetMoveVertical(true);
+                m_InputState.SetVertical(context.ReadValue<float>());
+                m_MessageDisplay.Print("OnMoveVertical: " + m_InputState.MoveVertical);
+                m_MessageDisplay.Print("OnVertical: " + m_InputState.Vertical);
             }
             else if (context.canceled)
             {
-                _inputState.SetMoveVertical(false);
-                _messageDisplay.Print("OnMoveVertical: " + _inputState.MoveVertical);
+                m_InputState.SetMoveVertical(false);
+                m_MessageDisplay.Print("OnMoveVertical: " + m_InputState.MoveVertical);
             }
         }
 
         public void OnPointerDelta(InputAction.CallbackContext context)
         {
-            if (!_inputState.LookAround) return;
+            if (!m_InputState.LookAround) return;
             if (context.performed)
             {
-                _inputState.SetMouseDelta(context.ReadValue<Vector2>());
-                _messageDisplay.Print("OnPointer: " + _inputState.MouseDelta);
+                m_InputState.SetMouseDelta(context.ReadValue<Vector2>());
+                m_MessageDisplay.Print("OnPointer: " + m_InputState.MouseDelta);
             }
             else if (context.canceled)
             {
-                _inputState.SetMouseDelta(Vector2.zero);
+                m_InputState.SetMouseDelta(Vector2.zero);
             }
         }
 
@@ -164,8 +164,8 @@ namespace Eos.Gameplay.Player.Handler
         {
             if (context.performed)
             {
-                _inputState.SetPointerPosition(context.ReadValue<Vector2>());
-                _messageDisplay.Print("OnPointerPosition: " + _inputState.PointerPosition);
+                m_InputState.SetPointerPosition(context.ReadValue<Vector2>());
+                m_MessageDisplay.Print("OnPointerPosition: " + m_InputState.PointerPosition);
             }
         }
 
@@ -173,7 +173,7 @@ namespace Eos.Gameplay.Player.Handler
         {
             if (context.performed)
             {
-                _inputState.SetLevelOfDolly((_inputState.LevelOfDolly + 1) % maxDollyLevel);
+                m_InputState.SetLevelOfDolly((m_InputState.LevelOfDolly + 1) % maxDollyLevel);
             }
         }
 
@@ -181,7 +181,7 @@ namespace Eos.Gameplay.Player.Handler
         {
             if (context.performed)
             {
-                _inputState.SetDodge(context.performed);
+                m_InputState.SetDodge(context.performed);
             }
         }
 
@@ -189,7 +189,7 @@ namespace Eos.Gameplay.Player.Handler
         {
             if (context.performed)
             {
-                _inputState.SetTurnAround(context.performed);
+                m_InputState.SetTurnAround(context.performed);
             }
         }
 
@@ -197,7 +197,7 @@ namespace Eos.Gameplay.Player.Handler
         {
             if (context.performed)
             {
-                _inputState.SetLockOnTarget(context.performed);
+                m_InputState.SetLockOnTarget(context.performed);
             }
         }
 
@@ -205,7 +205,7 @@ namespace Eos.Gameplay.Player.Handler
         {
             if (context.performed)
             {
-                _inputState.SetLockOnTarget(false);
+                m_InputState.SetLockOnTarget(false);
             }
         }
 
@@ -213,7 +213,7 @@ namespace Eos.Gameplay.Player.Handler
         {
             if (context.performed)
             {
-                _inputState.SetIndexOfTarget(_inputState.IndexOfTarget + 1);
+                m_InputState.SetIndexOfTarget(m_InputState.IndexOfTarget + 1);
             }
         }
 
@@ -221,7 +221,7 @@ namespace Eos.Gameplay.Player.Handler
         {
             if (context.performed)
             {
-                _inputState.SetIndexOfTarget(_inputState.IndexOfTarget - 1);
+                m_InputState.SetIndexOfTarget(m_InputState.IndexOfTarget - 1);
             }
         }
 
@@ -229,7 +229,7 @@ namespace Eos.Gameplay.Player.Handler
         {
             if (context.performed)
             {
-                _inputState.SetIndexOfTarget((int)context.ReadValue<float>());
+                m_InputState.SetIndexOfTarget((int)context.ReadValue<float>());
             }
         }
 
@@ -240,19 +240,19 @@ namespace Eos.Gameplay.Player.Handler
 
         private void UpdateMoveDirection()
         {
-            var moveDirection = _inputState.MoveForward ? Vector2.up : Vector2.zero;
-            moveDirection += _inputState.MoveHorizontal ? Vector2.right * _inputState.Horizontal : Vector2.zero;
-            moveDirection += _inputState.MoveVertical ? Vector2.up * _inputState.Vertical : Vector2.zero;
+            var moveDirection = m_InputState.MoveForward ? Vector2.up : Vector2.zero;
+            moveDirection += m_InputState.MoveHorizontal ? Vector2.right * m_InputState.Horizontal : Vector2.zero;
+            moveDirection += m_InputState.MoveVertical ? Vector2.up * m_InputState.Vertical : Vector2.zero;
             moveDirection =  moveDirection.normalized;
-            _inputState.SetMoveDirection(moveDirection);
+            m_InputState.SetMoveDirection(moveDirection);
         }
 
         private void UpdateMoveDelta()
         {
-            var mouseDelta = _inputState.LookAround ? _inputState.MouseDelta : Vector2.zero;
-            _inputState.SetPitchDelta(mouseDelta.y);
-            _inputState.SetYawDelta(mouseDelta.x);
-            _inputState.SetMouseDelta(Vector2.zero);
+            var mouseDelta = m_InputState.LookAround ? m_InputState.MouseDelta : Vector2.zero;
+            m_InputState.SetPitchDelta(mouseDelta.y);
+            m_InputState.SetYawDelta(mouseDelta.x);
+            m_InputState.SetMouseDelta(Vector2.zero);
         }
 
         #endregion

@@ -1,9 +1,9 @@
 #region
 
-using Eos.Gameplay.Context.Scene;
-using Eos.Gameplay.Player.Main;
-using Eos.Utils.System;
 using Zenject;
+using Eos.Utils.System;
+using Eos.Gameplay.Player.Main;
+using Eos.Gameplay.Context.Scene;
 
 #endregion
 
@@ -13,8 +13,8 @@ namespace Eos.Gameplay.Player.Handler
     {
         #region Public Variables
 
-        [Inject] private readonly InputState      _inputState;
-        [Inject] private readonly ACameraPitchYaw _cameraPitchYaw;
+        [Inject] private readonly InputState      m_InputState;
+        [Inject] private readonly ACameraPitchYaw m_CameraPitchYaw;
 
         #endregion
 
@@ -27,9 +27,9 @@ namespace Eos.Gameplay.Player.Handler
 
         private void AdjustCameraYaw()
         {
-            if (!_inputState.LookAround) return;
+            if (!m_InputState.LookAround) return;
 
-            _cameraPitchYaw.transform.AdjustYaw(_inputState.YawDelta);
+            m_CameraPitchYaw.transform.AdjustYaw(m_InputState.YawDelta);
         }
 
         #endregion

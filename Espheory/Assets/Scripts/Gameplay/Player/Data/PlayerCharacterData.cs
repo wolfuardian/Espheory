@@ -1,7 +1,7 @@
 #region
 
-using UnityEngine;
 using Zenject;
+using UnityEngine;
 
 #endregion
 
@@ -12,7 +12,7 @@ namespace Eos.Gameplay.Player.Data
     {
         #region Private Variables
 
-        [SerializeField] private float moveSpeed;
+        [SerializeField] private float m_moveSpeed;
 
         #endregion
 
@@ -20,7 +20,7 @@ namespace Eos.Gameplay.Player.Data
 
         public override void InstallBindings()
         {
-            Container.Bind<float>().WithId("MOVE_SPEED").FromInstance(moveSpeed);
+            Container.Bind<float>().WithId("MOVE_SPEED").FromInstance(m_moveSpeed);
         }
 
         #endregion

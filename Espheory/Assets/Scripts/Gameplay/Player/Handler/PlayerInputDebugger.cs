@@ -1,9 +1,8 @@
 #region
 
-using Eos.Gameplay.Player.Main;
-using Eos.UI.Effect;
-using UnityEngine.UI;
 using Zenject;
+using Eos.UI.Effect;
+using Eos.Gameplay.Player.Main;
 
 #endregion
 
@@ -13,12 +12,12 @@ namespace Eos.Gameplay.Player.Handler
     {
         #region Public Variables
 
-        [Inject]                           private readonly InputState _inputState;
-        [Inject(Id = "D_LOOK_AROUND")]     public readonly  UIFader    LookAroundDebugger;
-        [Inject(Id = "D_MOVE_FORWARD")]    public readonly  UIFader    MoveForwardDebugger;
-        [Inject(Id = "D_MOVE_HORIZONTAL")] public readonly  UIFader    MoveHorizontalDebugger;
-        [Inject(Id = "D_MOVE_VERTICAL")]   public readonly  UIFader    MoveVerticalDebugger;
-        [Inject(Id = "D_SELECT")]          public readonly  UIFader    SelectDebugger;
+        [Inject]                           private readonly InputState m_InputState;
+        [Inject(Id = "D_LOOK_AROUND")]     public readonly  UIFader    lookAroundDebugger;
+        [Inject(Id = "D_MOVE_FORWARD")]    public readonly  UIFader    moveForwardDebugger;
+        [Inject(Id = "D_MOVE_HORIZONTAL")] public readonly  UIFader    moveHorizontalDebugger;
+        [Inject(Id = "D_MOVE_VERTICAL")]   public readonly  UIFader    moveVerticalDebugger;
+        [Inject(Id = "D_SELECT")]          public readonly  UIFader    selectDebugger;
 
         #endregion
 
@@ -26,11 +25,11 @@ namespace Eos.Gameplay.Player.Handler
 
         public void Tick()
         {
-            SelectDebugger.TriggerFade(_inputState.Select);
-            LookAroundDebugger.TriggerFade(_inputState.LookAround);
-            MoveForwardDebugger.TriggerFade(_inputState.MoveForward);
-            MoveHorizontalDebugger.TriggerFade(_inputState.MoveHorizontal);
-            MoveVerticalDebugger.TriggerFade(_inputState.MoveVertical);
+            selectDebugger.TriggerFade(m_InputState.Select);
+            lookAroundDebugger.TriggerFade(m_InputState.LookAround);
+            moveForwardDebugger.TriggerFade(m_InputState.MoveForward);
+            moveHorizontalDebugger.TriggerFade(m_InputState.MoveHorizontal);
+            moveVerticalDebugger.TriggerFade(m_InputState.MoveVertical);
         }
 
         #endregion

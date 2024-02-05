@@ -1,7 +1,7 @@
 #region
 
-using UnityEngine;
 using Zenject;
+using UnityEngine;
 
 #endregion
 
@@ -12,10 +12,10 @@ namespace Eos.Gameplay.Scene.Data
     {
         #region Private Variables
 
-        [SerializeField] private string groundLayerName = "Ground";
-        [SerializeField] private string wallLayerName   = "Wall";
-        [SerializeField] private string portalLayerName = "Portal";
-        [SerializeField] private string cursorLayerName = "Cursor";
+        [SerializeField] private string m_groundLayerName = "Ground";
+        [SerializeField] private string m_wallLayerName   = "Wall";
+        [SerializeField] private string m_portalLayerName = "Portal";
+        [SerializeField] private string m_cursorLayerName = "Cursor";
 
         #endregion
 
@@ -23,10 +23,10 @@ namespace Eos.Gameplay.Scene.Data
 
         public override void InstallBindings()
         {
-            Container.Bind<string>().WithId("LAYER_GROUND").FromInstance(groundLayerName);
-            Container.Bind<string>().WithId("LAYER_WALL").FromInstance(wallLayerName);
-            Container.Bind<string>().WithId("LAYER_PORTAL").FromInstance(portalLayerName);
-            Container.Bind<string>().WithId("LAYER_CURSOR").FromInstance(cursorLayerName);
+            Container.Bind<string>().WithId("LAYER_GROUND").FromInstance(m_groundLayerName);
+            Container.Bind<string>().WithId("LAYER_WALL").FromInstance(m_wallLayerName);
+            Container.Bind<string>().WithId("LAYER_PORTAL").FromInstance(m_portalLayerName);
+            Container.Bind<string>().WithId("LAYER_CURSOR").FromInstance(m_cursorLayerName);
         }
 
         #endregion

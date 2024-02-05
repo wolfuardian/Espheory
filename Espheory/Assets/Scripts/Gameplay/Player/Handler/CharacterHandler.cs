@@ -1,10 +1,10 @@
 #region
 
-using Eos.Gameplay.Context.Scene;
-using Eos.Gameplay.Player.Main;
-using Eos.Utils.System;
-using UnityEngine;
 using Zenject;
+using UnityEngine;
+using Eos.Utils.System;
+using Eos.Gameplay.Player.Main;
+using Eos.Gameplay.Context.Scene;
 
 #endregion
 
@@ -12,14 +12,20 @@ namespace Eos.Gameplay.Player.Handler
 {
     public class CharacterHandler : ITickable
     {
+        private const string PLAYER_IDLE = "Player_Idle";
+        private const string PLAYER_WALK = "Player_Walk";
+        private const string PLAYER_RUN  = "Player_Run";
+        private const string PLAYER_ATTACK  = "Player_Attack";
+
+
         #region Injected Variables
 
-        [Inject]                      private readonly InputState      _inputState;
-        [Inject]                      private readonly APlayer         _player;
-        [Inject]                      private readonly ACharacter      _character;
-        [Inject]                      private readonly ACameraPitchYaw _cameraPitchYaw;
-        [Inject(Id = "MOVE_SPEED")]   private readonly float           _moveSpeed;
-        [Inject(Id = "LAYER_GROUND")] private readonly string          _groundLayerName;
+        [Inject]                      private readonly InputState      m_InputState;
+        [Inject]                      private readonly APlayer         m_Player;
+        [Inject]                      private readonly ACharacter      m_Character;
+        [Inject]                      private readonly ACameraPitchYaw m_CameraPitchYaw;
+        [Inject(Id = "MOVE_SPEED")]   private readonly float           m_MoveSpeed;
+        [Inject(Id = "LAYER_GROUND")] private readonly string          m_GroundLayerName;
 
         #endregion
 
@@ -32,33 +38,33 @@ namespace Eos.Gameplay.Player.Handler
 
         private void RotateCharacterTowardsCamera()
         {
-            var targetYRotation = _cameraPitchYaw.transform.eulerAngles.y;
-            _character.transform.SetYRotation(targetYRotation);
+            var targetYRotation = m_CameraPitchYaw.transform.eulerAngles.y;
+            m_Character.transform.SetYRotation(targetYRotation);
         }
 
         private void MoveCharacter()
         {
             var direction = CalculateCharacterDirection();
-            _player.transform.MovePosition(direction, _moveSpeed);
+            m_Player.transform.MovePosition(direction, m_MoveSpeed);
         }
 
         private Vector3 CalculateCharacterDirection()
         {
-            return (_character.transform.ForwardDirection(_inputState.MoveDirection.y) +
-                    _cameraPitchYaw.transform.RightDirection(_inputState.MoveDirection.x)).normalized;
+            return (m_Character.transform.ForwardDirection(m_InputState.MoveDirection.y) +
+                    m_CameraPitchYaw.transform.RightDirection(m_InputState.MoveDirection.x)).normalized;
         }
 
         private void AdjustCharacterPositionToGround()
         {
-            if (GroundRaycast(_player.transform.position, out var hit))
+            if (GroundRaycast(m_Player.transform.position, out var hit))
             {
-                _player.transform.SetYPosition(hit.point.y);
+                m_Player.transform.SetYPosition(hit.point.y);
             }
         }
 
         private bool GroundRaycast(Vector3 position, out RaycastHit hit)
         {
-            var groundLayerMask = LayerMask.GetMask(_groundLayerName);
+            var groundLayerMask = LayerMask.GetMask(m_GroundLayerName);
             return Physics.Raycast(position, Vector3.up,   out hit, Mathf.Infinity, groundLayerMask) ||
                    Physics.Raycast(position, Vector3.down, out hit, Mathf.Infinity, groundLayerMask);
         }

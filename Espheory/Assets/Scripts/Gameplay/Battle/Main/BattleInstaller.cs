@@ -1,7 +1,7 @@
 #region
 
-using Eos.Gameplay.Context.Scene;
 using Zenject;
+using Eos.Gameplay.Context.Scene;
 
 #endregion
 

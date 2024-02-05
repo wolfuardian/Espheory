@@ -1,9 +1,9 @@
 #region
 
+using Zenject;
+using Eos.Utils.Debug;
 using Eos.Gameplay.Context.Scene;
 using Eos.Gameplay.Player.Handler;
-using Eos.Utils.Debug;
-using Zenject;
 
 #endregion
 
