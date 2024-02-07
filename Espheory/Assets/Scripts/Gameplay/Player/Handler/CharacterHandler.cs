@@ -5,6 +5,7 @@ using UnityEngine;
 using Eos.Utils.System;
 using Eos.Gameplay.Player.Main;
 using Eos.Gameplay.Context.Scene;
+using Eos.Gameplay.Input;
 
 #endregion
 

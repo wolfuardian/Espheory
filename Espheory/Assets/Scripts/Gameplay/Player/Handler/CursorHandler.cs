@@ -4,6 +4,7 @@ using Zenject;
 using UnityEngine;
 using Eos.Gameplay.Player.Main;
 using Eos.Gameplay.Context.Scene;
+using Eos.Gameplay.Input;
 
 #endregion
 

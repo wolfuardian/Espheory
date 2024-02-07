@@ -1,5 +1,6 @@
 #region
 
+using Eos.Gameplay.Input;
 using Zenject;
 using Eos.UI.Effect;
 using Eos.Gameplay.Player.Main;

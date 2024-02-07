@@ -3,6 +3,7 @@
 using Zenject;
 using Eos.Utils.Debug;
 using Eos.Gameplay.Context.Scene;
+using Eos.Gameplay.Input;
 using Eos.Gameplay.Player.Handler;
 
 #endregion
