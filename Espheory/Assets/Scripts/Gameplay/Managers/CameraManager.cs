@@ -21,14 +21,12 @@ namespace Eos.Gameplay.Managers
 
         private void OnEnable()
         {
-            if (_inputReader == null) return;
             _inputReader.SelectEvent  += OnSelect;
             _inputReader.PointerEvent += OnPointer;
         }
 
         private void OnDisable()
         {
-            if (_inputReader == null) return;
             _inputReader.SelectEvent  -= OnSelect;
             _inputReader.PointerEvent -= OnPointer;
         }

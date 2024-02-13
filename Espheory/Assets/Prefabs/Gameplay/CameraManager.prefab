@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5667082166401899}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4412975, y: 0.011280308, z: -0.005547891, w: 0.8972728}
+  m_LocalRotation: {x: 0.44129747, y: 0.011280368, z: -0.0055479207, w: 0.8972728}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -626,7 +626,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3823481947664488276}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.4412975, y: 0.011280308, z: -0.005547891, w: 0.8972728}
+  m_LocalRotation: {x: 0.44129747, y: 0.011280375, z: -0.005547923, w: 0.8972728}
   m_LocalPosition: {x: -0.25139582, y: 15, z: -19.99684}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -743,7 +743,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4593232854167000022}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.41710216, y: 0.011424873, z: -0.005243709, w: 0.9087727}
+  m_LocalRotation: {x: 0.41710216, y: 0.011424905, z: -0.0052437233, w: 0.9087727}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -843,11 +843,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2972f4d65c6706d44b2b000fa1f29dfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputReader: {fileID: 11400000, guid: e7fd6e06ca433f242a76f9ad86436540, type: 2}
-  mainCamera: {fileID: 3266365350467049888}
-  hoveringObject: {fileID: 0}
-  isInteractable: 0
-  isPickable: 0
+  _inputReader: {fileID: 11400000, guid: e7fd6e06ca433f242a76f9ad86436540, type: 2}
+  _mainCamera: {fileID: 3266365350467049888}
+  _cursorManager: {fileID: 0}
+  _identifyObject: {fileID: 0}
+  _isSelecting: 0
 --- !u!1 &6439828416909828925
 GameObject:
   m_ObjectHideFlags: 3
