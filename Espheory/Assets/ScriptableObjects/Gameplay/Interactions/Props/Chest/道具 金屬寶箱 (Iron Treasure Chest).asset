@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b63f25603041d03448825a1a23bf5753, type: 3}
+  m_Name: "\u9053\u5177 \u91D1\u5C6C\u5BF6\u7BB1 (Iron Treasure Chest)"
+  m_EditorClassIdentifier: 
+  _id: PROP_IRON_TREASURE_CHEST_N_001
+  _name: "\u91D1\u5C6C\u5BF6\u7BB1"
+  _description: 
+  _icon: {fileID: 0}
