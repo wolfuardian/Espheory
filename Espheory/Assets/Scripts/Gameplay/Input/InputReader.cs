@@ -4,110 +4,38 @@ using UnityEngine.InputSystem;
 
 namespace Eos.Gameplay.Input
 {
-    [CreateAssetMenu(fileName = "InputReader", menuName = "Game/Input Reader")]
+    [CreateAssetMenu(menuName = "Game/Input/Input Reader")]
     public class InputReader : ScriptableObject, GameInput.IPlayerActions
     {
         #region Field Declarations
 
-        public event UnityAction<Vector2> PointerEvent      = delegate { };
-        public event UnityAction          SelectEvent       = delegate { };
-        public event UnityAction          SelectCancelEvent = delegate { };
-
-        private GameInput gameInput;
+        public event UnityAction<Vector2> PointerEvent = delegate { };
+        public event UnityAction<bool>    SelectEvent  = delegate { };
+        public  Vector2                   Pointer => _gameInput.Player.Pointer.ReadValue<Vector2>();
+        private GameInput                 _gameInput;
 
         #endregion
 
         private void OnEnable()
         {
-            if (gameInput == null)
-            {
-                gameInput = new GameInput();
-                gameInput.Player.Enable();
-                gameInput.Player.SetCallbacks(this);
-            }
+            if (_gameInput != null) return;
+            _gameInput = new GameInput();
+            _gameInput.Player.Enable();
+            _gameInput.Player.SetCallbacks(this);
         }
-
 
         public void OnSelect(InputAction.CallbackContext context)
         {
-            switch (context.phase)
-            {
-                case InputActionPhase.Started:
-                    break;
-                case InputActionPhase.Performed:
-                    // Debug.Log("InputReader: Select performed");
-                    SelectEvent.Invoke();
-                    break;
-                case InputActionPhase.Canceled:
-                    // Debug.Log("InputReader: Select canceled");
-                    SelectCancelEvent.Invoke();
-                    break;
-            }
-        }
-
-        public void OnLookAround(InputAction.CallbackContext context)
-        {
-        }
-
-        public void OnMoveForward(InputAction.CallbackContext context)
-        {
-        }
-
-        public void OnMoveHorizontal(InputAction.CallbackContext context)
-        {
-        }
-
-        public void OnMoveVertical(InputAction.CallbackContext context)
-        {
-        }
-
-        public void OnPointerDelta(InputAction.CallbackContext context)
-        {
+            if (context.performed)
+                SelectEvent.Invoke(true);
+            if (context.canceled)
+                SelectEvent.Invoke(false);
         }
 
         public void OnPointer(InputAction.CallbackContext context)
         {
-            switch (context.phase)
-            {
-                case InputActionPhase.Started:
-                    // Debug.Log("InputReader: PointerPosition started");
-                    break;
-                case InputActionPhase.Performed:
-                    // Debug.Log("InputReader: PointerPosition performed");
-                    PointerEvent.Invoke(context.ReadValue<Vector2>());
-                    break;
-                case InputActionPhase.Canceled:
-                    // Debug.Log("InputReader: PointerPosition canceled");
-                    break;
-            }
-        }
-
-        public void OnNextDollyLevel(InputAction.CallbackContext context)
-        {
-        }
-
-        public void OnDodge(InputAction.CallbackContext context)
-        {
-        }
-
-        public void OnTurnAround(InputAction.CallbackContext context)
-        {
-        }
-
-        public void OnLockOnTarget(InputAction.CallbackContext context)
-        {
-        }
-
-        public void OnUnlockTarget(InputAction.CallbackContext context)
-        {
-        }
-
-        public void OnNextTarget(InputAction.CallbackContext context)
-        {
-        }
-
-        public void OnPrevTarget(InputAction.CallbackContext context)
-        {
+            if (context.phase == InputActionPhase.Performed)
+                PointerEvent.Invoke(context.ReadValue<Vector2>());
         }
     }
 }

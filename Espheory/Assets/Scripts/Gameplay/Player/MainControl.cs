@@ -82,7 +82,7 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": true
                 },
                 {
-                    ""name"": ""PointerPosition"",
+                    ""name"": ""Pointer"",
                     ""type"": ""Value"",
                     ""id"": ""18cef54f-f938-4c1e-9f92-f320ab491371"",
                     ""expectedControlType"": ""Vector2"",
@@ -382,7 +382,7 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""PC"",
-                    ""action"": ""PointerPosition"",
+                    ""action"": ""Pointer"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -427,7 +427,7 @@ public partial class @MainControl: IInputActionCollection2, IDisposable
         m_Player_MoveHorizontal = m_Player.FindAction("MoveHorizontal", throwIfNotFound: true);
         m_Player_MoveVertical = m_Player.FindAction("MoveVertical", throwIfNotFound: true);
         m_Player_PointerDelta = m_Player.FindAction("PointerDelta", throwIfNotFound: true);
-        m_Player_PointerPosition = m_Player.FindAction("PointerPosition", throwIfNotFound: true);
+        m_Player_PointerPosition = m_Player.FindAction("Pointer", throwIfNotFound: true);
         m_Player_NextDollyLevel = m_Player.FindAction("NextDollyLevel", throwIfNotFound: true);
         m_Player_Dodge = m_Player.FindAction("Dodge", throwIfNotFound: true);
         m_Player_TurnAround = m_Player.FindAction("TurnAround", throwIfNotFound: true);
