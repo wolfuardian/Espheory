@@ -31,7 +31,6 @@ MonoBehaviour:
     m_Name: package.openupm.com
     m_Url: https://package.openupm.com
     m_Scopes:
-    - com.svermeulen.extenject
     - com.cysharp.unitask
     - com.cysharp.messagepipe
     - com.cysharp.messagepipe.zenject
