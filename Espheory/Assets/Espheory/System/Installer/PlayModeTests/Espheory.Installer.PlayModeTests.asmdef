@@ -1,0 +1,22 @@
+{
+    "name": "Espheory.Installer.PlayModeTests",
+    "rootNamespace": "",
+    "references": [
+        "GUID:254337104d4901344b6dc3537f7a0387",
+        "GUID:7002d2416c2147e46a1bd1d357ae8927",
+        "GUID:0acc523941302664db1f4e527237feb3",
+        "GUID:b06bf8eb1295ec247beabd7fce36fc1f"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": true,
+    "precompiledReferences": [
+        "NSubstitute.dll",
+        "nunit.framework.dll"
+    ],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
