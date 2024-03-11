@@ -21,14 +21,36 @@ namespace Espheory.System.Player
         #region Test Methods
 
         [Test]
-        public void Should_Call_Select_When_Tick()
+        public void Should_Receive_Select_When_Tick()
         {
             // arrange // given
-            Given_SelectKeyDown(true);
+            GivenSelectKeyDown(true);
             // act // when
-            Tick_PlayerController();
+            TickPlayerController();
             // assert // then
-            Should_Select();
+            ShouldSelect();
+        }
+
+        [Test]
+        public void Should_Did_Not_Receive_Select_When_Tick()
+        {
+            // arrange // given
+            GivenSelectKeyDown(false);
+            // act // when
+            TickPlayerController();
+            // assert // then
+            DidNotSelect();
+        }
+
+        [Test]
+        public void Should_Detect_Floor_When_Tick()
+        {
+            // arrange // given
+            GivenSelectKeyDown(true);
+            // act // when
+            TickPlayerController();
+            // assert // then
+            ShouldSelect();
         }
 
         #endregion
@@ -53,19 +75,24 @@ namespace Espheory.System.Player
 
         #region Private Methods
 
-        private void Given_SelectKeyDown(bool keyDown)
+        private void GivenSelectKeyDown(bool keyDown)
         {
             inputReader.IsSelectKeyDown().Returns(keyDown);
         }
 
-        private void Should_Select()
+        private void TickPlayerController()
+        {
+            playerController.Tick();
+        }
+
+        private void ShouldSelect()
         {
             service.Received(1).Select();
         }
 
-        private void Tick_PlayerController()
+        private void DidNotSelect()
         {
-            playerController.Tick();
+            service.DidNotReceiveWithAnyArgs().Select();
         }
 
         #endregion
