@@ -1,5 +1,6 @@
 #region
 
+using UnityEngine;
 using Zenject;
 
 #endregion
@@ -24,14 +25,16 @@ namespace Espheory.Player
     public enum ActionState
     {
         Idle,
-        Select
+        Select,
+        SelectCooldown
     }
 
     public class ActionController : IAction, ITickable
     {
         #region Public Variables
 
-        public readonly int defaultSelectFrame = 60;
+        public readonly int defaultSelectActiveFrame   = 1;
+        public readonly int defaultSelectCooldownFrame = 60;
 
         public ActionState State { get; private set; }
 
@@ -39,7 +42,8 @@ namespace Espheory.Player
 
         #region Private Variables
 
-        private int selectFrame;
+        private int selectActiveFrame;
+        private int selectCooldownFrame;
 
         #endregion
 
@@ -47,26 +51,74 @@ namespace Espheory.Player
 
         public void Select(int value)
         {
-            selectFrame = defaultSelectFrame;
-            State       = ActionState.Select;
+            selectActiveFrame   = defaultSelectActiveFrame;
+            selectCooldownFrame = defaultSelectCooldownFrame;
+            State               = ActionState.Select;
         }
 
         public void Tick()
         {
-            Tick_Select();
+            Tick_SelectState();
+            Tick_SelectCooldownState();
         }
 
         #endregion
 
         #region Private Methods
 
-        private void Tick_Select()
+        private void Tick_SelectState()
         {
-            if (State == ActionState.Select)
+            if (State != ActionState.Select) return;
+
+            Tick_Select_Active();
+            Tick_Select_Condition();
+        }
+
+        private void Tick_SelectCooldownState()
+        {
+            if (State != ActionState.SelectCooldown) return;
+
+            Tick_Select_Cooldown();
+            Tick_SelectCooldown_Transition();
+        }
+
+        private void Tick_Select_Active()
+        {
+            Select();
+            selectActiveFrame -= 1;
+        }
+
+        private void Tick_Select_Cooldown()
+        {
+            SelectCooldown();
+            selectCooldownFrame -= 1;
+        }
+
+
+        private void Tick_Select_Condition()
+        {
+            if (selectActiveFrame <= 0)
             {
-                selectFrame -= 1;
-                if (selectFrame == 0) State = ActionState.Idle;
+                State = ActionState.SelectCooldown;
             }
+        }
+
+        private void Tick_SelectCooldown_Transition()
+        {
+            if (selectCooldownFrame <= 0)
+            {
+                State = ActionState.Idle;
+            }
+        }
+
+        private void Select()
+        {
+            Debug.Log("Select");
+        }
+
+        private void SelectCooldown()
+        {
+            Debug.Log("SelectCooldown");
         }
 
         #endregion

@@ -34,7 +34,6 @@ namespace Espheory.Player
             {
                 return;
             }
-
             action.Select(selectValue);
         }
 
