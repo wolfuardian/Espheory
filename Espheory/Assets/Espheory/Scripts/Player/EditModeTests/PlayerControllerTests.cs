@@ -21,36 +21,58 @@ namespace Espheory.Player.EditModeTests
         #region Test Methods
 
         [Test]
-        public void Should_Receive_Select_When_Tick()
+        public void Given_Select_Key_Down_Should_Did_Not_Receive_Select_When_Tick()
         {
             // arrange // given
-            GivenSelectKeyDown(true);
+            Given_Select_Key_Down(true);
             // act // when
-            TickPlayerController();
+            Tick_PlayerController();
             // assert // then
-            ShouldSelect();
+            Did_Not_Select();
         }
 
         [Test]
-        public void Should_Did_Not_Receive_Select_When_Tick()
+        public void Given_Select_Key_Push_Should_Receive_Select_When_Tick()
         {
             // arrange // given
-            GivenSelectKeyDown(false);
+            Given_Select_Key_Push(true);
             // act // when
-            TickPlayerController();
+            Tick_PlayerController();
             // assert // then
-            DidNotSelect();
+            Should_Select();
         }
 
         [Test]
-        public void Should_Detect_Floor_When_Tick()
+        public void Given_Select_Key_Push_Should_Did_Not_Receive_When_Tick()
         {
             // arrange // given
-            GivenSelectKeyDown(true);
+            Given_Select_Key_Push(false);
             // act // when
-            TickPlayerController();
+            Tick_PlayerController();
             // assert // then
-            ShouldSelect();
+            Did_Not_Select();
+        }
+
+        [Test]
+        public void Given_Select_Key_Down_Should_Did_Not_Detect_Floor_When_Tick()
+        {
+            // arrange // given
+            Given_Select_Key_Down(true);
+            // act // when
+            Tick_PlayerController();
+            // assert // then
+            Did_Not_Select();
+        }
+
+        [Test]
+        public void Given_Select_Key_Push_Should_Detect_Floor_When_Tick()
+        {
+            // arrange // given
+            Given_Select_Key_Push(true);
+            // act // when
+            Tick_PlayerController();
+            // assert // then
+            Should_Select();
         }
 
         #endregion
@@ -74,22 +96,27 @@ namespace Espheory.Player.EditModeTests
 
         #region Private Methods
 
-        private void GivenSelectKeyDown(bool keyDown)
+        private void Given_Select_Key_Down(bool keyDown)
         {
             inputReader.IsSelectKeyDown().Returns(keyDown);
         }
 
-        private void TickPlayerController()
+        private void Given_Select_Key_Push(bool keyDown)
+        {
+            inputReader.IsSelectKeyPush().Returns(keyDown);
+        }
+
+        private void Tick_PlayerController()
         {
             playerController.Tick();
         }
 
-        private void ShouldSelect()
+        private void Should_Select()
         {
             service.Received(1).Select();
         }
 
-        private void DidNotSelect()
+        private void Did_Not_Select()
         {
             service.DidNotReceiveWithAnyArgs().Select();
         }

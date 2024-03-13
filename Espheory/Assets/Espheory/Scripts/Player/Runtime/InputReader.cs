@@ -1,5 +1,9 @@
+#region
+
 using UnityEngine.InputSystem;
 using Zenject;
+
+#endregion
 
 namespace Espheory.Player
 {
@@ -8,35 +12,44 @@ namespace Espheory.Player
         #region Public Methods
 
         bool IsSelectKeyDown();
+        bool IsSelectKeyPush();
 
         #endregion
     }
 
-    public class InputReader : GameInput.IPlayerActions, IInputReader
+    public class InputReader : InputMapper.IPlayerActions, IInputReader
     {
-        private GameInput gameInput;
+        #region Private Variables
+
+        private          InputMapper inputMapping;
+        [Inject] private IKeyTracker selectKeyTracker;
 
         private bool isSelectKeyDown;
+        private bool isSelectKeyPush;
+        private int  selectKeyDownFrame;
+
+        #endregion
+
+        #region Public Methods
 
         [Inject]
         public void Construct()
         {
-            gameInput = new GameInput();
-            gameInput.Player.SetCallbacks(this);
-            gameInput.Player.Enable();
+            inputMapping = new InputMapper();
+            inputMapping.Player.SetCallbacks(this);
+            inputMapping.Player.Enable();
         }
 
         public void OnSelect(InputAction.CallbackContext context)
         {
-            // TODO: 這裡要用最簡單的方式實現壓住按鍵不放的時候，就不再重複觸發 Select 的邏輯。
             if (context.started)
             {
-                isSelectKeyDown = true;
+                selectKeyTracker.SetKeyDown(true);
             }
 
             if (context.canceled)
             {
-                isSelectKeyDown = false;
+                selectKeyTracker.SetKeyDown(false);
             }
         }
 
@@ -46,7 +59,14 @@ namespace Espheory.Player
 
         public bool IsSelectKeyDown()
         {
-            return isSelectKeyDown;
+            return selectKeyTracker.IsKeyDown();
         }
+
+        public bool IsSelectKeyPush()
+        {
+            return selectKeyTracker.IsKeyPush();
+        }
+
+        #endregion
     }
 }

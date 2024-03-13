@@ -1,4 +1,8 @@
+#region
+
 using Zenject;
+
+#endregion
 
 namespace Espheory.Player
 {
@@ -24,8 +28,8 @@ namespace Espheory.Player
 
         private void DoSelect()
         {
-            var isSelectKeyDown = inputReader.IsSelectKeyDown();
-            if (isSelectKeyDown) actionService.Select();
+            var isSelectKeyPush = inputReader.IsSelectKeyPush();
+            if (isSelectKeyPush) actionService.Select();
         }
 
         #endregion

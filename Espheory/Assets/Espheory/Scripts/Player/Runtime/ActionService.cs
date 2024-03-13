@@ -1,4 +1,9 @@
+#region
+
+using UnityEngine;
 using Zenject;
+
+#endregion
 
 namespace Espheory.Player
 {
@@ -29,11 +34,14 @@ namespace Espheory.Player
 
         public void Select()
         {
+            Debug.Log("ActionService.Select()");
+            
             var isStateNotIdle = IsNotState(ActionState.Idle);
             if (isStateNotIdle)
             {
                 return;
             }
+
             action.Select(selectValue);
         }
 

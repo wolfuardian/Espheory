@@ -118,7 +118,6 @@ namespace Espheory.Player
 
         private void SelectCooldown()
         {
-            Debug.Log("SelectCooldown");
         }
 
         #endregion
