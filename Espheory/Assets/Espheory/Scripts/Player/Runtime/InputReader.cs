@@ -11,8 +11,9 @@ namespace Espheory.Player
     {
         #region Public Methods
 
-        bool IsSelectKeyDown();
-        bool IsSelectKeyPush();
+        bool IsSelectKeyStarted();
+        bool IsSelectKeyPerformed();
+        bool IsSelectKeyCanceled();
 
         #endregion
     }
@@ -21,12 +22,13 @@ namespace Espheory.Player
     {
         #region Private Variables
 
-        private          InputMapper inputMapping;
-        [Inject] private IKeyTracker selectKeyTracker;
+        private InputMapper inputMapping;
 
-        private bool isSelectKeyDown;
-        private bool isSelectKeyPush;
-        private int  selectKeyDownFrame;
+        [Inject] private IKey selectKey;
+
+        private bool isSelectKeyStarted;
+        private bool isSelectKeyPerformed;
+        private bool isSelectKeyCanceled;
 
         #endregion
 
@@ -44,27 +46,38 @@ namespace Espheory.Player
         {
             if (context.started)
             {
-                selectKeyTracker.SetKeyDown(true);
+                // TODO: This could be the entry point for verifying logic.
+            }
+            
+            if (context.performed)
+            {
+                selectKey.SetKeyPerformed();
             }
 
             if (context.canceled)
             {
-                selectKeyTracker.SetKeyDown(false);
+                selectKey.SetKeyCanceled();
             }
         }
 
         public void OnPointer(InputAction.CallbackContext context)
         {
+            // TODO: This will serve as the logic code for the cursor on the screen.
         }
 
-        public bool IsSelectKeyDown()
+        public bool IsSelectKeyStarted()
         {
-            return selectKeyTracker.IsKeyDown();
+            return selectKey.IsKeyStarted();
         }
 
-        public bool IsSelectKeyPush()
+        public bool IsSelectKeyPerformed()
         {
-            return selectKeyTracker.IsKeyPush();
+            return selectKey.IsKeyPerformed();
+        }
+
+        public bool IsSelectKeyCanceled()
+        {
+            return selectKey.IsKeyCanceled();
         }
 
         #endregion

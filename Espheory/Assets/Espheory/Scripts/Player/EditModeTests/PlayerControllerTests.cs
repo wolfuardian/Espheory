@@ -98,7 +98,7 @@ namespace Espheory.Player.EditModeTests
 
         private void Given_Select_Key_Down(bool keyDown)
         {
-            inputReader.IsSelectKeyDown().Returns(keyDown);
+            inputReader.IsSelectKeyStarted().Returns(keyDown);
         }
 
         private void Given_Select_Key_Push(bool keyDown)

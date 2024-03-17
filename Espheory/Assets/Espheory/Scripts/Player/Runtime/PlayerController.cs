@@ -28,7 +28,7 @@ namespace Espheory.Player
 
         private void DoSelect()
         {
-            var isSelectKeyPush = inputReader.IsSelectKeyPush();
+            var isSelectKeyPush = inputReader.IsSelectKeyStarted();
             if (isSelectKeyPush) actionService.Select();
         }
 
