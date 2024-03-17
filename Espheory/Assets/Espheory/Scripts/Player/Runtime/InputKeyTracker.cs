@@ -2,7 +2,7 @@ using Zenject;
 
 namespace Espheory.Player
 {
-    public interface IKey
+    public interface IInputKey
     {
         #region Public Variables
 
@@ -20,7 +20,7 @@ namespace Espheory.Player
         #endregion
     }
 
-    public class InputTracker : IKey, ITickable
+    public class InputKeyTracker : IInputKey, ITickable
     {
         #region Private Variables
 

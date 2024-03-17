@@ -18,13 +18,13 @@ namespace Espheory.Player
         #endregion
     }
 
-    public class InputReader : InputMapper.IPlayerActions, IInputReader
+    public class InputReader : InputKeyMapper.IPlayerActions, IInputReader
     {
         #region Private Variables
 
-        private InputMapper inputMapping;
+        private InputKeyMapper inputKeyMapping;
 
-        [Inject] private IKey selectKey;
+        [Inject] private IInputKey selectInputKey;
 
         private bool isSelectKeyStarted;
         private bool isSelectKeyPerformed;
@@ -37,9 +37,9 @@ namespace Espheory.Player
         [Inject]
         public void Construct()
         {
-            inputMapping = new InputMapper();
-            inputMapping.Player.SetCallbacks(this);
-            inputMapping.Player.Enable();
+            inputKeyMapping = new InputKeyMapper();
+            inputKeyMapping.Player.SetCallbacks(this);
+            inputKeyMapping.Player.Enable();
         }
 
         public void OnSelect(InputAction.CallbackContext context)
@@ -51,12 +51,12 @@ namespace Espheory.Player
             
             if (context.performed)
             {
-                selectKey.SetKeyPerformed();
+                selectInputKey.SetKeyPerformed();
             }
 
             if (context.canceled)
             {
-                selectKey.SetKeyCanceled();
+                selectInputKey.SetKeyCanceled();
             }
         }
 
@@ -67,17 +67,17 @@ namespace Espheory.Player
 
         public bool IsSelectKeyStarted()
         {
-            return selectKey.IsKeyStarted();
+            return selectInputKey.IsKeyStarted();
         }
 
         public bool IsSelectKeyPerformed()
         {
-            return selectKey.IsKeyPerformed();
+            return selectInputKey.IsKeyPerformed();
         }
 
         public bool IsSelectKeyCanceled()
         {
-            return selectKey.IsKeyCanceled();
+            return selectInputKey.IsKeyCanceled();
         }
 
         #endregion
