@@ -19,10 +19,17 @@ namespace Modules.Scripts
 
         public void OnSelect(InputAction.CallbackContext context)
         {
-            if (context.started)
-                keyboard.TrackSelect.SetKeyDown(true);
-            if (context.canceled)
-                keyboard.TrackSelect.SetKeyDown(false);
+            switch (context.phase)
+            {
+                case InputActionPhase.Started:
+                    break;
+                case InputActionPhase.Performed:
+                    keyboard.TrackSelect.SetKeyPerforming(true);
+                    break;
+                case InputActionPhase.Canceled:
+                    keyboard.TrackSelect.SetKeyPerforming(false);
+                    break;
+            }
         }
 
         public void OnPointer(InputAction.CallbackContext context)
@@ -33,9 +40,7 @@ namespace Modules.Scripts
         {
             inputState.IsSelectPerforming = keyboard.TrackSelect.IsKeyPerforming();
             inputState.IsSelectPressed    = keyboard.TrackSelect.IsKeyPressed();
-            inputState.IsSelectReleased   = keyboard.TrackSelect.IsKeyReleased();
-            inputState.IsSelectCooldown   = keyboard.TrackSelect.IsKeyCooldown();
-            inputState.IsSelectIdle       = keyboard.TrackSelect.IsKeyIdle();
+            inputState.SelectPerforming   = keyboard.TrackSelect.GetKeyFrame();
         }
     }
 }

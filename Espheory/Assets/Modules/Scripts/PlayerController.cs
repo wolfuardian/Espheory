@@ -32,8 +32,7 @@ namespace Modules.Scripts
 
         private void DoSelect()
         {
-            var isSelectKeyPush = inputState.IsSelectPressed;
-            if (isSelectKeyPush) actionService.Select();
+            if (inputState.IsSelectPressed) actionService.Select();
         }
 
         #endregion

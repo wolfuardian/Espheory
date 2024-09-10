@@ -1,125 +1,86 @@
-#region
-
-using UnityEngine;
 using Zenject;
-
-#endregion
 
 namespace Modules.Scripts
 {
-    public interface IAction
+    public interface IActionTracker
     {
-        #region Public Variables
+        void        Perform();
+        ActionState GetState();
+        int         GetFrame();
+        int         GetActiveFrames();
+        int         GetCooldownFrames();
+    }
 
-        ActionState State { get; }
+    public class ActionTracker : IActionTracker, ITickable
+    {
+        private readonly int         activeFrames;
+        private readonly int         cooldownFrames;
+        private          ActionState state;
+        private          int         currentFrame;
 
-        #endregion
+        public ActionTracker(int activeFrames, int cooldownFrames)
+        {
+            this.activeFrames   = activeFrames;
+            this.cooldownFrames = cooldownFrames;
+            state               = ActionState.Idle;
+        }
 
-        #region Public Methods
+        public void Perform()
+        {
+            if (state == ActionState.Idle)
+            {
+                state        = ActionState.Active;
+                currentFrame = 0;
+            }
+        }
 
-        void Select(int value);
+        public void Tick()
+        {
+            if (state == ActionState.Active)
+            {
+                currentFrame++;
+                if (currentFrame >= activeFrames)
+                {
+                    state        = ActionState.Cooldown;
+                    currentFrame = 0;
+                }
+            }
+            else if (state == ActionState.Cooldown)
+            {
+                currentFrame++;
+                if (currentFrame >= cooldownFrames)
+                {
+                    state        = ActionState.Idle;
+                    currentFrame = 0;
+                }
+            }
+        }
 
-        #endregion
+        public ActionState GetState()          => state;
+        public int         GetFrame()          => currentFrame;
+        public int         GetActiveFrames()   => activeFrames;
+        public int         GetCooldownFrames() => cooldownFrames;
     }
 
     public enum ActionState
     {
         Idle,
-        Select,
-        SelectCooldown
+        Active,
+        Cooldown
     }
 
-    public class ActionController : IAction, ITickable
+    public interface IActionController
     {
-        #region Public Variables
+        IActionTracker Select { get; }
+    }
 
-        public readonly int defaultSelectActiveFrame   = 1;
-        public readonly int defaultSelectCooldownFrame = 60;
-
-        public ActionState State { get; private set; }
-
-        #endregion
-
-        #region Private Variables
-
-        private int selectActiveFrame;
-        private int selectCooldownFrame;
-
-        #endregion
-
-        #region Public Methods
-
-        public void Select(int value)
-        {
-            selectActiveFrame   = defaultSelectActiveFrame;
-            selectCooldownFrame = defaultSelectCooldownFrame;
-            State               = ActionState.Select;
-        }
+    public class ActionController : IActionController, ITickable
+    {
+        public IActionTracker Select { get; } = new ActionTracker(300, 600);
 
         public void Tick()
         {
-            Tick_SelectState();
-            Tick_SelectCooldownState();
+            (Select as ITickable)?.Tick();
         }
-
-        #endregion
-
-        #region Private Methods
-
-        private void Tick_SelectState()
-        {
-            if (State != ActionState.Select) return;
-
-            Tick_Select_Active();
-            Tick_Select_Condition();
-        }
-
-        private void Tick_SelectCooldownState()
-        {
-            if (State != ActionState.SelectCooldown) return;
-
-            Tick_Select_Cooldown();
-            Tick_SelectCooldown_Transition();
-        }
-
-        private void Tick_Select_Active()
-        {
-            Select();
-            selectActiveFrame -= 1;
-        }
-
-        private void Tick_Select_Cooldown()
-        {
-            SelectCooldown();
-            selectCooldownFrame -= 1;
-        }
-
-
-        private void Tick_Select_Condition()
-        {
-            if (selectActiveFrame <= 0)
-            {
-                State = ActionState.SelectCooldown;
-            }
-        }
-
-        private void Tick_SelectCooldown_Transition()
-        {
-            if (selectCooldownFrame <= 0)
-            {
-                State = ActionState.Idle;
-            }
-        }
-
-        private void Select()
-        {
-            Debug.Log("Select");
-        }
-
-        private void SelectCooldown()
-        {
-        }
-
-        #endregion
     }
 }

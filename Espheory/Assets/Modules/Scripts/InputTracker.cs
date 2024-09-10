@@ -2,56 +2,47 @@ using Zenject;
 
 namespace Modules.Scripts
 {
+    public interface IKeyboard
+    {
+        IKeyTracker TrackSelect { get; set; }
+    }
+
+    public class Keyboard : IKeyboard
+    {
+        [Inject]
+        private IKeyTracker selectKeyTracker;
+        public IKeyTracker TrackSelect
+        {
+            get => selectKeyTracker;
+            set => selectKeyTracker = value;
+        }
+    }
+
     public interface IKeyTracker
     {
-        void SetKeyDown(bool keyState);
+        void SetKeyPerforming(bool keyState);
         bool IsKeyPerforming();
         bool IsKeyPressed();
-        bool IsKeyReleased();
-        bool IsKeyCooldown();
-        bool IsKeyIdle();
+        int  GetKeyFrame();
     }
 
     public class InputTracker : IKeyTracker, ITickable
     {
-        private bool isKeyDown;
-        private bool isKeyPush;
-        private int  keyDownFrame;
+        private bool isKeyPerforming;
+        private bool isKeyPressed;
+        private int  keyFrame;
 
         public void Tick()
         {
-            isKeyPush    = isKeyDown && keyDownFrame == 0;
-            keyDownFrame = isKeyDown ? keyDownFrame + 1 : 0;
+            isKeyPressed = isKeyPerforming && keyFrame == 0;
+            keyFrame     = isKeyPerforming ? keyFrame + 1 : 0;
         }
 
-        public void SetKeyDown(bool keyState)
-        {
-            isKeyDown = keyState;
-        }
+        public void SetKeyPerforming(bool keyState) => isKeyPerforming = keyState;
 
-        public bool IsKeyPerforming()
-        {
-            return isKeyDown;
-        }
+        public int GetKeyFrame() => keyFrame;
 
-        public bool IsKeyPressed()
-        {
-            return isKeyPush;
-        }
-
-        public bool IsKeyReleased()
-        {
-            return !isKeyDown && keyDownFrame > 0;
-        }
-
-        public bool IsKeyCooldown()
-        {
-            return isKeyDown && keyDownFrame > 0;
-        }
-
-        public bool IsKeyIdle()
-        {
-            return !isKeyDown && keyDownFrame == 0;
-        }
+        public bool IsKeyPerforming() => isKeyPerforming;
+        public bool IsKeyPressed()    => isKeyPressed;
     }
 }
