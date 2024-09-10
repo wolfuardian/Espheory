@@ -1,0 +1,17 @@
+{
+    "name": "Espheory.Player.Runtime",
+    "rootNamespace": "",
+    "references": [
+        "Zenject",
+        "Unity.InputSystem"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

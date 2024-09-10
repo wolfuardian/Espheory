@@ -1,0 +1,18 @@
+{
+    "name": "Espheory.Scene",
+    "rootNamespace": "",
+    "references": [
+        "Zenject",
+        "Espheory",
+        "Espheory.Player.Runtime"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": false,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
