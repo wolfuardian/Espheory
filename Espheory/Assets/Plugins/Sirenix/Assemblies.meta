@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Espheory/Assets/Plugins/Zenject/OptionalExtras/IntegrationTests/Misc/TestAnimationStateBehaviourInject/Materials.meta
-guid: 0d6b2da9137d3314aa7dacc31e1b7865
-========
 guid: 05b1eef81f23d6648992c93437892982
->>>>>>>> develop-di:Espheory/Assets/Plugins/Sirenix/Assemblies.meta
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}

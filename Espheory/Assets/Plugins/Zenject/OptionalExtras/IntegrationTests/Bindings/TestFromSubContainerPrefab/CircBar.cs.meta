@@ -1,9 +1,5 @@
 fileFormatVersion: 2
-<<<<<<<< HEAD:Espheory/Assets/Scripts/Gameplay/Input/GameInput.cs.meta
-guid: e8116113a194cd943b69c931b535e7d3
-========
 guid: a9b1995fe11e44134aff82b87c9ad47d
->>>>>>>> develop-di:Espheory/Assets/Plugins/Zenject/OptionalExtras/IntegrationTests/Bindings/TestFromSubContainerPrefab/CircBar.cs.meta
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
@@ -13,3 +9,10 @@ MonoImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 157735
+  packageName: Extenject Dependency Injection IOC
+  packageVersion: 9.2.0
+  assetPath: Assets/Plugins/Zenject/OptionalExtras/IntegrationTests/Bindings/TestFromSubContainerPrefab/CircBar.cs
+  uploadId: 370902
