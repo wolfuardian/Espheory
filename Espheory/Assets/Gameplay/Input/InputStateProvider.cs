@@ -1,8 +1,8 @@
-using Zenject;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
-namespace Modules.Scripts
+namespace Gameplay.Input
 {
     public class InputStateProvider : MonoBehaviour
     {
@@ -16,10 +16,6 @@ namespace Modules.Scripts
 
         private void Update()
         {
-            m_Texts[0].text = $"Select Performing: {inputState.IsSelectPerforming}";
-            m_Texts[1].text = $"Select Pressed: {inputState.IsSelectPressed}";
-            m_Texts[2].text = $"Select Frame: {inputState.SelectPerforming}";
-
             var maxFrames = 0;
             if (actionService.GetSelectState() == ActionState.Idle)
             {
@@ -35,12 +31,6 @@ namespace Modules.Scripts
             }
 
             m_Texts[3].text = $"{actionService.GetSelectState()} : {1.0f - (actionService.GetSelectFrame() / (float)maxFrames):F1}";
-            // m_Texts[2].text = $"Select Released: {inputState.IsSelectReleased}";
-
-            // Debug.Log($"actionService.GetSelectState() = {actionService.GetSelectState()}");
-
-            // m_Texts[3].text = $"Select Cooldown: {inputState.IsSelectCooldown}";
-            // m_Texts[4].text = $"Select Idle: {inputState.IsSelectIdle}";
         }
     }
 }

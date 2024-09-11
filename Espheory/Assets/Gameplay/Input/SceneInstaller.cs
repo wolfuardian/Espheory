@@ -1,7 +1,6 @@
-using System.Collections.Generic;
 using Zenject;
 
-namespace Modules.Scripts
+namespace Gameplay.Input
 {
     public class SceneInstaller : MonoInstaller
     {

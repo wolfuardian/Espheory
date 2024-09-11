@@ -1,11 +1,11 @@
 #region
 
-using Zenject;
 using UnityEngine.InputSystem;
+using Zenject;
 
 #endregion
 
-namespace Modules.Scripts
+namespace Gameplay.Input
 {
     public interface IInputReader
     {

@@ -1,6 +1,6 @@
 using Zenject;
 
-namespace Modules.Scripts
+namespace Gameplay.Input
 {
     public interface IActionService
     {

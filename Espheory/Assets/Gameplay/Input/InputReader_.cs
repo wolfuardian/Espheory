@@ -3,7 +3,7 @@
 // using UnityEngine.Events;
 // using UnityEngine.InputSystem;
 //
-// namespace Modules.Scripts
+// namespace Gameplay.Scripts
 // {
 //     public interface IInputReader
 //     {

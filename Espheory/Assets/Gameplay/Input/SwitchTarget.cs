@@ -1,8 +1,7 @@
-using Zenject;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Modules.Scripts
+namespace Gameplay.Input
 {
     public class SwitchTarget : MonoBehaviour
     {

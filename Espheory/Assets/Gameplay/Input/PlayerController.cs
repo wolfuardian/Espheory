@@ -4,7 +4,7 @@ using Zenject;
 
 #endregion
 
-namespace Modules.Scripts
+namespace Gameplay.Input
 {
     public class PlayerController : ITickable
     {

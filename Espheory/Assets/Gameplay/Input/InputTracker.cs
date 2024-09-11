@@ -1,17 +1,17 @@
 using Zenject;
 
-namespace Modules.Scripts
+namespace Gameplay.Input
 {
     public interface IKeyboard
     {
-        IKeyTracker TrackSelect { get; set; }
+        IKeyTracker Select { get; set; }
     }
 
     public class Keyboard : IKeyboard
     {
         [Inject]
         private IKeyTracker selectKeyTracker;
-        public IKeyTracker TrackSelect
+        public IKeyTracker Select
         {
             get => selectKeyTracker;
             set => selectKeyTracker = value;

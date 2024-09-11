@@ -1,4 +1,4 @@
-namespace Modules.Scripts
+namespace Gameplay.Input
 {
     public interface IInputState
     {

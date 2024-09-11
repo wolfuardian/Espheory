@@ -1,7 +1,7 @@
-using Zenject;
 using UnityEngine.InputSystem;
+using Zenject;
 
-namespace Modules.Scripts
+namespace Gameplay.Input
 {
     public interface IInputHandler
     {
@@ -24,10 +24,10 @@ namespace Modules.Scripts
                 case InputActionPhase.Started:
                     break;
                 case InputActionPhase.Performed:
-                    keyboard.TrackSelect.SetKeyPerforming(true);
+                    keyboard.Select.SetKeyPerforming(true);
                     break;
                 case InputActionPhase.Canceled:
-                    keyboard.TrackSelect.SetKeyPerforming(false);
+                    keyboard.Select.SetKeyPerforming(false);
                     break;
             }
         }
@@ -38,9 +38,9 @@ namespace Modules.Scripts
 
         public void Tick()
         {
-            inputState.IsSelectPerforming = keyboard.TrackSelect.IsKeyPerforming();
-            inputState.IsSelectPressed    = keyboard.TrackSelect.IsKeyPressed();
-            inputState.SelectPerforming   = keyboard.TrackSelect.GetKeyFrame();
+            inputState.IsSelectPerforming = keyboard.Select.IsKeyPerforming();
+            inputState.IsSelectPressed    = keyboard.Select.IsKeyPressed();
+            inputState.SelectPerforming   = keyboard.Select.GetKeyFrame();
         }
     }
 }
