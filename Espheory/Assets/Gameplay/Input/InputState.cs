@@ -10,6 +10,7 @@ namespace Gameplay.Input
         int  SelectPerforming   { get; set; }
         int  SelectCooldown     { get; set; }
         int  SelectIdle         { get; set; }
+        bool IsTargetPressed    { get; set; }
     }
 
     public class InputState : IInputState
@@ -22,5 +23,6 @@ namespace Gameplay.Input
         public int  SelectPerforming   { get; set; }
         public int  SelectCooldown     { get; set; }
         public int  SelectIdle         { get; set; }
+        public bool IsTargetPressed    { get; set; }
     }
 }
