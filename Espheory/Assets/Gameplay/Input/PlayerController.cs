@@ -1,7 +1,7 @@
 #region
 
+using Gameplay.Navigate.Scripts;
 using Zenject;
-using Gameplay.AI.Scripts;
 
 #endregion
 
@@ -13,13 +13,17 @@ namespace Gameplay.Input
 
         [Inject]
         private IActionService actionService;
-        [Inject]
-        private INavService m_NavService;
+
         [Inject]
         private IInputReader inputReader;
         [Inject]
         private IInputState inputState;
 
+        
+        
+        [Inject]
+        private INavService navService;
+        
         #endregion
 
         private bool ShouldSelect   => inputState.IsSelectPressed;
@@ -46,12 +50,12 @@ namespace Gameplay.Input
 
         private void DoTarget()
         {
-            if (ShouldTarget) m_NavService.Target();
+            // if (ShouldTarget) m_NavService.Target();
         }
 
         private void DoNavigate()
         {
-            if (ShouldNavigate) m_NavService.Navigate();
+            if (ShouldNavigate) navService.SetIsNavigateNext();
         }
 
         #endregion

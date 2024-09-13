@@ -1,10 +1,10 @@
-using Gameplay.AI.Scripts;
-using Gameplay.Input;
 using Zenject;
+using Gameplay.Input;
+using Gameplay.Navigate.Scripts;
 
-namespace Gameplay.AI.Installers
+namespace Gameplay.Navigate.Installers
 {
-    public class AIInstaller : MonoInstaller
+    public class NavInstaller : MonoInstaller
     {
         public override void InstallBindings()
         {
@@ -17,9 +17,10 @@ namespace Gameplay.AI.Installers
             Container.Bind(typeof(IKeyboard)).To<Keyboard>().AsSingle();
             Container.Bind(typeof(IInputHandler),              typeof(ITickable)).To<InputHandler>().AsSingle();
             Container.Bind(typeof(InputMapper.IPlayerActions), typeof(IInputReader)).To<InputReader>().AsSingle();
-
-            Container.Bind(typeof(INavController), typeof(ITickable)).To<NavController>().AsSingle();
-            Container.Bind(typeof(INavService),    typeof(ITickable)).To<NavService>().AsSingle();
+            
+            Container.Bind(typeof(INavState)).To<NavState>().AsSingle();
+            Container.Bind(typeof(IAgentNavigator), typeof(ITickable)).To<AgentNavigator>().AsSingle();
+            Container.Bind(typeof(INavService)).To<NavService>().AsSingle();
         }
     }
 }
