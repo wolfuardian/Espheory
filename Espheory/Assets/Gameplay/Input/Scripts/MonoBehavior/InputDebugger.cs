@@ -1,8 +1,8 @@
 #region
 
 using Zenject;
-using UnityEngine;
 using Gameplay.Input.Core;
+using UnityEngine;
 
 #endregion
 

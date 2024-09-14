@@ -8,14 +8,14 @@ namespace Gameplay.Input.Core
 {
     public interface IInputService
     {
-        IInputRecorder InputRecorder { get; set; }
+        IInputTrack InputTrack { get; set; }
     }
 
     public class InputService : IInputService
     {
         #region Properties
 
-        [Inject] public IInputRecorder InputRecorder { get; set; }
+        [Inject] public IInputTrack InputTrack { get; set; }
 
         #endregion
     }

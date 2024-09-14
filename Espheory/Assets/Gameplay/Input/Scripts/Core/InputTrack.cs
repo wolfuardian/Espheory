@@ -6,12 +6,12 @@ using Zenject;
 
 namespace Gameplay.Input.Core
 {
-    public interface IInputRecorder
+    public interface IInputTrack
     {
-        IInputTracker TrackingSelect { get; set; }
+        IInputTrackPerformer TpSelect { get; set; }
     }
 
-    public class InputRecorder : IInputRecorder, ITickable
+    public class InputTrack : IInputTrack, ITickable
     {
         #region Private Valiables
 
@@ -22,7 +22,7 @@ namespace Gameplay.Input.Core
 
         #region Properties
 
-        [Inject] public IInputTracker TrackingSelect { get; set; }
+        [Inject] public IInputTrackPerformer TpSelect { get; set; }
 
         #endregion
 
@@ -30,7 +30,7 @@ namespace Gameplay.Input.Core
 
         public void Tick()
         {
-            inputState.PerformingSelect = TrackingSelect.GetFrameCount();
+            inputState.PerformingSelect = TpSelect.GetFrameCount();
         }
 
         #endregion

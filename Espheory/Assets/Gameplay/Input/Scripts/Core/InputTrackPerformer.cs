@@ -6,7 +6,7 @@ using Zenject;
 
 namespace Gameplay.Input.Core
 {
-    public interface IInputTracker
+    public interface IInputTrackPerformer
     {
         void Started();
         void Performed();
@@ -14,7 +14,7 @@ namespace Gameplay.Input.Core
         int  GetFrameCount();
     }
 
-    public class InputTracker : IInputTracker, ITickable
+    public class InputTrackPerformer : IInputTrackPerformer, ITickable
     {
         #region Private Valiables
 

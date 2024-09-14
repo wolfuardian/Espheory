@@ -1,7 +1,7 @@
 #region
 
-using UnityEngine.InputSystem;
 using Zenject;
+using UnityEngine.InputSystem;
 
 #endregion
 
@@ -33,13 +33,13 @@ namespace Gameplay.Input.Core
             switch (context.phase)
             {
                 case InputActionPhase.Started:
-                    inputService.InputRecorder.TrackingSelect.Started();
+                    inputService.InputTrack.TpSelect.Started();
                     break;
                 case InputActionPhase.Performed:
-                    inputService.InputRecorder.TrackingSelect.Performed();
+                    inputService.InputTrack.TpSelect.Performed();
                     break;
                 case InputActionPhase.Canceled:
-                    inputService.InputRecorder.TrackingSelect.Canceled();
+                    inputService.InputTrack.TpSelect.Canceled();
                     break;
             }
         }
