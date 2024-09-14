@@ -1,5 +1,5 @@
-using Gameplay.Input.Scripts;
 using Zenject;
+using Gameplay.Input.Core;
 
 namespace Gameplay.Input.Installer
 {
@@ -9,15 +9,11 @@ namespace Gameplay.Input.Installer
         {
             Container.Bind(typeof(Controls.IPlayerActions)).To<InputReader>().AsSingle().NonLazy();
 
-            Container.Bind(typeof(IActionTracker)).To<ActionTracker>().AsSingle();
-            Container.Bind(typeof(IActionController), typeof(ITickable)).To<ActionController>().AsSingle();
             Container.Bind(typeof(IInputState)).To<InputState>().AsSingle();
-            Container.Bind(typeof(IActionService)).To<ActionService>().AsSingle();
-            Container.Bind(typeof(ITickable)).To<PlayerController>().AsSingle();
-            Container.Bind(typeof(IKeyTracker), typeof(ITickable)).To<InputTracker>().AsSingle();
-            Container.Bind(typeof(IKeyboard)).To<Keyboard>().AsSingle();
-            Container.Bind(typeof(IInputHandler), typeof(ITickable)).To<InputHandler>().AsSingle();
 
+            Container.Bind(typeof(IInputService)).To<InputService>().AsSingle();
+            Container.Bind(typeof(IInputRecorder), typeof(ITickable)).To<InputRecorder>().AsSingle();
+            Container.Bind(typeof(IInputTracker),  typeof(ITickable)).To<InputTracker>().AsSingle();
         }
     }
 }
