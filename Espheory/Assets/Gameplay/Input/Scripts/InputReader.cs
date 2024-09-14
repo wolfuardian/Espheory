@@ -1,6 +1,5 @@
 #region
 
-using UnityEngine;
 using Zenject;
 using UnityEngine.InputSystem;
 
@@ -12,7 +11,7 @@ namespace Gameplay.Input.Scripts
     {
         #region Private Variables
 
-        private Controls controls;
+        private Controls gameControls;
 
         [Inject]
         private IInputService inputService;
@@ -24,9 +23,9 @@ namespace Gameplay.Input.Scripts
         [Inject]
         public void Construct()
         {
-            controls = new Controls();
-            controls.Player.SetCallbacks(this);
-            controls.Player.Enable();
+            gameControls = new Controls();
+            gameControls.Player.SetCallbacks(this);
+            gameControls.Player.Enable();
         }
 
         public void OnSelect(InputAction.CallbackContext context)
@@ -38,7 +37,6 @@ namespace Gameplay.Input.Scripts
                     break;
                 case InputActionPhase.Performed:
                     inputService.Select.Perform();
-                    Debug.Log("dadsassa");
                     break;
                 case InputActionPhase.Canceled:
                     inputService.Select.Reset();
