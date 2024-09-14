@@ -13,8 +13,6 @@ namespace Gameplay.Input.Scripts
         [Inject]
         private IActionService actionService;
         [Inject]
-        private IInputReader inputReader;
-        [Inject]
         private IInputState inputState;
 
         #endregion

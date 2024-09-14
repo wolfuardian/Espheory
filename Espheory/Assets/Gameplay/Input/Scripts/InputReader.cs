@@ -1,17 +1,13 @@
 #region
 
-using UnityEngine.InputSystem;
 using Zenject;
+using UnityEngine.InputSystem;
 
 #endregion
 
 namespace Gameplay.Input.Scripts
 {
-    public interface IInputReader
-    {
-    }
-
-    public class InputReader : Controls.IPlayerActions, IInputReader
+    public class InputReader : Controls.IPlayerActions
     {
         #region Private Variables
 
@@ -32,8 +28,7 @@ namespace Gameplay.Input.Scripts
             inputMapping.Player.Enable();
         }
 
-        public void OnSelect(InputAction.CallbackContext  context) => inputHandler.OnSelect(context);
-        public void OnPointer(InputAction.CallbackContext context) => inputHandler.OnPointer(context);
+        public void OnSelect(InputAction.CallbackContext context) => inputHandler.OnSelect(context);
 
         #endregion
     }
