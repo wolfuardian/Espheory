@@ -13,16 +13,7 @@ MonoBehaviour:
   m_Name: vFavorites Data
   m_EditorClassIdentifier: 
   pages:
-  - items:
-    - globalId:
-        globalObjectIdString: GlobalObjectId_V1-1-5d59f30fc489ff547910b50d6a676bfa-17502115434096073164-0
-      _typeString: UnityEngine.InputSystem.InputActionAsset, Unity.InputSystem, Version=1.8.2.0,
-        Culture=neutral, PublicKeyToken=null
-      _obj: {fileID: -944628639613478452, guid: 5d59f30fc489ff547910b50d6a676bfa, type: 3}
-      isSceneGameObject: 0
-      isFolder: 0
-      isAsset: 1
-      _id: 1055055258
+  - items: []
     name: Page 1
     _id: 1065061962
   - items: []
