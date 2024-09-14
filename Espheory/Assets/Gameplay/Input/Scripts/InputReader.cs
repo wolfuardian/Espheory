@@ -1,20 +1,24 @@
 #region
 
-using Zenject;
 using UnityEngine.InputSystem;
+using Zenject;
 
 #endregion
 
 namespace Gameplay.Input.Scripts
 {
-    public class InputReader : Controls.IPlayerActions
+    public interface IInputReader
+    {
+    }
+
+    public class InputReader : Controls.IPlayerActions, IInputReader
     {
         #region Private Variables
 
-        private Controls gameControls;
+        private Controls inputMapping;
 
         [Inject]
-        private IInputService inputService;
+        private IInputHandler inputHandler;
 
         #endregion
 
@@ -23,26 +27,13 @@ namespace Gameplay.Input.Scripts
         [Inject]
         public void Construct()
         {
-            gameControls = new Controls();
-            gameControls.Player.SetCallbacks(this);
-            gameControls.Player.Enable();
+            inputMapping = new Controls();
+            inputMapping.Player.SetCallbacks(this);
+            inputMapping.Player.Enable();
         }
 
-        public void OnSelect(InputAction.CallbackContext context)
-        {
-            switch (context.phase)
-            {
-                case InputActionPhase.Started:
-                    inputService.Select.Initiate();
-                    break;
-                case InputActionPhase.Performed:
-                    inputService.Select.Perform();
-                    break;
-                case InputActionPhase.Canceled:
-                    inputService.Select.Reset();
-                    break;
-            }
-        }
+        public void OnSelect(InputAction.CallbackContext  context) => inputHandler.OnSelect(context);
+        public void OnPointer(InputAction.CallbackContext context) => inputHandler.OnPointer(context);
 
         #endregion
     }
