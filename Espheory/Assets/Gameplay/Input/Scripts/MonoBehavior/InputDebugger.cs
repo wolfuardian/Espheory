@@ -1,8 +1,8 @@
 #region
 
 using Zenject;
-using Gameplay.Input.Core;
 using UnityEngine;
+using Gameplay.Input.Core;
 
 #endregion
 
@@ -22,7 +22,7 @@ namespace Gameplay.Input.MonoBehavior
         private void OnGUI()
         {
             GUILayout.Label($"Select Performing: {inputState.PerformingSelect > 0}");
-            GUILayout.Label($"Select Pulsing: {inputState.PerformingSelect    == 0}");
+            GUILayout.Label($"Select Pulsing: {inputState.PerformingSelect    == 1}");
             GUILayout.Label($"Select Frame: {inputState.PerformingSelect}");
         }
 

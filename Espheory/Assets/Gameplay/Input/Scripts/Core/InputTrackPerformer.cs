@@ -25,9 +25,9 @@ namespace Gameplay.Input.Core
 
         #region Public Methods
 
-        public void Tick() => frameCount = isPerforming ? frameCount + 1 : -1;
+        public void Tick() => frameCount = isPerforming ? frameCount + 1 : 0;
 
-        public void Started()   => frameCount = -1; // Force reset
+        public void Started()   => frameCount = 0; // Force reset
         public void Performed() => isPerforming = true;
         public void Canceled()  => isPerforming = false;
 
