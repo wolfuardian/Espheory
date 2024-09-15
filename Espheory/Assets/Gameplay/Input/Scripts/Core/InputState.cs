@@ -7,10 +7,6 @@ namespace Gameplay.Input.Core
 
     public class InputState : IInputState
     {
-        #region Properties
-
         public int PerformingSelect { get; set; }
-
-        #endregion
     }
 }

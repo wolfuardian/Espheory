@@ -1,8 +1,4 @@
-#region
-
 using Zenject;
-
-#endregion
 
 namespace Gameplay.Input.Core
 {
@@ -13,10 +9,6 @@ namespace Gameplay.Input.Core
 
     public class InputService : IInputService
     {
-        #region Properties
-
         [Inject] public IInputTrack InputTrack { get; set; }
-
-        #endregion
     }
 }
