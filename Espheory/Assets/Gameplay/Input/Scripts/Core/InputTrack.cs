@@ -1,8 +1,4 @@
-#region
-
 using Zenject;
-
-#endregion
 
 namespace Gameplay.Input.Core
 {
@@ -13,26 +9,13 @@ namespace Gameplay.Input.Core
 
     public class InputTrack : IInputTrack, ITickable
     {
-        #region Private Valiables
-
-        [Inject]
-        private IInputState inputState;
-
-        #endregion
-
-        #region Properties
+        [Inject] private IInputState inputState;
 
         [Inject] public IInputTrackPerformer TpSelect { get; set; }
-
-        #endregion
-
-        #region Public Methods
 
         public void Tick()
         {
             inputState.PerformingSelect = TpSelect.GetFrameCount();
         }
-
-        #endregion
     }
 }

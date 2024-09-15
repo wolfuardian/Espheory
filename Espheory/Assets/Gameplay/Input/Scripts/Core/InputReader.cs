@@ -1,24 +1,14 @@
-#region
-
 using Zenject;
 using UnityEngine.InputSystem;
-
-#endregion
 
 namespace Gameplay.Input.Core
 {
     public class InputReader : Controls.IPlayerActions
     {
-        #region Private Variables
-
         private Controls inputMapping;
 
         [Inject]
         private IInputService inputService;
-
-        #endregion
-
-        #region Public Methods
 
         [Inject]
         public void Construct()
@@ -43,7 +33,5 @@ namespace Gameplay.Input.Core
                     break;
             }
         }
-
-        #endregion
     }
 }

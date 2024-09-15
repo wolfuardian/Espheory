@@ -15,6 +15,10 @@ namespace Gameplay.Player.Installer
             Container.Bind(typeof(IInputTrackPerformer), typeof(ITickable)).To<InputTrackPerformer>().AsSingle();
 
             Container.Bind(typeof(ITickable)).To<PlayerController>().AsSingle();
+
+            Container.Bind(typeof(IActionState)).To<ActionState>().AsSingle();
+            Container.Bind(typeof(IActionTracker)).To<ActionTracker>().AsSingle();
+            Container.Bind(typeof(IActionTrackPerformer), typeof(ITickable)).To<ActionTrackPerformer>().AsSingle();
         }
     }
 }

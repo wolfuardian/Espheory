@@ -1,8 +1,4 @@
-#region
-
 using Zenject;
-
-#endregion
 
 namespace Gameplay.Input.Core
 {
@@ -16,14 +12,8 @@ namespace Gameplay.Input.Core
 
     public class InputTrackPerformer : IInputTrackPerformer, ITickable
     {
-        #region Private Valiables
-
         private bool isPerforming;
         private int  frameCount;
-
-        #endregion
-
-        #region Public Methods
 
         public void Tick() => frameCount = isPerforming ? frameCount + 1 : 0;
 
@@ -32,7 +22,5 @@ namespace Gameplay.Input.Core
         public void Canceled()  => isPerforming = false;
 
         public int GetFrameCount() => frameCount;
-
-        #endregion
     }
 }
