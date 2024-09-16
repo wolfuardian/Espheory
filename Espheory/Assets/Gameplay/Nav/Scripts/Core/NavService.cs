@@ -1,7 +1,7 @@
 using UnityEngine;
 using Zenject;
 
-namespace Gameplay.Navigate.Scripts
+namespace Gameplay.Nav.Core
 {
     public interface INavService
     {

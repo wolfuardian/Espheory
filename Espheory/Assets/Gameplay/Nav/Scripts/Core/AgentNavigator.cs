@@ -1,10 +1,10 @@
-using Zenject;
 using UnityEngine;
 using UnityEngine.AI;
+using Zenject;
 
-namespace Gameplay.Navigate.Scripts
+namespace Gameplay.Nav.Core
 {
-    internal interface IAgentNavigator
+    public interface IAgentNavigator
     {
         void Navigate(Transform target);
     }

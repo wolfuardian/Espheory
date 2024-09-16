@@ -1,7 +1,7 @@
+using Gameplay.Nav.Core;
 using Zenject;
-using Gameplay.Navigate.Scripts;
 
-namespace Gameplay.Navigate.Installers
+namespace Gameplay.Nav.Installers
 {
     public class NavInstaller : MonoInstaller
     {

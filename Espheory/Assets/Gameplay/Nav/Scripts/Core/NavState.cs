@@ -1,8 +1,8 @@
 using UnityEngine;
 
-namespace Gameplay.Navigate.Scripts
+namespace Gameplay.Nav.Core
 {
-    internal interface INavState
+    public interface INavState
     {
         bool      IsNavigateNext { get; set; }
         Transform GetNextTarget  { get; set; }
