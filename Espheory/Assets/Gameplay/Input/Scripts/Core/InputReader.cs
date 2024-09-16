@@ -1,4 +1,5 @@
 using Zenject;
+using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Gameplay.Input.Core
@@ -7,8 +8,7 @@ namespace Gameplay.Input.Core
     {
         private Controls inputMapping;
 
-        [Inject]
-        private IInputService inputService;
+        [Inject] private IInputService inputService;
 
         [Inject]
         public void Construct()
@@ -30,6 +30,16 @@ namespace Gameplay.Input.Core
                     break;
                 case InputActionPhase.Canceled:
                     inputService.InputTrack.TpSelect.Canceled();
+                    break;
+            }
+        }
+
+        public void OnPointer(InputAction.CallbackContext context)
+        {
+            switch (context.phase)
+            {
+                case InputActionPhase.Performed:
+                    inputService.SetPointerPosition(context.ReadValue<Vector2>());
                     break;
             }
         }
