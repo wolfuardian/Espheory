@@ -1,6 +1,7 @@
 using Gameplay.CameraRaycast.Scripts.Core;
 using Gameplay.Input.Core;
 using Gameplay.Nav.Core;
+using Gameplay.Stat.Core;
 using Zenject;
 
 namespace Gameplay.Stat.Installer
@@ -24,6 +25,8 @@ namespace Gameplay.Stat.Installer
             Container.Bind(typeof(INavState)).To<NavState>().AsSingle();
             Container.Bind(typeof(IAgentNavigator), typeof(ITickable)).To<AgentNavigator>().AsSingle();
             Container.Bind(typeof(INavService)).To<NavService>().AsSingle();
+
+            Container.Bind(typeof(IDamageProvider), typeof(IInitializable)).To<DamageProvider>().AsSingle();
         }
     }
 }
