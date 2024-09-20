@@ -26,7 +26,18 @@ namespace Gameplay.Stat.Installer
             Container.Bind(typeof(IAgentNavigator), typeof(ITickable)).To<AgentNavigator>().AsSingle();
             Container.Bind(typeof(INavService)).To<NavService>().AsSingle();
 
-            Container.Bind(typeof(IDamageProvider), typeof(IInitializable)).To<DamageProvider>().AsSingle();
+            // Container.Bind(typeof(IDamageProvider), typeof(IInitializable)).To<DamageProvider>().AsSingle();
+
+            // 假設有一個具體的 DamageProvider 實作
+            Container.Bind<IDamageProvider>().To<ConcreteDamageProvider>().AsSingle();
+
+            // 綁定 DamageHandler，並提供一個傷害時間間隔參數
+            Container.Bind<DamageHandler>()
+                .AsSingle()
+                .WithArguments(1f); // 每隔 1 秒造成一次傷害
+
+            // 綁定 DamageTriggerService
+            Container.Bind<DamageTriggerService>().AsSingle();
         }
     }
 }

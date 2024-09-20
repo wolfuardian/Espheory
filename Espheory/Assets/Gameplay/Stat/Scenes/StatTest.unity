@@ -364,6 +364,7 @@ GameObject:
   - component: {fileID: 1265103125}
   - component: {fileID: 1265103124}
   - component: {fileID: 1265103123}
+  - component: {fileID: 1265103127}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -455,6 +456,33 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1265103127
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1265103122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f32c91cd79945eeb1673239c7149526, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_OnHealthChanged:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 321700910}
+        m_TargetAssemblyTypeName: UnityEngine.UI.Text, UnityEngine.UI
+        m_MethodName: set_text
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &1359643607
 GameObject:
   m_ObjectHideFlags: 0
@@ -540,7 +568,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 697ad2b0a903426cb5430c31448e2733, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Text: {fileID: 321700910}
 --- !u!1 &1373223616
 GameObject:
   m_ObjectHideFlags: 0
