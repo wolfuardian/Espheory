@@ -7,6 +7,7 @@ namespace Gameplay.Battle.Mono
         protected override void ResolveDamageDealer()
         {
             damageDealer = container.Resolve<PlayerDamageDealer>();
+            healthBarUpdater = container.Resolve<PlayerHealthBarUpdater>();
         }
     }
 }

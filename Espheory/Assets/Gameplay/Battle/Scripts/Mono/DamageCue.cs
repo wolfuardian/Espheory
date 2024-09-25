@@ -1,14 +1,15 @@
-using Gameplay.Battle.Core;
-using UnityEngine;
 using Zenject;
+using UnityEngine;
+using Gameplay.Battle.Core;
 
 namespace Gameplay.Battle.Mono
 {
     public abstract class DamageCue : MonoBehaviour
     {
-        [Inject] protected DiContainer container;
+        [Inject] protected private DiContainer container;
 
-        protected private IDamageDealer damageDealer;
+        protected private IDamageDealer     damageDealer;
+        protected private IHealthBarUpdater healthBarUpdater;
 
         protected virtual void Awake()
         {
@@ -22,6 +23,7 @@ namespace Gameplay.Battle.Mono
             if (damageDealer != null)
             {
                 damageDealer.DealDamage(health);
+                healthBarUpdater.UpdateUI();
             }
             else
             {
