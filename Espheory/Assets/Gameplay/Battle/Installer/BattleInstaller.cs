@@ -16,6 +16,17 @@ namespace Gameplay.Battle.Installer
             Container.Bind<PlayerHealthBarUpdater>().AsTransient();
             Container.Bind<EnemyHealthBarUpdater>().AsTransient();
 
+            // 假設有一個具體的 DamageProvider 實作
+            Container.Bind<IDamageProvider>().To<ConcreteDamageProvider>().AsSingle();
+
+            // 綁定 DamageHandler，並提供一個傷害時間間隔參數
+            Container.Bind<DamageHandler>()
+                .AsSingle()
+                .WithArguments(1f); // 每隔 1 秒造成一次傷害
+
+            // 綁定 DamageTriggerService
+            Container.Bind<DamageTriggerService>().AsSingle();
+
             // TODO: 目前的結果是血量會不斷扣至負數，這肯定是不正確的
             // 這裡應該會有一個檢查機制，確保血量不會低於 0，並且在血量歸零時觸發死亡事件
             // 死亡可能牽涉到 FSM，不同狀態涉及場景的切換或重置
