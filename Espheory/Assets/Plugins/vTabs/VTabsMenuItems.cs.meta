@@ -13,6 +13,6 @@ AssetOrigin:
   serializedVersion: 1
   productId: 263645
   packageName: vTabs 2
-  packageVersion: 2.0.12
-  assetPath: Assets/vTabs/VTabsMenuItems.cs
-  uploadId: 670792
+  packageVersion: 2.0.15
+  assetPath: Assets/Plugins/vTabs/VTabsMenuItems.cs
+  uploadId: 701941

@@ -16,19 +16,19 @@ namespace VTabs
     public static class VTabsMenu
     {
 
-        public static bool dragndropEnabled { get => EditorPrefs.GetBool("vTabs-dragndropEnabled", true); set => EditorPrefs.SetBool("vTabs-dragndropEnabled", value); }
-        public static bool switchTabsEnabled { get => EditorPrefs.GetBool("vTabs-switchTabsEnabled", true); set => EditorPrefs.SetBool("vTabs-switchTabsEnabled", value); }
-        public static bool moveTabsEnabled { get => EditorPrefs.GetBool("vTabs-moveTabsEnabled", true); set => EditorPrefs.SetBool("vTabs-moveTabsEnabled", value); }
+        public static bool dragndropEnabled { get => EditorPrefsCached.GetBool("vTabs-dragndropEnabled", true); set => EditorPrefsCached.SetBool("vTabs-dragndropEnabled", value); }
+        public static bool switchTabsEnabled { get => EditorPrefsCached.GetBool("vTabs-switchTabsEnabled", true); set => EditorPrefsCached.SetBool("vTabs-switchTabsEnabled", value); }
+        public static bool moveTabsEnabled { get => EditorPrefsCached.GetBool("vTabs-moveTabsEnabled", true); set => EditorPrefsCached.SetBool("vTabs-moveTabsEnabled", value); }
 
-        public static bool addTabEnabled { get => EditorPrefs.GetBool("vTabs-addTabEnabled", true); set => EditorPrefs.SetBool("vTabs-addTabEnabled", value); }
-        public static bool closeTabEnabled { get => EditorPrefs.GetBool("vTabs-closeTabEnabled", true); set => EditorPrefs.SetBool("vTabs-closeTabEnabled", value); }
-        public static bool reopenTabEnabled { get => EditorPrefs.GetBool("vTabs-reopenTabEnabled", true); set => EditorPrefs.SetBool("vTabs-reopenTabEnabled", value); }
+        public static bool addTabEnabled { get => EditorPrefsCached.GetBool("vTabs-addTabEnabled", true); set => EditorPrefsCached.SetBool("vTabs-addTabEnabled", value); }
+        public static bool closeTabEnabled { get => EditorPrefsCached.GetBool("vTabs-closeTabEnabled", true); set => EditorPrefsCached.SetBool("vTabs-closeTabEnabled", value); }
+        public static bool reopenTabEnabled { get => EditorPrefsCached.GetBool("vTabs-reopenTabEnabled", true); set => EditorPrefsCached.SetBool("vTabs-reopenTabEnabled", value); }
 
-        public static bool sidescrollEnabled { get => EditorPrefs.GetBool("vTabs-sidescrollEnabled", Application.platform == RuntimePlatform.OSXEditor); set => EditorPrefs.SetBool("vTabs-sidescrollEnabled", value); }
-        public static bool reverseScrollDirectionEnabled { get => EditorPrefs.GetBool("vTabs-reverseScrollDirectionDirection", false); set => EditorPrefs.SetBool("vTabs-reverseScrollDirectionDirection", value); }
-        public static float sidescrollSensitivity { get => EditorPrefs.GetFloat("vTabs-sidescrollSensitivity", 1); set => EditorPrefs.SetFloat("vTabs-sidescrollSensitivity", value); }
+        public static bool sidescrollEnabled { get => EditorPrefsCached.GetBool("vTabs-sidescrollEnabled", Application.platform == RuntimePlatform.OSXEditor); set => EditorPrefsCached.SetBool("vTabs-sidescrollEnabled", value); }
+        public static bool reverseScrollDirectionEnabled { get => EditorPrefsCached.GetBool("vTabs-reverseScrollDirectionDirection", false); set => EditorPrefsCached.SetBool("vTabs-reverseScrollDirectionDirection", value); }
+        public static float sidescrollSensitivity { get => EditorPrefsCached.GetFloat("vTabs-sidescrollSensitivity", 1); set => EditorPrefsCached.SetFloat("vTabs-sidescrollSensitivity", value); }
 
-        public static bool pluginDisabled { get => EditorPrefs.GetBool("vTabs-pluginDisabled", false); set => EditorPrefs.SetBool("vTabs-pluginDisabled", value); }
+        public static bool pluginDisabled { get => EditorPrefsCached.GetBool("vTabs-pluginDisabled", false); set => EditorPrefsCached.SetBool("vTabs-pluginDisabled", value); }
 
 
 
@@ -112,12 +112,15 @@ namespace VTabs
         [MenuItem(dir + "More", false, 10001)] static void daasadsddsas() { }
         [MenuItem(dir + "More", true, 10001)] static bool dadsadsdasas123() => false;
 
-        [MenuItem(dir + "Join our Discord", false, 10002)]
-        static void dadasdsas() => Application.OpenURL("https://discord.gg/4dG9KsbspG");
+        [MenuItem(dir + "Open manual", false, 10002)]
+        static void dadadssadsas() => AssetDatabase.OpenAsset(AssetDatabase.LoadAssetAtPath<Object>(GetScriptPath("VTabs").GetParentPath().CombinePath("Manual.pdf")));
+
+        [MenuItem(dir + "Join our Discord", false, 10003)]
+        static void dadasdsas() => Application.OpenURL("https://discord.gg/pUektnZeJT");
 
 
-        [MenuItem(dir + "Check out vInspector 2", false, 10003)]
-        static void dadadssadsas() => Application.OpenURL("https://assetstore.unity.com/packages/slug/252297?aid=1100lGLBn&pubref=checkoutvfav");
+        // [MenuItem(dir + "Check out vInspector 2", false, 10003)]
+        // static void dadadssadsas() => Application.OpenURL("https://assetstore.unity.com/packages/slug/252297?aid=1100lGLBn&pubref=checkoutvfav");
 
         // [MenuItem(dir + "Get more Editor Enhancers/Get vHierarchy 2", false, 10003)]
         // static void dadadssadsas() => Application.OpenURL("https://assetstore.unity.com/packages/slug/251320?aid=1100lGLBn&pubref=menucheckout");

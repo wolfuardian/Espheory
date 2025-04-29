@@ -709,6 +709,8 @@ namespace VTabs.Libs
         public static string ToGlobalPath(this string localPath) => Application.dataPath + "/" + localPath.Substring(0, localPath.Length - 1);
         public static string ToLocalPath(this string globalPath) => "Assets" + globalPath.Remove(Application.dataPath);
 
+        public static string CombinePath(this string p, string p2) => Path.Combine(p, p2);
+
 
 
 
@@ -795,6 +797,63 @@ namespace VTabs.Libs
         public static void Dirty(this Object o) => UnityEditor.EditorUtility.SetDirty(o);
         public static void RecordUndo(this Object so) => Undo.RecordObject(so, "");
 
+
+
+        public static class EditorPrefsCached
+        {
+            public static int GetInt(string key, int defaultValue = 0)
+            {
+                if (ints_byKey.ContainsKey(key))
+                    return ints_byKey[key];
+                else
+                    return ints_byKey[key] = EditorPrefs.GetInt(key, defaultValue);
+
+            }
+            public static bool GetBool(string key, bool defaultValue = false)
+            {
+                if (bools_byKey.ContainsKey(key))
+                    return bools_byKey[key];
+                else
+                    return bools_byKey[key] = EditorPrefs.GetBool(key, defaultValue);
+
+            }
+            public static float GetFloat(string key, float defaultValue = 0)
+            {
+                if (floats_byKey.ContainsKey(key))
+                    return floats_byKey[key];
+                else
+                    return floats_byKey[key] = EditorPrefs.GetFloat(key, defaultValue);
+
+            }
+
+            public static void SetInt(string key, int value)
+            {
+                ints_byKey[key] = value;
+
+                EditorPrefs.SetInt(key, value);
+
+            }
+            public static void SetBool(string key, bool value)
+            {
+                bools_byKey[key] = value;
+
+                EditorPrefs.SetBool(key, value);
+
+            }
+            public static void SetFloat(string key, float value)
+            {
+                floats_byKey[key] = value;
+
+                EditorPrefs.SetFloat(key, value);
+
+            }
+
+
+            static Dictionary<string, bool> bools_byKey = new();
+            static Dictionary<string, float> floats_byKey = new();
+            static Dictionary<string, int> ints_byKey = new();
+
+        }
 
 
         #endregion
@@ -891,56 +950,56 @@ namespace VTabs.Libs
 
         #region Events
 
-        public struct WrappedEvent
+
+        public class WrappedEvent
         {
             public Event e;
 
-            public bool isNull => e == null;
-            public bool isRepaint => isNull ? default : e.type == EventType.Repaint;
-            public bool isLayout => isNull ? default : e.type == EventType.Layout;
-            public bool isUsed => isNull ? default : e.type == EventType.Used;
-            public bool isMouseLeaveWindow => isNull ? default : e.type == EventType.MouseLeaveWindow;
-            public bool isMouseEnterWindow => isNull ? default : e.type == EventType.MouseEnterWindow;
-            public bool isContextClick => isNull ? default : e.type == EventType.ContextClick;
+            public bool isRepaint => e.type == EventType.Repaint;
+            public bool isLayout => e.type == EventType.Layout;
+            public bool isUsed => e.type == EventType.Used;
+            public bool isMouseLeaveWindow => e.type == EventType.MouseLeaveWindow;
+            public bool isMouseEnterWindow => e.type == EventType.MouseEnterWindow;
+            public bool isContextClick => e.type == EventType.ContextClick;
 
-            public bool isKeyDown => isNull ? default : e.type == EventType.KeyDown;
-            public bool isKeyUp => isNull ? default : e.type == EventType.KeyUp;
-            public KeyCode keyCode => isNull ? default : e.keyCode;
-            public char characted => isNull ? default : e.character;
+            public bool isKeyDown => e.type == EventType.KeyDown;
+            public bool isKeyUp => e.type == EventType.KeyUp;
+            public KeyCode keyCode => e.keyCode;
+            public char characted => e.character;
 
-            public bool isExecuteCommand => isNull ? default : e.type == EventType.ExecuteCommand;
-            public string commandName => isNull ? default : e.commandName;
+            public bool isExecuteCommand => e.type == EventType.ExecuteCommand;
+            public string commandName => e.commandName;
 
-            public bool isMouse => isNull ? default : e.isMouse;
-            public bool isMouseDown => isNull ? default : e.type == EventType.MouseDown;
-            public bool isMouseUp => isNull ? default : e.type == EventType.MouseUp;
-            public bool isMouseDrag => isNull ? default : e.type == EventType.MouseDrag;
-            public bool isMouseMove => isNull ? default : e.type == EventType.MouseMove;
-            public bool isScroll => isNull ? default : e.type == EventType.ScrollWheel;
-            public int mouseButton => isNull ? default : e.button;
-            public int clickCount => isNull ? default : e.clickCount;
-            public Vector2 mousePosition => isNull ? default : e.mousePosition;
-            public Vector2 mousePosition_screenSpace => isNull ? default : GUIUtility.GUIToScreenPoint(e.mousePosition);
-            public Vector2 mouseDelta => isNull ? default : e.delta;
+            public bool isMouse => e.isMouse;
+            public bool isMouseDown => e.type == EventType.MouseDown;
+            public bool isMouseUp => e.type == EventType.MouseUp;
+            public bool isMouseDrag => e.type == EventType.MouseDrag;
+            public bool isMouseMove => e.type == EventType.MouseMove;
+            public bool isScroll => e.type == EventType.ScrollWheel;
+            public int mouseButton => e.button;
+            public int clickCount => e.clickCount;
+            public Vector2 mousePosition => e.mousePosition;
+            public Vector2 mousePosition_screenSpace => GUIUtility.GUIToScreenPoint(e.mousePosition);
+            public Vector2 mouseDelta => e.delta;
 
-            public bool isDragUpdate => isNull ? default : e.type == EventType.DragUpdated;
-            public bool isDragPerform => isNull ? default : e.type == EventType.DragPerform;
-            public bool isDragExit => isNull ? default : e.type == EventType.DragExited;
+            public bool isDragUpdate => e.type == EventType.DragUpdated;
+            public bool isDragPerform => e.type == EventType.DragPerform;
+            public bool isDragExit => e.type == EventType.DragExited;
 
-            public EventModifiers modifiers => isNull ? default : e.modifiers;
+            public EventModifiers modifiers => e.modifiers;
             public bool holdingAnyModifierKey => modifiers != EventModifiers.None;
 
-            public bool holdingAlt => isNull ? default : e.alt;
-            public bool holdingShift => isNull ? default : e.shift;
-            public bool holdingCtrl => isNull ? default : e.control;
-            public bool holdingCmd => isNull ? default : e.command;
-            public bool holdingCmdOrCtrl => isNull ? default : e.command || e.control;
+            public bool holdingAlt => e.alt;
+            public bool holdingShift => e.shift;
+            public bool holdingCtrl => e.control;
+            public bool holdingCmd => e.command;
+            public bool holdingCmdOrCtrl => e.command || e.control;
 
-            public bool holdingAltOnly => isNull ? default : e.modifiers == EventModifiers.Alt;        // in some sessions FunctionKey is always pressed?
-            public bool holdingShiftOnly => isNull ? default : e.modifiers == EventModifiers.Shift;        // in some sessions FunctionKey is always pressed?
-            public bool holdingCtrlOnly => isNull ? default : e.modifiers == EventModifiers.Control;
-            public bool holdingCmdOnly => isNull ? default : e.modifiers == EventModifiers.Command;
-            public bool holdingCmdOrCtrlOnly => isNull ? default : (e.modifiers == EventModifiers.Command || e.modifiers == EventModifiers.Control);
+            public bool holdingAltOnly => e.modifiers == EventModifiers.Alt;        // in some sessions FunctionKey is always pressed?
+            public bool holdingShiftOnly => e.modifiers == EventModifiers.Shift;        // in some sessions FunctionKey is always pressed?
+            public bool holdingCtrlOnly => e.modifiers == EventModifiers.Control;
+            public bool holdingCmdOnly => e.modifiers == EventModifiers.Command;
+            public bool holdingCmdOrCtrlOnly => (e.modifiers == EventModifiers.Command || e.modifiers == EventModifiers.Control);
 
             public EventType type => e.type;
 
@@ -953,9 +1012,10 @@ namespace VTabs.Libs
 
         }
 
-        public static WrappedEvent Wrap(this Event e) => new WrappedEvent(e);
-        public static WrappedEvent curEvent => (Event.current ?? _fi_s_Current.GetValue(null) as Event).Wrap();
-        static FieldInfo _fi_s_Current = typeof(Event).GetField("s_Current", maxBindingFlags);
+        public static WrappedEvent Wrap(this Event e) => new(e);
+
+        public static WrappedEvent curEvent => _curEvent ??= typeof(Event).GetFieldValue<Event>("s_Current").Wrap();
+        static WrappedEvent _curEvent;
 
 
 
@@ -1097,7 +1157,7 @@ namespace VTabs.Libs
 
 
 
-        public static bool IsHovered(this Rect r) => !curEvent.isNull && r.Contains(curEvent.mousePosition);
+        public static bool IsHovered(this Rect r) => r.Contains(curEvent.mousePosition);
 
         #endregion
 

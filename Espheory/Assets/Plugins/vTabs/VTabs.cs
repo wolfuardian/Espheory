@@ -455,6 +455,7 @@ namespace VTabs
                 if (!VTabsMenu.closeTabEnabled) return;
                 if (!EditorWindow.mouseOverWindow) return;
                 if (!EditorWindow.mouseOverWindow.docked) return;
+                if (EditorWindow.mouseOverWindow.maximized) return;
                 if (GetTabList(EditorWindow.mouseOverWindow).Count <= 1) return;
 
 
@@ -620,7 +621,7 @@ namespace VTabs
 
                         m_AssetTree.InvokeMethod("ReloadData");
 
-                        window.GetMemberValue("m_SearchFilter")?.SetMemberValue("m_Folders", new[] { folderPath });
+                        SetLockedFolderPath_oneColumn(window, folderPath);
 
 
                         window.SetPropertyValue("isLocked", true);
@@ -722,8 +723,8 @@ namespace VTabs
                     isLayoutSaved = true;
 
 
-                    var folderPath = savedLayout == 0 ? window.GetMemberValue("m_SearchFilter")?.GetMemberValue<string[]>("m_Folders")?.FirstOrDefault() ?? "Assets" // one column
-                                                      : window.InvokeMethod<string>("GetActiveFolderPath");                                                          // two columns
+                    var folderPath = savedLayout == 0 ? GetLockedFolderPath_oneColumn(window)                   // one column
+                                                      : window.InvokeMethod<string>("GetActiveFolderPath");     // two columns
                     folderGuid = folderPath.ToGuid();
 
                 }
@@ -818,7 +819,7 @@ namespace VTabs
 
                 var isOneColumn = browser.GetMemberValue<int>("m_ViewMode") == 0;
 
-                var path = isOneColumn ? browser.GetMemberValue("m_SearchFilter")?.GetMemberValue<string[]>("m_Folders")?.FirstOrDefault() ?? "Assets" : browser.InvokeMethod<string>("GetActiveFolderPath");
+                var path = isOneColumn ? GetLockedFolderPath_oneColumn(browser) : browser.InvokeMethod<string>("GetActiveFolderPath");
                 var guid = path.ToGuid();
 
                 var name = path.GetFilename();
@@ -923,7 +924,7 @@ namespace VTabs
             if (mi_VFavorites_CanBrowserBeWrapped != null && mi_VFavorites_CanBrowserBeWrapped.Invoke(null, new[] { browser }).Equals(false)) return;
 
             var isLocked = browser.GetMemberValue<bool>("isLocked");
-            var isWrapped = browser.GetMemberValue("m_Parent").GetMemberValue<Delegate>("m_OnGUI").Method.Name == nameof(WrappedBrowserOnGUI);
+            var isWrapped = browser.GetMemberValue("m_Parent").GetMemberValue<Delegate>("m_OnGUI").Method == mi_WrappedBrowserOnGUI;
 
             void wrap()
             {
@@ -995,7 +996,7 @@ namespace VTabs
                 {
                     if (m_rootInstanceID != 0) return;
 
-                    var folderPath = browser.GetMemberValue("m_SearchFilter")?.GetMemberValue<string[]>("m_Folders")?.FirstOrDefault() ?? "Assets";
+                    var folderPath = GetLockedFolderPath_oneColumn(browser);
                     var folderIid = AssetDatabase.LoadAssetAtPath<Object>(folderPath).GetInstanceID();
 
                     data.SetMemberValue("m_rootInstanceID", folderIid);
@@ -1010,7 +1011,9 @@ namespace VTabs
                     var folderIid = m_rootInstanceID;
                     var folderPath = EditorUtility.InstanceIDToObject(folderIid).GetPath();
 
-                    browser.GetMemberValue("m_SearchFilter")?.SetMemberValue("m_Folders", new[] { folderPath });
+                    SetLockedFolderPath_oneColumn(browser, folderPath);
+
+                    browser.GetMemberValue("m_SearchFilter")?.SetMemberValue("m_Folders", new[] { folderPath }); // needed for breadcrumbs to display correctly
 
                 }
                 void reset()
@@ -1018,7 +1021,7 @@ namespace VTabs
                     if (browser.GetMemberValue<bool>("isLocked")) return;
 
                     data.SetMemberValue("m_rootInstanceID", 0);
-                    browser.GetMemberValue("m_SearchFilter")?.SetMemberValue("m_Folders", new[] { "Assets" });
+                    SetLockedFolderPath_oneColumn(browser, "Assets");
 
                     m_AssetTree.InvokeMethod("ReloadData");
 
@@ -1125,6 +1128,8 @@ namespace VTabs
                 breadcrumbsRect.Draw(breadcrumbsTint);
                 topGapRect.Draw(topGapColor);
 
+                breadcrumbsRect.SetHeightFromBottom(1).Draw(Greyscale(.14f));
+
 
 
 
@@ -1189,6 +1194,8 @@ namespace VTabs
 
                 breadcrumbsRect.Draw(breadcrumbsTint);
                 topGapRect.Draw(topGapColor);
+
+                breadcrumbsRect.SetHeightFromBottom(1).Draw(Greyscale(.14f));
 
 
 
@@ -1709,6 +1716,34 @@ namespace VTabs
 
 
 
+        static string GetLockedFolderPath_oneColumn(EditorWindow browser)
+        {
+            var path = browser.GetMemberValue<string[]>("m_LastFolders")?.FirstOrDefault();
+
+            if (path == null || path == "Assets")
+                path = browser.GetMemberValue("m_SearchFilter")?.GetMemberValue<string[]>("m_Folders")?.FirstOrDefault() ?? "Assets"; // to migrate locked folder paths from 2.0.14
+
+            return path;
+
+            // unlike in two column layout, there's no such concept as active folder path in one column
+            // so we have to serialize locked folder path in some unused field
+            // m_LastFolders appears to work fine for this purpose
+            // m_SearchFilter was used before v2.0.15 but could get changed when moving/creating/deleting assets
+
+        }
+
+        static void SetLockedFolderPath_oneColumn(EditorWindow browser, string folderPath)
+        {
+            browser.SetMemberValue("m_LastFolders", new[] { folderPath });
+        }
+
+
+
+
+
+
+
+
 
 
 
@@ -1793,6 +1828,7 @@ namespace VTabs
         static Type t_HostView = typeof(Editor).Assembly.GetType("UnityEditor.HostView");
         static Type t_EditorWindowDelegate = t_HostView.GetNestedType("EditorWindowDelegate", maxBindingFlags);
 
+        static MethodInfo mi_WrappedBrowserOnGUI = typeof(VTabs).GetMethod(nameof(WrappedBrowserOnGUI), maxBindingFlags);
 
         static Type t_VHierarchy = Type.GetType("VHierarchy.VHierarchy") ?? Type.GetType("VHierarchy.VHierarchy, VHierarchy, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null");
         static Type t_VFolders = Type.GetType("VFolders.VFolders") ?? Type.GetType("VFolders.VFolders, VFolders, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null");
@@ -1807,7 +1843,7 @@ namespace VTabs
 
 
 
-        const string version = "2.0.13";
+        const string version = "2.0.15";
 
     }
 }
